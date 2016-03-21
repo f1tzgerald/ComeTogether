@@ -33,8 +33,20 @@ namespace ComeTogether.Controllers
         }
 
         [HttpPost]
-        public IActionResult Contact([FromBody] ContactViewModel model)
+        public IActionResult Contact(ContactViewModel model)
         {
+            var emailToReceive = Startup.Configuration["AppSettings:EmailAddressToReceive"];
+
+            if (ModelState.IsValid)
+            {
+
+                if (_mailService.SendMessage(model.Email, "Me", model.Name, model.Message))
+                {
+                    ViewBag.Message = "Mail Sent.";
+                    ModelState.Clear();
+                }
+
+            }
 
             return View();
         }
