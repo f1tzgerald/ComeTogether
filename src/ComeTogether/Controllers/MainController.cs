@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using ComeTogether.ViewModels;
+using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,18 @@ namespace ComeTogether.Controllers
         }
 
         public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Contact([FromBody] ContactViewModel model)
+        {
+
+            return View();
+        }
+
+        public IActionResult Constructor()
         {
             return View();
         }

@@ -22,6 +22,7 @@
             <li class="active"><a asp-controller="Main" asp-action="Index">How to start</a></li>
             <li><a asp-controller="Main" asp-action="About">About</a></li>
             <li><a asp-controller="Main" asp-action="Contact">Contact</a></li>
+            <li><a asp-controller="Main" asp-action="Constructor">Constructor</a></li>
         </ul>
 
     </div>
@@ -45,5 +46,7 @@
 
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/js/script.js"></script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
