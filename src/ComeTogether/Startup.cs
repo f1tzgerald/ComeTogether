@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ComeTogether.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
+using ComeTogether.Models;
 
 namespace ComeTogether
 {
@@ -30,6 +31,11 @@ namespace ComeTogether
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<MainContextDb>();
+
             services.AddScoped<IMailService, DebugMailService>();
         }
 

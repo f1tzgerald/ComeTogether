@@ -1,5 +1,9 @@
 ﻿{
   "AppSettings": {
     "EmailAddressToReceive": "alter.vetal@mail.ru"
+  },
+
+  "DataConnection": {
+    "ConnectionString": "Server=.\\SQLEXPRESS;Database=ComeTogetherDb;Trusted_Connection=True;MultipleActiveResultSets=true"
   }
 }
