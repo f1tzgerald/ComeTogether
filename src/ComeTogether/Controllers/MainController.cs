@@ -1,4 +1,5 @@
-﻿using ComeTogether.ViewModels;
+﻿using ComeTogether.Services;
+using ComeTogether.ViewModels;
 using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,13 @@ namespace ComeTogether.Controllers
 {
     public class MainController : Controller
     {
+        IMailService _mailService;
+
+        public MainController(IMailService mailService)
+        {
+            _mailService = mailService;
+        }
+
         public IActionResult Index()
         {
             return View();
