@@ -9,6 +9,10 @@
     
 
     <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootswatch/united/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+
 </head>
 <body>
     <div id="sidebar">
@@ -30,7 +34,9 @@
     <div id="wrapper">
         <div id="main">
             <div>
-                <button id="sidebarBtn"><<</button>
+                <button id="sidebarBtn" class="btn btn-default">
+                    <i class="fa fa-chevron-left"></i>
+                </button>
             </div>
             
             <div>
@@ -38,13 +44,14 @@
             </div>
 
         </div>
-        <div id="footer">
-            &copy; 2016 Fitzgerald Ltd.
-        </div>
+        <footer class="modal-footer">
+            <p class="text-info">&copy; 2016 Fitzgerald Ltd.</p>
+        </footer>
     </div>
 
 
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/js/script.js"></script>
 
     @RenderSection("Scripts", required: false)

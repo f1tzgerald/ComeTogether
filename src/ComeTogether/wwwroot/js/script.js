@@ -1,13 +1,16 @@
 ﻿(function () {
     var $menuAndMain = $("#sidebar,#wrapper");
+    var $icon = $("#sidebarBtn i.fa");
 
     $("#sidebarBtn").on("click", function () {
         $menuAndMain.toggleClass("hide-sidebar");
         if ($menuAndMain.hasClass("hide-sidebar")) {
-            $(this).text(">>");
+            $(this).addClass("fa-chevron-right");
+            $(this).removeClass("fa-chevron-left");
         }
         else {
-            $(this).text("<<");
+            $(this).addClass("fa-chevron-left");
+            $(this).removeClass("fa-chevron-right");
         }
     });
 })();
