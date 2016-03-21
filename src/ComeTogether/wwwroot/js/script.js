@@ -5,12 +5,12 @@
     $("#sidebarBtn").on("click", function () {
         $menuAndMain.toggleClass("hide-sidebar");
         if ($menuAndMain.hasClass("hide-sidebar")) {
-            $(this).addClass("fa-chevron-right");
-            $(this).removeClass("fa-chevron-left");
+            $icon.addClass("fa-chevron-right");
+            $icon.removeClass("fa-chevron-left");
         }
         else {
-            $(this).addClass("fa-chevron-left");
-            $(this).removeClass("fa-chevron-right");
+            $icon.addClass("fa-chevron-left");
+            $icon.removeClass("fa-chevron-right");
         }
     });
 })();
