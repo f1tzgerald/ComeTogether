@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using ComeTogether.Models;
+using ComeTogether.Services;
+using ComeTogether.ViewModels;
+using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +11,15 @@ namespace ComeTogether.Controllers
 {
     public class MainController : Controller
     {
+        IMailService _mailService;
+        private ITasksRepository _repos;
+
+        public MainController(IMailService mailService, ITasksRepository s)
+        {
+            _mailService = mailService;
+            _repos = s;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -19,6 +31,30 @@ namespace ComeTogether.Controllers
         }
 
         public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Contact(ContactViewModel model)
+        {
+            var emailToReceive = Startup.Configuration["AppSettings:EmailAddressToReceive"];
+
+            if (ModelState.IsValid)
+            {
+
+                if (_mailService.SendMessage(model.Email, "Me", model.Name, model.Message))
+                {
+                    ViewBag.Message = "Mail Sent.";
+                    ModelState.Clear();
+                }
+
+            }
+
+            return View();
+        }
+
+        public IActionResult Constructor()
         {
             return View();
         }

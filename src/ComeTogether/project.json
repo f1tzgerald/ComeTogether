@@ -10,11 +10,18 @@
     "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-rc1-final",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
     "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Mvc.TagHelpers" :  "6.0.0-rc1-final"  
+    "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-rc1-final",
+    "Microsoft.AspNet.Tooling.Razor": "1.0.0-rc1-final",
+    "EntityFramework.Core": "7.0.0-rc1-final",
+    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+    "EntityFramework.Commands": "7.0.0-rc1-final",
+    "Microsoft.Framework.Logging.Debug": "1.0.0-beta8",
+    "AutoMapper": "4.2.1"
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel"
+    "web": "Microsoft.AspNet.Server.Kestrel",
+    "ef": "EntityFramework.Commands"
   },
 
   "frameworks": {
