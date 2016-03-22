@@ -13,6 +13,8 @@ using ComeTogether.Models;
 using Newtonsoft.Json.Serialization;
 using AutoMapper;
 using ComeTogether.ViewModels;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Mvc;
 
 namespace ComeTogether
 {
@@ -33,16 +35,26 @@ namespace ComeTogether
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddJsonOptions(opt =>
-                {
-                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                }
-                );
+            services.AddMvc(config =>
+            {
+        #if !DEBUG
+                config.Filters.Add(new RequireHttpsAttribute());
+        #endif  
+            })
+            .AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<MainContextDb>();
+
+            services.AddIdentity<Person, IdentityRole>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequiredLength = 5;
+            }).AddEntityFrameworkStores<MainContextDb>();
 
             services.AddScoped<IMailService, DebugMailService>();
             services.AddScoped<ITasksRepository, TasksRepository>();
@@ -51,11 +63,13 @@ namespace ComeTogether
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, SeedData dataToAdd)
+        public async void Configure(IApplicationBuilder app, SeedData dataToAdd)
         {
             app.UseIISPlatformHandler();
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UseMvc(config =>
             {
@@ -65,8 +79,13 @@ namespace ComeTogether
                     defaults: new { controller = "Main", action = "Index" });
             });
 
+            app.UseCookieAuthentication(config =>
+            {
+                config.LoginPath = "/Auth/Login";
+            });
+
             // Add data to database if not exists
-            dataToAdd.AddData();
+            await dataToAdd.AddDataAsync();
 
             Mapper.Initialize(config =>
             {

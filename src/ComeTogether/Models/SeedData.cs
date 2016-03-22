@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,22 +9,34 @@ namespace ComeTogether.Models
     public class SeedData
     {
         private MainContextDb _context;
+        private UserManager<Person> _userManager;
 
-        public SeedData(MainContextDb context)
+        public SeedData(MainContextDb context, UserManager<Person> manager)
         {
             _context = context;
-
+            _userManager = manager;
         }
 
-        public void AddData()
+        public async Task AddDataAsync()
         {
+            if (await _userManager.FindByEmailAsync("alter.vetal@mail.ru") == null)
+            {
+                var newPerson = new Person()
+                {
+                    UserName = "Vitalii",
+                    Email = "alter.vetal@mail.ru"
+                };
+
+                await _userManager.CreateAsync(newPerson, "12345");
+            }
+
             if (!_context.Category.Any())
             {
                 #region Add Category I
                 var todo1 = new TodoItem()
                 {
                     Name = "1",
-                    Creator = "Me",
+                    Creator = "Vitalii",
                     DateAdded = DateTime.UtcNow.Date,
                     DateFinish = DateTime.UtcNow.AddDays(1).Date,
                     Done = false,
@@ -47,7 +60,7 @@ namespace ComeTogether.Models
                 var todo2 = new TodoItem()
                 {
                     Name = "2",
-                    Creator = "Me",
+                    Creator = "Vitalii",
                     DateAdded = DateTime.UtcNow.Date,
                     DateFinish = DateTime.UtcNow.AddDays(1).Date,
                     Done = false,
@@ -72,6 +85,7 @@ namespace ComeTogether.Models
                 var newCategory = new Category()
                 {
                     Name = "First Category",
+
                     ToDoItems = new List<TodoItem>() { todo1, todo2 }
                 };
 
