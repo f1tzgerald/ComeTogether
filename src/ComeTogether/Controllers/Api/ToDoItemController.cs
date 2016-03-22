@@ -40,8 +40,31 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpPost]
-        public void Post([FromBody]string value)
+        public JsonResult Post(string categoryName, [FromBody] ToDoItemViewModel toDoitemVM)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var todoItem = Mapper.Map<TodoItem>(toDoitemVM);
+
+                    _repository.AddToDoItem(categoryName, todoItem);
+
+                    if (_repository.SaveChanges())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.Created;
+                        return Json(Mapper.Map<ToDoItemViewModel>(todoItem));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Message = ex.ToString() });
+            }
+
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(false);
         }
 
         // PUT api/values/5

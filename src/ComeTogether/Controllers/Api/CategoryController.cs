@@ -48,7 +48,7 @@ namespace ComeTogether.Controllers.Api
             }
             catch (Exception ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.Created;
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(new { Message = ex.ToString() });
             }
             
