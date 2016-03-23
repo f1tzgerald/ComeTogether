@@ -7,9 +7,11 @@ using ComeTogether.Models;
 using System.Net;
 using ComeTogether.ViewModels;
 using AutoMapper;
+using Microsoft.AspNet.Authorization;
 
 namespace ComeTogether.Controllers.Api
 {
+    [Authorize]
     [Route("api/category")]
     public class CategoryController : Controller
     {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,16 +20,18 @@ namespace ComeTogether.Models
 
         public async Task AddDataAsync()
         {
-            if (await _userManager.FindByEmailAsync("alter.vetal@mail.ru") == null)
-            {
-                var newPerson = new Person()
-                {
-                    UserName = "Vitalii",
-                    Email = "alter.vetal@mail.ru"
-                };
 
-                await _userManager.CreateAsync(newPerson, "12345");
+            if (!_context.Users.Any(u => u.UserName == "Vitalii"))
+            {
+                var store = new UserStore<Person>(_context);
+
+#warning Костыль
+                // Костыль: var user = new Person
+                var user = new IdentityUser { UserName = "Vitalii", Email = "alter.vetal@mail.ru" };
+                //  последствия костыля await _userManager.CreateAsync((Person) user
+                await _userManager.CreateAsync((Person) user, "P@ssw0rd!");
             }
+
 
             if (!_context.Category.Any())
             {

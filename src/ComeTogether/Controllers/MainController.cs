@@ -1,6 +1,7 @@
 ﻿using ComeTogether.Models;
 using ComeTogether.Services;
 using ComeTogether.ViewModels;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,13 @@ namespace ComeTogether.Controllers
 {
     public class MainController : Controller
     {
-        IMailService _mailService;
+        private IMailService _mailService;
         private ITasksRepository _repos;
 
-        public MainController(IMailService mailService, ITasksRepository s)
+        public MainController(IMailService mailService, ITasksRepository repos)
         {
             _mailService = mailService;
-            _repos = s;
+            _repos = repos;
         }
 
         public IActionResult Index()
@@ -55,6 +56,12 @@ namespace ComeTogether.Controllers
         }
 
         public IActionResult Constructor()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Categories()
         {
             return View();
         }

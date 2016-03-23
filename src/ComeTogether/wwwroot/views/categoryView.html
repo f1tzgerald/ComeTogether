@@ -1,0 +1,28 @@
+﻿<div class="col-md-6 col-md-offset-3">
+
+    <div class="text-danger" ng-show="vm.errorMessage">{{ vm.errorMessage }}</div>
+
+    <div ng-show="vm.isBusy" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading...</div>
+
+    <!-- DISPLAY CATEGORIES FROM DATABASE -->
+    <table class="table table-responsive table-striped">
+        <tr ng-repeat="category in vm.categories">
+            <td>{{ category.name }}</td>
+            <td><a ng-href="#/edit/{{ category.name }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a></td>
+        </tr>
+    </table>
+
+    <!-- FORM TO ADD NEW CATEGORY TO DATABASE -->
+    <form novalidate name="addNewCategoryForm" ng-submit="vm.addCategory()">
+        <div class="form-group">
+            <label for="name">Category Name:</label>
+            <input type="text" name="name" id="name" ng-model="vm.newCategory.Name" required ng-minlength="2" />
+            <span class="text-danger" ng-show="addNewCategoryForm.name.$error.required">Write category name in the form</span>
+            <span class="text-danger" ng-show="addNewCategoryForm.name.$error.minlength">Name must be at least two character.</span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Add new" class="btn btn-success" ng-disabled="addnewCategoryForm.$invalid" />
+        </div>
+    </form>
+
+</div>

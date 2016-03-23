@@ -21,7 +21,9 @@ namespace ComeTogether.Controllers
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
+            {
                 return RedirectToAction("Index", "Main");
+            }                
 
             return View();
         }
@@ -37,19 +39,23 @@ namespace ComeTogether.Controllers
                 {
                     // If redirect to login page from other
                     if (string.IsNullOrWhiteSpace(returnUrl))
-                        return RedirectToAction(returnUrl);
-                    else
+                    {
                         return RedirectToAction("Index", "Main");
+                    }                        
+                    else
+                    {
+                        return RedirectToAction(returnUrl);
+                    }                                            
                 }
             }
             else
             {
-                #warning Add more extend error
+                #warning Не отображается ошибка Add more extend error
                 ModelState.AddModelError("", "Username or password incorrect");
             }
 
             return View();
-        }
+         }
 
         public async Task<IActionResult> Logout()
         {

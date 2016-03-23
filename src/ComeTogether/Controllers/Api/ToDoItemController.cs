@@ -7,9 +7,11 @@ using ComeTogether.Models;
 using System.Net;
 using AutoMapper;
 using ComeTogether.ViewModels;
+using Microsoft.AspNet.Authorization;
 
 namespace ComeTogether.Controllers.Api
 {
+    [Authorize]
     [Route("api/category/{categoryName}/tasks")]
     public class ToDoItemController : Controller
     {
