@@ -11,11 +11,17 @@
                     templateUrl: "/views/categoryView.html"
                 });
 
-                $routeProvider.when("/edit/:{categoryName}", {
+                $routeProvider.when("/:categoryName/tasks", {
+                    controller: "toDoItemsController",
+                    controllerAs: "vm",
+                    templateUrl: "/views/toDoItemsView.html"
+                });
+
+                $routeProvider.when("/edit/:categoryName", {
                     controller: "categoryEditController",
                     controllerAs: "vm",
-                    templateUrl: "/views/categoryEditView.html"
-                });
+                    templateUrl: "/views/editCategory.html"
+                })
 
                 $routeProvider.otherwise({ redirectTo: "/"});
 

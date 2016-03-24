@@ -7,16 +7,17 @@
     <!-- DISPLAY CATEGORIES FROM DATABASE -->
     <table class="table table-responsive table-striped">
         <tr ng-repeat="category in vm.categories">
-            <td>{{ category.name }}</td>
+            <td><a ng-href="#/{{ category.name }}/tasks">{{ category.name }}</a></td>
             <td><a ng-href="#/edit/{{ category.name }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a></td>
         </tr>
     </table>
-
+    
     <!-- FORM TO ADD NEW CATEGORY TO DATABASE -->
     <form novalidate name="addNewCategoryForm" ng-submit="vm.addCategory()">
         <div class="form-group">
             <label for="name">Category Name:</label>
-            <input type="text" name="name" id="name" ng-model="vm.newCategory.Name" required ng-minlength="2" />
+            <input type="text" name="name" id="name" ng-model="vm.newCategory.name" required ng-minlength="2" />
+            <br/>
             <span class="text-danger" ng-show="addNewCategoryForm.name.$error.required">Write category name in the form</span>
             <span class="text-danger" ng-show="addNewCategoryForm.name.$error.minlength">Name must be at least two character.</span>
         </div>

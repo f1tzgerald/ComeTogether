@@ -72,12 +72,15 @@ namespace ComeTogether.Models
             return _context.ToDoItems.Include(c => c.Comments).Where(c => c.Id == id).FirstOrDefault();
         }
 
-
-
-
         public bool SaveChanges()
         {
             return _context.SaveChanges() > 0;
+        }
+
+        public void EditCategory(string categoryName, Category newCategory)
+        {
+            var currentCategory = _context.Category.Where(c => c.Name == categoryName).FirstOrDefault();
+            currentCategory.Name = newCategory.Name;
         }
     }
 }

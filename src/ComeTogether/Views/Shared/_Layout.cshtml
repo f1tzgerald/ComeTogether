@@ -20,7 +20,7 @@
         @if (User.Identity.IsAuthenticated)
         {
             <!--PUT here image from user id-->
-            <span>@User.Identity.Name</span>
+            <span>Hello, @User.Identity.Name !!!</span>
         }
         
         <ul class="menu nav">
@@ -30,7 +30,7 @@
             <li><a asp-controller="Main" asp-action="Constructor">Constructor</a></li>
             @if (User.Identity.IsAuthenticated)
             {
-                <li><a asp-controller="Main" asp-action="Categories"></a></li>
+                <li><a asp-controller="Main" asp-action="Categories">Work hard! list</a></li>
                 <li><a asp-controller="Auth" asp-action="Logout">Logout</a></li>
             }
             else

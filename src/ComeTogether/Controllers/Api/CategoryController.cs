@@ -22,7 +22,7 @@ namespace ComeTogether.Controllers.Api
             _repository = repository;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public JsonResult Get()
         {
             var res = Mapper.Map<IEnumerable<CategoryViewModel>>(_repository.GetAllCategories());
@@ -30,13 +30,14 @@ namespace ComeTogether.Controllers.Api
             return Json(res);
         }
 
-        [HttpPost("")]
+        [HttpPost]
         public JsonResult Post([FromBody] CategoryViewModel viewmodelCategory)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    //Add new category 
                     var category = Mapper.Map<Category>(viewmodelCategory);
 
                     _repository.AddCategory(category);
@@ -54,6 +55,40 @@ namespace ComeTogether.Controllers.Api
                 return Json(new { Message = ex.ToString() });
             }
             
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(false);
+        }
+
+        [HttpPut]
+        public JsonResult Put(string name, [FromBody] CategoryViewModel categoryVM)
+        {
+            if (name == categoryVM.Name)
+            {
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return Json(new { message = "Name hasn't changed" });
+            }
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var editCategory = Mapper.Map<Category>(categoryVM);
+
+                    _repository.EditCategory(name, editCategory);
+
+                    if (_repository.SaveChanges())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.Created;
+                        return Json(Mapper.Map<CategoryViewModel>(editCategory));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Message = ex.ToString() });
+            }
+
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
             return Json(false);
         }

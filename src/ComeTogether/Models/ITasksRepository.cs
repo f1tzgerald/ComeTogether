@@ -13,6 +13,7 @@ namespace ComeTogether.Models
         TodoItem GetToDoItemById(int id);
         IEnumerable<TodoItem> GetToDoItemsForCategory(string categoryName);
         void AddCategory(Category category);
+        void EditCategory(string categoryName, Category editCategory);
         bool SaveChanges();
     }
 }
