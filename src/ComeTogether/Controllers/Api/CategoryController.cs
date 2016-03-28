@@ -30,6 +30,15 @@ namespace ComeTogether.Controllers.Api
             return Json(res);
         }
 
+        [HttpGet]
+        [Route("api/category/{categoryId}")]
+        public JsonResult Get(int categoryId)
+        {
+            var category = _repository.GetCategoryById(categoryId);
+
+            return Json(Mapper.Map<CategoryViewModel>(category));
+        }
+
         [HttpPost]
         [Route("api/category")]
         public JsonResult Post([FromBody] CategoryViewModel viewmodelCategory)
@@ -60,21 +69,16 @@ namespace ComeTogether.Controllers.Api
             return Json(false);
         }
 
+        
+        [Route ("api/category/edit/{categoryId}")]
         [HttpPut]
-        [Route("api/category/edit/{categoryId}")]
-        public JsonResult Put(int categoryId, [FromBody] CategoryViewModel categoryVM)
-        {
-            if (categoryId == categoryVM.Id)
+        public JsonResult Put(int categoryId, [FromBody] CategoryViewModel editCategoryVM)
             {
-                Response.StatusCode = (int)HttpStatusCode.OK;
-                return Json(new { message = "Name hasn't changed" });
-            }
-
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var editCategory = Mapper.Map<Category>(categoryVM);
+                    var editCategory = Mapper.Map<Category>(editCategoryVM);
 
                     _repository.EditCategory(categoryId, editCategory);
 

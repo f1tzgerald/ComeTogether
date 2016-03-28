@@ -52,7 +52,6 @@
                 .then(function (response) {
                     //success
 
-
                 })
         };
 
