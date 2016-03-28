@@ -1,0 +1,33 @@
+﻿<div>
+    <div class="col-md-12">
+        <h2>{{ vm.categoryName }}</h2>
+        <div ng-show="vm.isBusy" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading...</div>
+        <div class="alert alert-danger" ng-show="vm.errorMessage">{{ vm.errorMessage }}</div>
+
+<!-- DISPLAY TODOITEMS FOR CATEGORY -->
+        <table class="table table-responsive table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Added Date</th>
+                <th>Finish Date</th>
+                <th>Executor</th>
+                <th>Creator</th>
+                <th>Status</th>
+            </tr>
+            <tr ng-repeat="todoItem in vm.todoItems">
+                <td>{{ todoItem.name }}</td>
+                <td>{{ todoItem.dateAdded | date:shortDate }}</td>
+                <td>{{ todoItem.dateFinish | date:shortDate }}</td>
+                <td>{{ todoItem.whoDoIt }}</td>
+                <td>{{ todoItem.creator }}</td>
+                <td><input type="checkbox" name="status" value="{{ todoItem.done }}" /></td>
+            </tr>
+        </table>
+<!-- **END** DISPLAY TODOITEMS FOR CATEGORY **END** -->
+
+    </div>
+
+    <div>
+        <a href="#/" class="btn btn-sm btn-default"><i class="fa fa-chevron-left"></i> Back to list</a>
+    </div>
+</div>

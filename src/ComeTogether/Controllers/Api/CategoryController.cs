@@ -7,10 +7,11 @@ using ComeTogether.Models;
 using System.Net;
 using ComeTogether.ViewModels;
 using AutoMapper;
+using Microsoft.AspNet.Authorization;
 
 namespace ComeTogether.Controllers.Api
 {
-    [Route("api/category")]
+    [Authorize]
     public class CategoryController : Controller
     {
         private ITasksRepository _repository;
@@ -20,7 +21,8 @@ namespace ComeTogether.Controllers.Api
             _repository = repository;
         }
 
-        [HttpGet("")]
+        [HttpGet]
+        [Route("api/category")]
         public JsonResult Get()
         {
             var res = Mapper.Map<IEnumerable<CategoryViewModel>>(_repository.GetAllCategories());
@@ -28,13 +30,15 @@ namespace ComeTogether.Controllers.Api
             return Json(res);
         }
 
-        [HttpPost("")]
+        [HttpPost]
+        [Route("api/category")]
         public JsonResult Post([FromBody] CategoryViewModel viewmodelCategory)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    //Add new category 
                     var category = Mapper.Map<Category>(viewmodelCategory);
 
                     _repository.AddCategory(category);
@@ -48,12 +52,76 @@ namespace ComeTogether.Controllers.Api
             }
             catch (Exception ex)
             {
-                Response.StatusCode = (int)HttpStatusCode.Created;
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(new { Message = ex.ToString() });
             }
             
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
             return Json(false);
+        }
+
+        [HttpPut]
+        [Route("api/category/edit/{categoryId}")]
+        public JsonResult Put(int categoryId, [FromBody] CategoryViewModel categoryVM)
+        {
+            if (categoryId == categoryVM.Id)
+            {
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return Json(new { message = "Name hasn't changed" });
+            }
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var editCategory = Mapper.Map<Category>(categoryVM);
+
+                    _repository.EditCategory(categoryId, editCategory);
+
+                    if (_repository.SaveChanges())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.Created;
+                        return Json(Mapper.Map<CategoryViewModel>(editCategory));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Message = ex.ToString() });
+            }
+
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(false);
+        }
+
+        [HttpDelete]
+        [Route("api/category/{categoryId}")]
+        public JsonResult Delete (int categoryId)
+        {
+            try
+            {
+                if (_repository.GetCategoryById(categoryId) != null)
+                {
+                    var categoryToDelete = _repository.GetCategoryById(categoryId);
+
+                    _repository.DeleteCategory(categoryId);
+
+                    if (_repository.SaveChanges())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.OK;
+                        return Json(new { Message = $"Category {categoryToDelete.Name} has been deleted." });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Message = ex.ToString() });
+            }
+            
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(new { Message = $"Can't find category with this id:{categoryId}." });
         }
     }
 }

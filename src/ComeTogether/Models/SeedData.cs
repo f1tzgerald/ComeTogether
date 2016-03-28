@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,22 +10,36 @@ namespace ComeTogether.Models
     public class SeedData
     {
         private MainContextDb _context;
+        private UserManager<Person> _userManager;
 
-        public SeedData(MainContextDb context)
+        public SeedData(MainContextDb context, UserManager<Person> manager)
         {
             _context = context;
-
+            _userManager = manager;
         }
 
-        public void AddData()
+        public async Task AddDataAsync()
         {
+
+            if (!_context.Users.Any(u => u.UserName == "Vitalii"))
+            {
+                var store = new UserStore<Person>(_context);
+
+#warning Костыль
+                // Костыль: var user = new Person
+                var user = new IdentityUser { UserName = "Vitalii", Email = "alter.vetal@mail.ru" };
+                //  последствия костыля await _userManager.CreateAsync((Person) user
+                await _userManager.CreateAsync((Person) user, "P@ssw0rd!");
+            }
+
+
             if (!_context.Category.Any())
             {
                 #region Add Category I
                 var todo1 = new TodoItem()
                 {
                     Name = "1",
-                    Creator = "Me",
+                    Creator = "Vitalii",
                     DateAdded = DateTime.UtcNow.Date,
                     DateFinish = DateTime.UtcNow.AddDays(1).Date,
                     Done = false,
@@ -47,7 +63,7 @@ namespace ComeTogether.Models
                 var todo2 = new TodoItem()
                 {
                     Name = "2",
-                    Creator = "Me",
+                    Creator = "Vitalii",
                     DateAdded = DateTime.UtcNow.Date,
                     DateFinish = DateTime.UtcNow.AddDays(1).Date,
                     Done = false,
@@ -72,6 +88,7 @@ namespace ComeTogether.Models
                 var newCategory = new Category()
                 {
                     Name = "First Category",
+
                     ToDoItems = new List<TodoItem>() { todo1, todo2 }
                 };
 

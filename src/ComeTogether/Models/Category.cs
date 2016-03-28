@@ -15,7 +15,7 @@ namespace ComeTogether.Models
         public string Name { get; set; }
 
         public ICollection<TodoItem> ToDoItems { get; set; }
-        
-        //public List<People> People { get; set; }
+
+        //public ICollection<Person> Peoples { get; set; }
     }
 }

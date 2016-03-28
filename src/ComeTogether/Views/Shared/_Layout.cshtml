@@ -16,17 +16,27 @@
 </head>
 <body>
     <div id="sidebar">
-        <!--PUT here image from user id-->
-        <img src="img/user1.jpg" alt="headshot" class="headshot" />
-        <br />
-        <!--PUT here name from user id-->
-        <span>Vitalii F.</span>
 
+        @if (User.Identity.IsAuthenticated)
+        {
+            <!--PUT here image from user id-->
+            <span>Hello, @User.Identity.Name !!!</span>
+        }
+        
         <ul class="menu nav">
             <li class="active"><a asp-controller="Main" asp-action="Index">How to start</a></li>
             <li><a asp-controller="Main" asp-action="About">About</a></li>
             <li><a asp-controller="Main" asp-action="Contact">Contact</a></li>
             <li><a asp-controller="Main" asp-action="Constructor">Constructor</a></li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li><a asp-controller="Main" asp-action="Categories">Work hard! list</a></li>
+                <li><a asp-controller="Auth" asp-action="Logout">Logout</a></li>
+            }
+            else
+            {
+                <li><a asp-controller="Auth" asp-action="Login">Login</a></li>
+             }
         </ul>
 
     </div>

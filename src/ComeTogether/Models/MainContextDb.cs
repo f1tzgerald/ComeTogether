@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ComeTogether.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ComeTogether.Models
 {
-    public class MainContextDb : DbContext
+    public class MainContextDb : IdentityDbContext<Person>
     {
         public MainContextDb()
         {

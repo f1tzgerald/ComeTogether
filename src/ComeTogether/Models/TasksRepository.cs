@@ -23,9 +23,9 @@ namespace ComeTogether.Models
             _context.Comments.Add(comment);
         }
 
-        public void AddToDoItem(string categoryName, TodoItem toDoitem)
+        public void AddToDoItem(int categoryId, TodoItem toDoitem)
         {
-            var category = GetCategoryByName(categoryName);
+            var category = GetCategoryById(categoryId);
             category.ToDoItems.Add(toDoitem);
             _context.ToDoItems.Add(toDoitem);
         }
@@ -46,10 +46,10 @@ namespace ComeTogether.Models
             return _context.Category.Include(c => c.ToDoItems).OrderBy(c => c.Name).ToList();
         }
 
-        public IEnumerable<TodoItem> GetToDoItemsForCategory(string categoryName)
+        public IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId)
         {
             var tasksInCategory = (from s in _context.Category
-                     where s.Name == categoryName
+                     where s.Id == categoryId
                      select s).Single().ToDoItems.ToList();
             return tasksInCategory;
         }
@@ -62,9 +62,9 @@ namespace ComeTogether.Models
             return commentsInTasks;
         }
 
-        public Category GetCategoryByName(string name)
+        public Category GetCategoryById(int categoryId)
         {
-            return _context.Category.Include(c => c.ToDoItems).Where(c => c.Name == name).FirstOrDefault();
+            return _context.Category.Include(c => c.ToDoItems).Where(c => c.Id == categoryId).FirstOrDefault();
         }
 
         public TodoItem GetToDoItemById(int id)
@@ -72,12 +72,21 @@ namespace ComeTogether.Models
             return _context.ToDoItems.Include(c => c.Comments).Where(c => c.Id == id).FirstOrDefault();
         }
 
-
-
-
         public bool SaveChanges()
         {
             return _context.SaveChanges() > 0;
+        }
+
+        public void EditCategory(int categoryId, Category newCategory)
+        {
+            var currentCategory = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
+            currentCategory.Name = newCategory.Name;
+        }
+
+        public void DeleteCategory(int categoryId)
+        {
+            var categoryToDelete = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
+            _context.Category.Remove(categoryToDelete);
         }
     }
 }

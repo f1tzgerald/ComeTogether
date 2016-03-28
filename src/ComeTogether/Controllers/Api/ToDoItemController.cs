@@ -7,10 +7,12 @@ using ComeTogether.Models;
 using System.Net;
 using AutoMapper;
 using ComeTogether.ViewModels;
+using Microsoft.AspNet.Authorization;
 
 namespace ComeTogether.Controllers.Api
 {
-    [Route("api/category/{categoryName}/tasks")]
+    [Authorize]
+    [Route("api/category/{categoryId}/tasks")]
     public class ToDoItemController : Controller
     {
         private ITasksRepository _repository;
@@ -21,11 +23,11 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpGet]
-        public JsonResult Get(string categoryName)
+        public JsonResult Get(int categoryId)
         {
             try
             {
-                var category = _repository.GetCategoryByName(categoryName);
+                var category = _repository.GetCategoryById(categoryId);
 
                 if (category == null)
                     return Json(null);
@@ -40,8 +42,31 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpPost]
-        public void Post([FromBody]string value)
+        public JsonResult Post(int categoryId, [FromBody] ToDoItemViewModel toDoitemVM)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var todoItem = Mapper.Map<TodoItem>(toDoitemVM);
+
+                    _repository.AddToDoItem(categoryId, todoItem);
+
+                    if (_repository.SaveChanges())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.Created;
+                        return Json(Mapper.Map<ToDoItemViewModel>(todoItem));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Message = ex.ToString() });
+            }
+
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(false);
         }
 
         // PUT api/values/5
