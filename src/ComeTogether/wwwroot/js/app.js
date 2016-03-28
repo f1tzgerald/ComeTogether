@@ -11,13 +11,13 @@
                     templateUrl: "/views/categoryView.html"
                 });
 
-                $routeProvider.when("/:categoryName/tasks", {
+                $routeProvider.when("/:categoryId/tasks", {
                     controller: "toDoItemsController",
                     controllerAs: "vm",
                     templateUrl: "/views/toDoItemsView.html"
                 });
 
-                $routeProvider.when("/edit/:categoryName", {
+                $routeProvider.when("/edit/:categoryId", {
                     controller: "categoryEditController",
                     controllerAs: "vm",
                     templateUrl: "/views/editCategory.html"

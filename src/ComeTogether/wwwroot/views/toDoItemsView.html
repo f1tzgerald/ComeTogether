@@ -20,7 +20,7 @@
                 <td>{{ todoItem.dateFinish | date:shortDate }}</td>
                 <td>{{ todoItem.whoDoIt }}</td>
                 <td>{{ todoItem.creator }}</td>
-                <td>{{ todoItem.done }}</td>
+                <td><input type="checkbox" name="status" value="{{ todoItem.done }}" /></td>
             </tr>
         </table>
 <!-- **END** DISPLAY TODOITEMS FOR CATEGORY **END** -->

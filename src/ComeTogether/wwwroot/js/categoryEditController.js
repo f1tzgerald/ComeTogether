@@ -8,22 +8,31 @@
     function categoryEditController($routeParams, $http) {
 
         var vm = this;
-        vm.categoryName = $routeParams.categoryName;
-        
+        vm.categoryId = $routeParams.categoryId;
+        vm.categoryName = "";
         
 
-        vm.url = "api/category/edit/" + vm.categoryName;
+        vm.url = "api/category/edit/" + vm.categoryId;
 
 
         vm.editCategoryClick = function () {
 
             vm.isBusy = true;
             vm.errorMessage = "";
+            vm.category = {};
+            console.log("Click edit category click");
 
-            $http.post(vm.url, vm.editCategory)
-                .then(function () {
+            $http({
+                method: 'PUT',
+                url: vm.url,
+                data: { Id: vm.categoryId, Name: vm.categoryName}
+            })
+                .then(function (response) {
                     //success
+                    console.log(response.data);
+                    console.log(vm.url);
 
+                    return response.data;
                 }, function () {
                     //failed
                 })

@@ -12,7 +12,7 @@ using Microsoft.AspNet.Authorization;
 namespace ComeTogether.Controllers.Api
 {
     [Authorize]
-    [Route("api/category/edit/{categoryName}")]
+    [Route("api/category/edit/{categoryId}")]
     public class CategoryEditController : Controller
     {
         private ITasksRepository _repository;
@@ -22,8 +22,8 @@ namespace ComeTogether.Controllers.Api
             _repository = repos;
         }
 
-        [HttpPost]
-        public JsonResult Post(string categoryName, [FromBody]CategoryViewModel editCategoryVM)
+        [HttpPut]
+        public JsonResult Put(int categoryId, [FromBody]CategoryViewModel editCategoryVM)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace ComeTogether.Controllers.Api
                 {
                     var editCategory = Mapper.Map<Category>(editCategoryVM);
 
-                    _repository.EditCategory(categoryName, editCategory);
+                    _repository.EditCategory(categoryId, editCategory);
 
                     if (_repository.SaveChanges())
                     {

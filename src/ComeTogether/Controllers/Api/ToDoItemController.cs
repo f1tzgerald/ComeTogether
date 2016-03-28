@@ -12,7 +12,7 @@ using Microsoft.AspNet.Authorization;
 namespace ComeTogether.Controllers.Api
 {
     [Authorize]
-    [Route("api/category/{categoryName}/tasks")]
+    [Route("api/category/{categoryId}/tasks")]
     public class ToDoItemController : Controller
     {
         private ITasksRepository _repository;
@@ -23,11 +23,11 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpGet]
-        public JsonResult Get(string categoryName)
+        public JsonResult Get(int categoryId)
         {
             try
             {
-                var category = _repository.GetCategoryByName(categoryName);
+                var category = _repository.GetCategoryById(categoryId);
 
                 if (category == null)
                     return Json(null);
@@ -42,7 +42,7 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpPost]
-        public JsonResult Post(string categoryName, [FromBody] ToDoItemViewModel toDoitemVM)
+        public JsonResult Post(int categoryId, [FromBody] ToDoItemViewModel toDoitemVM)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace ComeTogether.Controllers.Api
                 {
                     var todoItem = Mapper.Map<TodoItem>(toDoitemVM);
 
-                    _repository.AddToDoItem(categoryName, todoItem);
+                    _repository.AddToDoItem(categoryId, todoItem);
 
                     if (_repository.SaveChanges())
                     {

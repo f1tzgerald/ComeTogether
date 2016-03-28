@@ -9,14 +9,14 @@
 
         var vm = this;
 
-        vm.categoryName = $routeParams.categoryName;
+        vm.categoryId = $routeParams.categoryId;
 
         vm.errorMessage = "";
         vm.isBusy = true;
 
         vm.todoItems = [];
 
-        var urlTasks = "/api/category/" + vm.categoryName + "/tasks";
+        var urlTasks = "/api/category/" + vm.categoryId + "/tasks";
 
         $http.get(urlTasks)
             .then(function (response) {

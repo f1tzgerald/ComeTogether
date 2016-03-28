@@ -7,8 +7,9 @@
     <!-- DISPLAY CATEGORIES FROM DATABASE -->
     <table class="table table-responsive table-striped">
         <tr ng-repeat="category in vm.categories">
-            <td><a ng-href="#/{{ category.name }}/tasks">{{ category.name }}</a></td>
-            <td><a ng-href="#/edit/{{ category.name }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a></td>
+            <td><a ng-href="#/{{ category.id }}/tasks">{{ category.name }}</a></td>
+            <td><a ng-href="#/edit/{{ category.id }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a></td>
+            <td><a class="btn btn-warning" ng-really-message="Are you sure to delete category {{category.name}} ?" ng-really-click="vm.delete(category.id)"><i class="fa fa-close"></i></a></td>
         </tr>
     </table>
     
