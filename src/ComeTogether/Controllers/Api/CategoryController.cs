@@ -12,7 +12,6 @@ using Microsoft.AspNet.Authorization;
 namespace ComeTogether.Controllers.Api
 {
     [Authorize]
-    [Route("api/category")]
     public class CategoryController : Controller
     {
         private ITasksRepository _repository;
@@ -23,6 +22,7 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpGet]
+        [Route("api/category")]
         public JsonResult Get()
         {
             var res = Mapper.Map<IEnumerable<CategoryViewModel>>(_repository.GetAllCategories());
@@ -31,6 +31,7 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpPost]
+        [Route("api/category")]
         public JsonResult Post([FromBody] CategoryViewModel viewmodelCategory)
         {
             try
@@ -60,9 +61,10 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpPut]
-        public JsonResult Put(string name, [FromBody] CategoryViewModel categoryVM)
+        [Route("api/category/edit/{categoryId}")]
+        public JsonResult Put(int categoryId, [FromBody] CategoryViewModel categoryVM)
         {
-            if (name == categoryVM.Name)
+            if (categoryId == categoryVM.Id)
             {
                 Response.StatusCode = (int)HttpStatusCode.OK;
                 return Json(new { message = "Name hasn't changed" });
@@ -74,7 +76,7 @@ namespace ComeTogether.Controllers.Api
                 {
                     var editCategory = Mapper.Map<Category>(categoryVM);
 
-                    _repository.EditCategory(name, editCategory);
+                    _repository.EditCategory(categoryId, editCategory);
 
                     if (_repository.SaveChanges())
                     {
@@ -91,6 +93,35 @@ namespace ComeTogether.Controllers.Api
 
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
             return Json(false);
+        }
+
+        [HttpDelete]
+        [Route("api/category/{categoryId}")]
+        public JsonResult Delete (int categoryId)
+        {
+            try
+            {
+                if (_repository.GetCategoryById(categoryId) != null)
+                {
+                    var categoryToDelete = _repository.GetCategoryById(categoryId);
+
+                    _repository.DeleteCategory(categoryId);
+
+                    if (_repository.SaveChanges())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.OK;
+                        return Json(new { Message = $"Category {categoryToDelete.Name} has been deleted." });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Message = ex.ToString() });
+            }
+            
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(new { Message = $"Can't find category with this id:{categoryId}." });
         }
     }
 }

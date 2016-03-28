@@ -10,7 +10,7 @@ using Microsoft.AspNet.Authorization;
 namespace ComeTogether.Controllers.Api
 {
     [Authorize]
-    [Route("api/category/{categoryName}/{taskId}/comments")]
+    [Route("api/category/{categoryId}/{taskId}/comments")]
     public class CommentController : Controller
     {
 
