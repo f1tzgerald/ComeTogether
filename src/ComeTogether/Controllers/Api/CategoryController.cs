@@ -73,7 +73,7 @@ namespace ComeTogether.Controllers.Api
         [Route ("api/category/edit/{categoryId}")]
         [HttpPut]
         public JsonResult Put(int categoryId, [FromBody] CategoryViewModel editCategoryVM)
-            {
+        {
             try
             {
                 if (ModelState.IsValid)

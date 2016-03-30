@@ -12,7 +12,6 @@ using Microsoft.AspNet.Authorization;
 namespace ComeTogether.Controllers.Api
 {
     [Authorize]
-    [Route("api/category/{categoryId}/tasks")]
     public class ToDoItemController : Controller
     {
         private ITasksRepository _repository;
@@ -23,6 +22,7 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpGet]
+        [Route("api/category/{categoryId}/tasks")]
         public JsonResult Get(int categoryId)
         {
             try
@@ -42,6 +42,7 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpPost]
+        [Route("api/category/{categoryId}/tasks")]
         public JsonResult Post(int categoryId, [FromBody] ToDoItemViewModel toDoitemVM)
         {
             try
@@ -49,6 +50,7 @@ namespace ComeTogether.Controllers.Api
                 if (ModelState.IsValid)
                 {
                     var todoItem = Mapper.Map<TodoItem>(toDoitemVM);
+                    todoItem.Creator = User.Identity.Name;
 
                     _repository.AddToDoItem(categoryId, todoItem);
 
@@ -70,15 +72,70 @@ namespace ComeTogether.Controllers.Api
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        [Route("api/category/{categoryId}/tasks/{todoitemId}")]
+        public JsonResult Put(int todoitemId, [FromBody]ToDoItemViewModel updatedToDoVM)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var editToDoItem = Mapper.Map<TodoItem>(updatedToDoVM);
+
+                    _repository.EditToDoItem (todoitemId, editToDoItem);
+
+                    if (_repository.SaveChanges())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.Created;
+                        return Json(Mapper.Map<ToDoItemViewModel>(editToDoItem));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Message = ex.ToString() });
+            }
+
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(false);
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE all done tasks
+        [HttpDelete]
+        [Route("api/category/{categoryId}/tasks/deleteAllDone")]
+        public JsonResult Delete(List<ToDoItemViewModel> finishedToDoItems)
         {
+            string message = "";
+            List<TodoItem> list = new List<TodoItem>();
+
+            if (finishedToDoItems == null)
+                return Json(new { Message = "You don't have finished tasks."});
+
+            try
+            {
+                foreach (var ToDoItem in finishedToDoItems)
+                {
+                    var toDoItemtoDelete = Mapper.Map<TodoItem>(ToDoItem);
+
+                    list.Add(toDoItemtoDelete);
+                    message += "ToDo Item -" + ToDoItem.Name + "has been Deleted" + Environment.NewLine;
+                }
+
+                _repository.DeleteAllDoneItems(list);
+
+                if (_repository.SaveChanges())
+                {
+                    Response.StatusCode = (int)HttpStatusCode.Created;
+                }
+
+                return Json(new { Message = message });
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Message = ex.ToString() });
+            }
         }
     }
 }

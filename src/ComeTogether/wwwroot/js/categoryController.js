@@ -43,19 +43,6 @@
                 });
         };
 
-
-        vm.editCategory = function (id) {
-            vm.isBusy = true;
-            vm.errorMessage = "";
-
-            $http.put("/api/category", vm.editCateg)
-                .then(function (response) {
-                    //success
-
-                })
-        };
-
-
         vm.delete = function (id) {
             $http.delete('/api/category/' + id)
                 .then(function (response) {

@@ -34,6 +34,18 @@ namespace ComeTogether.Models
         {
             _context.Category.Add(category);
         }
+
+        public void EditCategory(int categoryId, Category newCategory)
+        {
+            var currentCategory = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
+            currentCategory.Name = newCategory.Name;
+        }
+
+        public void DeleteCategory(int categoryId)
+        {
+            var categoryToDelete = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
+            _context.Category.Remove(categoryToDelete);
+        }
         #endregion
 
         public IEnumerable<Category> GetAllCategories()
@@ -77,16 +89,23 @@ namespace ComeTogether.Models
             return _context.SaveChanges() > 0;
         }
 
-        public void EditCategory(int categoryId, Category newCategory)
+        public void EditToDoItem(int todoitemId, TodoItem toDoitem)
         {
-            var currentCategory = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
-            currentCategory.Name = newCategory.Name;
+            var currentToDoItem = _context.ToDoItems.Where(c => c.Id == todoitemId).FirstOrDefault();
+            //#warning HARDCODING
+            currentToDoItem.Comments = toDoitem.Comments;
+            currentToDoItem.Creator = toDoitem.Creator;
+            currentToDoItem.DateAdded = toDoitem.DateAdded;
+            currentToDoItem.DateFinish = toDoitem.DateFinish;
+            currentToDoItem.Done = toDoitem.Done;
+            currentToDoItem.Name = toDoitem.Name;
+            currentToDoItem.WhoDoIt = toDoitem.WhoDoIt;
+            //currentToDoItem = toDoitem;
         }
 
-        public void DeleteCategory(int categoryId)
+        public void DeleteAllDoneItems(IEnumerable<TodoItem> finishedToDoItems)
         {
-            var categoryToDelete = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
-            _context.Category.Remove(categoryToDelete);
+            _context.RemoveRange(finishedToDoItems);
         }
     }
 }
