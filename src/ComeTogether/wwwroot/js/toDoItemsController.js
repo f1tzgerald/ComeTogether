@@ -5,40 +5,38 @@
 
     "use strict";
 
-    angular.module("tasks_app")
-        .controller("toDoItemsController", toDoItemsController);
+    angular.module("tasks_app").controller("toDoItemsController", toDoItemsController);
 
     function toDoItemsController($routeParams, $http) {
 
         var vm = this;
-
         vm.categoryId = $routeParams.categoryId;
-
         vm.errorMessage = "";
         vm.isBusy = true;
-
         vm.todoItems = [];
 
+        vm.today = new Date().toJSON().slice(0, 10);
         var urlTasks = "/api/category/" + vm.categoryId + "/tasks";
 
-        $http.get(urlTasks)
-            .then(function (response) {
-                //success
-                vm.todoItems = response.data;
-            }, function () {
-                //error
-                vm.errorMessage = "Failed to load To Do Items from db";
-            }).finally(function () {
-                vm.isBusy = false;
-            });
+        // GET - TODOITEMS LIST
+        vm.refreshToDoItems = function () {
+            $http.get(urlTasks)
+                .then(function (response) {
+                    //success
+                    vm.todoItems = response.data;
+                }, function () {
+                    //error
+                    vm.errorMessage = "Failed to load To Do Items from db";
+                }).finally(function () {
+                    vm.isBusy = false;
+                });
+        };
+        vm.refreshToDoItems();
 
-        console.log(vm.todoItems);
-
-
-        // ADD POST - ADD NEW TASK
-        vm.newTodoitem = {};
+        // TOGGLE BUTTON - SHOW/HIDE NEW TASK        
         vm.newItemMenuToggle = false; // Show/hide add new category
         vm.textToggleBtn = "Show add todo form"
+
         vm.showNewItem = function () {
             vm.newItemMenuToggle = !vm.newItemMenuToggle;
             
@@ -48,37 +46,40 @@
                 vm.textToggleBtn = "Show add todo form";
         };
 
-        //to UTC time
-        var x = new Date();
-        x.setHours(x.getHours() - x.getTimezoneOffset() / 60);
-        console.log(x);
-        vm.today = x.toJSON().slice(0, 10);
+        // POST - ADD NEW TASK
+        vm.newTodoitem = {};
+        vm.isBusyAddNew = false;
 
         vm.addNewToDoItem = function () {
-            console.log(vm.newTodoitem);
-
-            // to UTC time
-            // ERRRRORORORORRORORRO
-            vm.newTodoitem.dateFinish.setHours(vm.newTodoitem.dateFinish.getHours() - vm.newTodoitem.dateFinish.getTimezoneOffset() / 60);
+            vm.errorMessageAddNew = "";
+            vm.isBusyAddNew = true;
+            try {
+                vm.newTodoitem.dateFinish.setHours(vm.newTodoitem.dateFinish.getHours() - vm.newTodoitem.dateFinish.getTimezoneOffset() / 60);
+            }
+            catch (err) {
+                vm.errorMessageAddNew = "Can't add new task to db. Check your date";
+                vm.isBusyAddNew = false;
+                return;
+            }
 
             vm.urlNewtask = "/api/category/" + vm.categoryId + "/tasks";
+
             $http.post(vm.urlNewtask, vm.newTodoitem)
                 .then(function () {
                     //success
-                    vm.todoItems.push(vm.newTodoitem);
+                    vm.refreshToDoItems();
                 }, function () {
                     //failed
-
+                    vm.errorMessageAddNew = "Can't add new task to db. Check if date is correct.";
                 })
                 .finally(function () {
-                    
-                });
-
-            vm.newTodoitem = {};
+                    vm.newTodoitem = {};
+                    vm.isBusyAddNew = false;
+                });            
         };
 
 
-        // Change checkbox status         
+        // PUT - CHANGE CHECKBOX STATUS         
         vm.updateStatus = function (id, $index) {
             vm.updatedItem = vm.todoItems[$index];
             vm.updatedItem.done = !vm.updatedItem.done;
@@ -96,24 +97,56 @@
                 .finally(function () {
                     vm.isBusy = false;
                 });
-
         };
 
-        //DELETE ALL DONE TASKS
+
+        // DELETE - TASK
+        vm.deleteTask = function (id, $index) {
+            console.log("Id task to delete - " + id);
+
+            var urlTaskToDel = "/api/category/" + vm.categoryId + "/tasks/";
+
+            $http.delete(urlTaskToDel + id)
+                .then(function () {
+                    //success
+                    vm.todoItems.splice($index, 1 );
+                }, function () {
+                    //error
+                }).finally(function () {
+
+                });
+        };
+
+        // DELETE - ALL DONE TASKS
         vm.deleteAllDone = function () {
-            vm.todoItemsToDelete = [];
+            var urlDelete = "/api/category/" + vm.categoryId + "/tasks/deleteAllDone";
+            $http.delete(urlDelete)
+                .then(function () {
+                    //success
+                    vm.refreshToDoItems();
+                }, function () {
+                    //error
+                }).finally(function () {
 
-            for (var i = 0; i < vm.todoItems.length; i++) {
-                if (vm.todoItems[i].done)
-                    vm.todoItemsToDelete.push(vm.todoItems[i]);
-            }
-
-            console.log(vm.todoItemsToDelete);
+                });
         };
 
         // SHOW COMMENTS BTN
-        vm.showComments = function (id) {
+        vm.showCommentsFlag = false;
+        vm.comments = [];
 
+        vm.showComments = function (taskId) {
+            vm.showCommentsFlag = true;
+            var urlComments = "/api/category/" + vm.categoryId + "/" + taskId + "/comments";
+            $http.get(urlComments)
+                .then(function (response) {
+                    //success
+                    vm.comments = response.data;
+                }, function () {
+                    //failed
+                })
+                .finally(function () {
+                });
         };
     }
 })();

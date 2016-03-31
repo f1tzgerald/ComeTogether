@@ -43,6 +43,7 @@ namespace ComeTogether.Models
 
         public void DeleteCategory(int categoryId)
         {
+#warning Cascade delete
             var categoryToDelete = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
             _context.Category.Remove(categoryToDelete);
         }
@@ -61,8 +62,8 @@ namespace ComeTogether.Models
         public IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId)
         {
             var tasksInCategory = (from s in _context.Category
-                     where s.Id == categoryId
-                     select s).Single().ToDoItems.ToList();
+                                   where s.Id == categoryId
+                                   select s).Single().ToDoItems.ToList();
             return tasksInCategory;
         }
 
@@ -103,9 +104,19 @@ namespace ComeTogether.Models
             //currentToDoItem = toDoitem;
         }
 
-        public void DeleteAllDoneItems(IEnumerable<TodoItem> finishedToDoItems)
+        public void DeleteAllDoneItems(int categoryId)
         {
-            _context.RemoveRange(finishedToDoItems);
+#warning Insert Cascade delete
+            var category = _context.Category.Include(c => c.ToDoItems).Where(c => c.Id == categoryId).FirstOrDefault();
+            var doneTasks = category.ToDoItems.Where(c => c.Done == true).ToList();
+            _context.RemoveRange(doneTasks);
+        }
+
+        public void DeleteToDoItem (int taskId)
+        {
+#warning Insert Cascade delete
+            var taskToDelete = _context.ToDoItems.Where(c => c.Id == taskId).FirstOrDefault();
+            _context.Remove(taskToDelete);
         }
     }
 }

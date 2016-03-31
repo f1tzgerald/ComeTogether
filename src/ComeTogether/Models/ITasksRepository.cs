@@ -21,15 +21,16 @@ namespace ComeTogether.Models
     {
         void AddToDoItem(int categoryId, TodoItem toDoitem);
         TodoItem GetToDoItemById(int id);
-        IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId);
+        //IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId);
         void EditToDoItem(int todoitemId, TodoItem toDoitem);
 
-        void DeleteAllDoneItems(IEnumerable<TodoItem> finishedToDoItems);
+        void DeleteToDoItem(int taskId);
+        void DeleteAllDoneItems(int categoryId);
     }
 
     public interface IComment
     {
         void AddComment(int toDoItemId, Comment comment);
-        IEnumerable<Comment> GetCommentsForToDoItem(int id);
+        //IEnumerable<Comment> GetCommentsForToDoItem(int id);
     }
 }
