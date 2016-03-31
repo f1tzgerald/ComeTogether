@@ -99,7 +99,6 @@
                 });
         };
 
-
         // DELETE - TASK
         vm.deleteTask = function (id, $index) {
             console.log("Id task to delete - " + id);
@@ -134,8 +133,10 @@
         // SHOW COMMENTS BTN
         vm.showCommentsFlag = false;
         vm.comments = [];
+        vm.selectedCommentButton = {};
 
         vm.showComments = function (taskId) {
+            vm.selectedCommentButton = taskId;
             vm.showCommentsFlag = true;
             var urlComments = "/api/category/" + vm.categoryId + "/" + taskId + "/comments";
             $http.get(urlComments)
@@ -146,6 +147,29 @@
                     //failed
                 })
                 .finally(function () {
+                });
+        };
+
+        //POST - ADD NEW COMMENT
+        vm.newComment = {};
+        vm.addNewComment = function () {
+            if (vm.selectedCommentButton == "" || vm.selectedCommentButton == null)
+                return;
+
+            vm.newComment.dateAdded = vm.today;
+
+            vm.urlNewComment = "/api/category/" + vm.categoryId + "/" + vm.selectedCommentButton + "/comments";
+
+            $http.post(vm.urlNewComment, vm.newComment)
+                .then(function () {
+                    //success
+                    vm.showComments(vm.selectedCommentButton);
+                }, function () {
+                    //failed
+                    vm.errorMessageAddNew = "Something wrong. Can't add new comment.";
+                })
+                .finally(function () {
+                    vm.newComment = {};
                 });
         };
     }

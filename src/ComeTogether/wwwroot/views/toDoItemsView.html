@@ -35,9 +35,24 @@
     <div class="col-md-offset-1 col-lg-offset-1"></div>
     <div class="col-md-3 col-lg-3">
         <h2> Comments </h2>
+        <!-- FORM TO ADD NEW COMMENT -->
         <div>
             <p class="text-primary">Post new comment for task</p>
+            <table>
+                <tr>
+                    <th>
+                        <input class="form-control" type="text" name="postText" ng-model="vm.newComment.text" />
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <button type="submit" class="btn btn-primary" ng-click="vm.addNewComment(selectedCommentButton)">Post new comment</button>
+                    </th>
+                </tr>
+            </table>
         </div>
+        <!-- **END** FORM TO ADD NEW COMMENT **END** -->
+        <!-- SHOW COMMENTS FOR TODOITEM -->
         <div ng-if="vm.showCommentsFlag">
             <div ng-repeat="comment in vm.comments">
                 <p class="tab-content">Creator: {{ comment.creator }}</p>
@@ -46,6 +61,7 @@
                 <br/>
             </div>
         </div>
+        <!-- **END** SHOW COMMENTS FOR TODOITEM **END** -->
     </div>
 
 </div>
@@ -69,24 +85,15 @@
                     <th>Name</th>                    
                     <th>Finish Date</th>
                     <th>Executor</th>
-                                        
-                    <!--<th>Creator</th>
-                        <th>Added Date</th>
-                        <th>Status</th>-->
                 </tr>
                 <tr>
                     <td><input class="form-control" type="text" name="name" value="" ng-model="vm.newTodoitem.name" /></td>                    
                     <td><input class="form-control" type="date" value="{{ vm.today }}" ng-model="vm.newTodoitem.dateFinish" /></td>
                     <td><input class="form-control" type="text" name="executor" value="" ng-model="vm.newTodoitem.whoDoIt" /></td>
-                                        
-                    <!--<td><input class="form-control" type="text" name="creator" value="" ng-model="newTodoitem.creator" /></td>
-                        <td><input class="form-control" type="date" name="dateadded" value="{{ vm.today }}" ng-model="newTodoitem.dateAdded" /></td>
-                        <td><input class="checkbox" type="checkbox" name="status" ng-checked="vm.todoItem.done" ng-model="newTodoitem.done" /></td>-->
                 </tr>
             </table>
 
             <button type="submit" class="btn btn-primary" ng-click="vm.addNewToDoItem()"> Add new To Do Item</button>
-            <!-- Comments -->
         </div> 
         <!-- **END**  ADD TODOITEMS FOR CATEGORY -->
     </div>

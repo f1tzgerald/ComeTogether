@@ -40,5 +40,35 @@ namespace ComeTogether.Controllers.Api
                 return Json($"Error: {ex.ToString()}");
             }
         }
+
+        [HttpPost]
+        public JsonResult Post(int taskId, [FromBody] CommentViewModel commentnewVM)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var commentToAdd = Mapper.Map<Comment>(commentnewVM);
+                    commentToAdd.Creator = User.Identity.Name;
+
+                    _repository.AddComment (taskId, commentToAdd);
+
+                    if (_repository.SaveChanges())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.Created;
+                        return Json(Mapper.Map<CommentViewModel>(commentToAdd));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json($"Error: {ex.ToString()}");
+            }
+
+            // If model is not valid
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(false);
+        }
     }
 }
