@@ -1,5 +1,5 @@
 ﻿<div class="row">
-    <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+    <div class="col-md-offset-1 col-md-7 col-lg-offset-1 col-lg-7">
         <h2>{{ vm.categoryName }}</h2>
         <div ng-show="vm.isBusy" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading...</div>
         <div class="alert alert-danger" ng-show="vm.errorMessage">{{ vm.errorMessage }}</div>
@@ -17,6 +17,7 @@
                 <th>Executor</th>
                 <th>Creator</th>                
                 <th>Comments</th>
+                <th>Delete</th>
             </tr>
             <tr ng-repeat="todoItem in vm.todoItems">
                 <td><input type="checkbox" name="status" ng-checked="todoItem.done" ng-click="vm.updateStatus(todoItem.id, $index)" /></td>
@@ -25,11 +26,28 @@
                 <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateFinish | date:shortDate }}</td>
                 <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.whoDoIt }}</td>
                 <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.creator }}</td>                
-                <td><input type="button" name="comments" value="{{todoItem.comments.length}}" ng-click="vm.showComments(todoItem.id)" /></td>
+                <td><input type="button" name="comments" value="Show" ng-click="vm.showComments(todoItem.id)"/></td>
+                <td><a class="btn btn-warning" ng-click="vm.deleteTask(todoItem.id, $index)"><i class="fa fa-close"></i></a></td>
             </tr>
         </table>
 <!-- **END** DISPLAY TODOITEMS FOR CATEGORY **END** -->
     </div>
+    <div class="col-md-offset-1 col-lg-offset-1"></div>
+    <div class="col-md-3 col-lg-3">
+        <h2> Comments </h2>
+        <div>
+            <p class="text-primary">Post new comment for task</p>
+        </div>
+        <div ng-if="vm.showCommentsFlag">
+            <div ng-repeat="comment in vm.comments">
+                <p class="tab-content">Creator: {{ comment.creator }}</p>
+                <p class="text-info">Text: {{ comment.text }}</p>
+                <p class="fa-text-height text-capitalize">Posted: {{ comment.dateAdded | date:shortDate }}</p>
+                <br/>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <div class="row">
@@ -39,7 +57,10 @@
 </div>
 
 <div class="row animate-show">
-    
+
+    <div ng-show="vm.isBusyAddNew" class="text-center"><i class="fa fa-spinner fa-spin"></i> Adding new task...</div>
+    <div class="alert alert-danger" ng-show="vm.errorMessageAddNew">{{ vm.errorMessageAddNew }}</div>
+
     <div ng-if="vm.newItemMenuToggle" class="col-md-offset-2 col-md-8 col-md-offset-2">
         <!-- ADD TODOITEMS FOR CATEGORY -->
         <div>

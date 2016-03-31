@@ -104,32 +104,39 @@ namespace ComeTogether.Controllers.Api
         // DELETE all done tasks
         [HttpDelete]
         [Route("api/category/{categoryId}/tasks/deleteAllDone")]
-        public JsonResult Delete(List<ToDoItemViewModel> finishedToDoItems)
+        public JsonResult DeleteAllDone(int categoryId)
         {
-            string message = "";
-            List<TodoItem> list = new List<TodoItem>();
-
-            if (finishedToDoItems == null)
-                return Json(new { Message = "You don't have finished tasks."});
-
             try
             {
-                foreach (var ToDoItem in finishedToDoItems)
+                _repository.DeleteAllDoneItems(categoryId);
+
+                if (_repository.SaveChanges())
                 {
-                    var toDoItemtoDelete = Mapper.Map<TodoItem>(ToDoItem);
-
-                    list.Add(toDoItemtoDelete);
-                    message += "ToDo Item -" + ToDoItem.Name + "has been Deleted" + Environment.NewLine;
+                    Response.StatusCode = (int)HttpStatusCode.Created;
                 }
+                return Json(new { Message = "Tasks was been deleted." });
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Message = ex.ToString() });
+            }
+        }
 
-                _repository.DeleteAllDoneItems(list);
+        [HttpDelete]
+        [Route("api/category/{categoryId}/tasks/{taskId}")]
+        public JsonResult Delete(int taskId)
+        {
+            try
+            {
+                _repository.DeleteToDoItem(taskId);
 
                 if (_repository.SaveChanges())
                 {
                     Response.StatusCode = (int)HttpStatusCode.Created;
                 }
 
-                return Json(new { Message = message });
+                return Json(new { Message = "ToDo Item -" + taskId + "has been Deleted" });
             }
             catch (Exception ex)
             {
