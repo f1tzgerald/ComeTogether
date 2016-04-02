@@ -12,7 +12,6 @@ using System.Net;
 namespace ComeTogether.Controllers.Api
 {
     [Authorize]
-    [Route("api/category/{categoryId}/{taskId}/comments")]
     public class CommentController : Controller
     {
         private ITasksRepository _repository;
@@ -23,6 +22,7 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpGet]
+        [Route("api/category/{categoryId}/{taskId}/comments")]
         public JsonResult Get(int taskId)
         {
             try
@@ -42,6 +42,7 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpPost]
+        [Route("api/category/{categoryId}/{taskId}/comments")]
         public JsonResult Post(int taskId, [FromBody] CommentViewModel commentnewVM)
         {
             try
@@ -69,6 +70,33 @@ namespace ComeTogether.Controllers.Api
             // If model is not valid
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
             return Json(false);
+        }
+
+        [HttpDelete]
+        [Route("api/category/{categoryId}/{taskId}/comments/{commentId}")]
+        public JsonResult DeleteComment(int commentId)
+        {
+            try
+            {
+                var commentToDelete = _repository.GetCommentById(commentId);
+
+                // Check if creator = current user then delete comment
+                if (commentToDelete.Creator == User.Identity.Name)
+                    _repository.DeleteComment(commentId);
+
+                if (_repository.SaveChanges())
+                {
+                    Response.StatusCode = (int)HttpStatusCode.Created;
+                    return Json(new { Message = "ToDo Item - " + commentId + " has been Deleted" });
+                }                
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Message = ex.ToString() });
+            }
+
+            return Json(new { Message = "Can't delete this comment." });
         }
     }
 }

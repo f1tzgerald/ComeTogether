@@ -57,6 +57,7 @@
             <div ng-repeat="comment in vm.comments">
                 <p class="tab-content">Creator: {{ comment.creator }}</p>
                 <p class="text-info">Text: {{ comment.text }}</p>
+                <div class=""><a class="btn btn-warning" ng-show="{{ comment.creator == vm.userName }}" ng-click="vm.deleteComment(comment.id, $index)"><i class="fa fa-close"></i></a></div>
                 <p class="fa-text-height text-capitalize">Posted: {{ comment.dateAdded | date:shortDate }}</p>
                 <br/>
             </div>

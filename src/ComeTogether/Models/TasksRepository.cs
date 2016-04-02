@@ -59,6 +59,11 @@ namespace ComeTogether.Models
             return _context.Category.Include(c => c.ToDoItems).OrderBy(c => c.Name).ToList();
         }
 
+        //public IEnumerable<TodoItem> GetDeletedToDoItems()
+        //{
+        //    return _context.ToDoItems.Where(c => c.isDeleted == true).OrderBy(c => c.DateFinish).ToList();
+        //}
+
         public IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId)
         {
             var tasksInCategory = (from s in _context.Category
@@ -117,6 +122,17 @@ namespace ComeTogether.Models
 #warning Insert Cascade delete
             var taskToDelete = _context.ToDoItems.Where(c => c.Id == taskId).FirstOrDefault();
             _context.Remove(taskToDelete);
+        }
+
+        public Comment GetCommentById (int commentId)
+        {
+            return _context.Comments.Where(c => c.Id == commentId).FirstOrDefault();
+        }
+
+        public void DeleteComment(int commentId)
+        {
+            var comment = _context.Comments.Where(c => c.Id == commentId).FirstOrDefault();
+            _context.Remove(comment);
         }
     }
 }

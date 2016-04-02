@@ -7,13 +7,31 @@
 
     angular.module("tasks_app").controller("toDoItemsController", toDoItemsController);
 
-    function toDoItemsController($routeParams, $http) {
+    function toDoItemsController($routeParams, $http/*, userConfig*/) {
 
         var vm = this;
         vm.categoryId = $routeParams.categoryId;
         vm.errorMessage = "";
         vm.isBusy = true;
         vm.todoItems = [];
+
+        //vm.userName = userConfig.userName;
+        //console.log("username = " + vm.userName);
+
+        // GET CURRENT USER NAME
+        vm.userName = {};
+        $http.get("/api/currentuser")
+            .then(function (response) {
+                //Success
+                vm.userName = response.data;
+            }, function (error) {
+            }).finally(function () { });
+        console.log("username = " + vm.userName);
+
+
+
+
+
 
         vm.today = new Date().toJSON().slice(0, 10);
         var urlTasks = "/api/category/" + vm.categoryId + "/tasks";
@@ -150,7 +168,7 @@
                 });
         };
 
-        //POST - ADD NEW COMMENT
+        // POST - ADD NEW COMMENT
         vm.newComment = {};
         vm.addNewComment = function () {
             if (vm.selectedCommentButton == "" || vm.selectedCommentButton == null)
@@ -171,6 +189,19 @@
                 .finally(function () {
                     vm.newComment = {};
                 });
+        };
+
+        // DELETE - DELETE COMMENT
+        vm.deleteComment = function (commentId, $index) {
+            var urlCommentDelete = "/api/category/" + vm.categoryId + "/" + vm.selectedCommentButton + "/comments/" + commentId;
+            console.log($rootScope.currentUser);
+            $http.delete(urlCommentDelete)
+                .then(function () {
+                    //success
+                    vm.comments.splice($index, 1);
+                }, function () {
+                    //failed
+                }).finally(function () { });
         };
     }
 })();

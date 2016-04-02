@@ -24,6 +24,8 @@ namespace ComeTogether.Models
         //IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId);
         void EditToDoItem(int todoitemId, TodoItem toDoitem);
 
+
+
         void DeleteToDoItem(int taskId);
         void DeleteAllDoneItems(int categoryId);
     }
@@ -32,5 +34,7 @@ namespace ComeTogether.Models
     {
         void AddComment(int toDoItemId, Comment comment);
         //IEnumerable<Comment> GetCommentsForToDoItem(int id);
+        Comment GetCommentById(int commentID);
+        void DeleteComment(int commentId);
     }
 }

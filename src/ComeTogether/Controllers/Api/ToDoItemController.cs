@@ -123,6 +123,7 @@ namespace ComeTogether.Controllers.Api
             }
         }
 
+        // Delete api/values/5
         [HttpDelete]
         [Route("api/category/{categoryId}/tasks/{taskId}")]
         public JsonResult Delete(int taskId)
