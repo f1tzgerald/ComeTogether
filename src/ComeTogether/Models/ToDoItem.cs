@@ -29,6 +29,11 @@ namespace ComeTogether.Models
         public string  Creator { get; set; }
         public bool Done { get; set; }
 
+        //public bool isDeleted { get; set; }
+
         public ICollection<Comment> Comments { get; set; }
+
+        public int? CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

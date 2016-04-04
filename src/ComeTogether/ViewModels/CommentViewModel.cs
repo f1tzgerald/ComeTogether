@@ -10,9 +10,9 @@ namespace ComeTogether.ViewModels
     {
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(20, MinimumLength = 4)]
-        public string Creator { get; set; }
+        //[Required]
+        //[StringLength(20, MinimumLength = 4)]
+        //public string Creator { get; set; }
 
         public DateTime DateAdded { get; set; } = DateTime.UtcNow.Date;
 

@@ -8,9 +8,10 @@ using ComeTogether.Models;
 namespace ComeTogether.Migrations
 {
     [DbContext(typeof(MainContextDb))]
-    partial class MainContextDbModelSnapshot : ModelSnapshot
+    [Migration("20160404111759_PersonCategory")]
+    partial class PersonCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")

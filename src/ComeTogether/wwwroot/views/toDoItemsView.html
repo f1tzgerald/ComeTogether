@@ -1,33 +1,107 @@
-﻿<div>
-    <div class="col-md-12">
+﻿<div class="row">
+    <div class="col-md-offset-1 col-md-7 col-lg-offset-1 col-lg-7">
         <h2>{{ vm.categoryName }}</h2>
         <div ng-show="vm.isBusy" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading...</div>
         <div class="alert alert-danger" ng-show="vm.errorMessage">{{ vm.errorMessage }}</div>
 
 <!-- DISPLAY TODOITEMS FOR CATEGORY -->
+
+        <input type="button" value="Delete All Done ToDo Items" name="deleteDone" ng-click="vm.deleteAllDone()" />
+
         <table class="table table-responsive table-striped">
             <tr>
+                <th>Status</th>
                 <th>Name</th>
                 <th>Added Date</th>
                 <th>Finish Date</th>
                 <th>Executor</th>
-                <th>Creator</th>
-                <th>Status</th>
+                <th>Creator</th>                
+                <th>Comments</th>
+                <th>Delete</th>
             </tr>
             <tr ng-repeat="todoItem in vm.todoItems">
-                <td>{{ todoItem.name }}</td>
-                <td>{{ todoItem.dateAdded | date:shortDate }}</td>
-                <td>{{ todoItem.dateFinish | date:shortDate }}</td>
-                <td>{{ todoItem.whoDoIt }}</td>
-                <td>{{ todoItem.creator }}</td>
-                <td><input type="checkbox" name="status" value="{{ todoItem.done }}" /></td>
+                <td><input type="checkbox" name="status" ng-checked="todoItem.done" ng-click="vm.updateStatus(todoItem.id, $index)" /></td>
+                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.name }}</td>
+                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateAdded | date:shortDate }}</td>
+                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateFinish | date:shortDate }}</td>
+                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.whoDoIt }}</td>
+                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.creator }}</td>                
+                <td><input type="button" name="comments" value="Show" ng-click="vm.showComments(todoItem.id)"/></td>
+                <td><a class="btn btn-warning" ng-click="vm.deleteTask(todoItem.id, $index)"><i class="fa fa-close"></i></a></td>
             </tr>
         </table>
 <!-- **END** DISPLAY TODOITEMS FOR CATEGORY **END** -->
-
+    </div>
+    <div class="col-md-offset-1 col-lg-offset-1"></div>
+    <div class="col-md-3 col-lg-3">
+        <h2> Comments </h2>
+        <!-- FORM TO ADD NEW COMMENT -->
+        <div>
+            <p class="text-primary">Post new comment for task</p>
+            <table>
+                <tr>
+                    <th>
+                        <input class="form-control" type="text" name="postText" ng-model="vm.newComment.text" />
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <button type="submit" class="btn btn-primary" ng-click="vm.addNewComment(selectedCommentButton)">Post new comment</button>
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <!-- **END** FORM TO ADD NEW COMMENT **END** -->
+        <!-- SHOW COMMENTS FOR TODOITEM -->
+        <div ng-if="vm.showCommentsFlag">
+            <div ng-repeat="comment in vm.comments">
+                <p class="tab-content">Creator: {{ comment.creator }}</p>
+                <p class="text-info">Text: {{ comment.text }}</p>
+                <div class=""><a class="btn btn-warning" ng-show="{{ comment.creator == vm.userName }}" ng-click="vm.deleteComment(comment.id, $index)"><i class="fa fa-close"></i></a></div>
+                <p class="fa-text-height text-capitalize">Posted: {{ comment.dateAdded | date:shortDate }}</p>
+                <br/>
+            </div>
+        </div>
+        <!-- **END** SHOW COMMENTS FOR TODOITEM **END** -->
     </div>
 
-    <div>
+</div>
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        <input type="submit" ng-click="vm.showNewItem()" class="btn btn-sm btn-block btn-danger" value="{{ vm.textToggleBtn }}" />
+    </div>    
+</div>
+
+<div class="row animate-show">
+
+    <div ng-show="vm.isBusyAddNew" class="text-center"><i class="fa fa-spinner fa-spin"></i> Adding new task...</div>
+    <div class="alert alert-danger" ng-show="vm.errorMessageAddNew">{{ vm.errorMessageAddNew }}</div>
+
+    <div ng-if="vm.newItemMenuToggle" class="col-md-offset-2 col-md-8 col-md-offset-2">
+        <!-- ADD TODOITEMS FOR CATEGORY -->
+        <div>
+            <table class="table table-responsive">
+                <tr>
+                    <th>Name</th>                    
+                    <th>Finish Date</th>
+                    <th>Executor</th>
+                </tr>
+                <tr>
+                    <td><input class="form-control" type="text" name="name" value="" ng-model="vm.newTodoitem.name" /></td>                    
+                    <td><input class="form-control" type="date" value="{{ vm.today }}" ng-model="vm.newTodoitem.dateFinish" /></td>
+                    <td><input class="form-control" type="text" name="executor" value="" ng-model="vm.newTodoitem.whoDoIt" /></td>
+                </tr>
+            </table>
+
+            <button type="submit" class="btn btn-primary" ng-click="vm.addNewToDoItem()"> Add new To Do Item</button>
+        </div> 
+        <!-- **END**  ADD TODOITEMS FOR CATEGORY -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-offset-1">
         <a href="#/" class="btn btn-sm btn-default"><i class="fa fa-chevron-left"></i> Back to list</a>
     </div>
 </div>

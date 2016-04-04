@@ -34,6 +34,19 @@ namespace ComeTogether.Models
         {
             _context.Category.Add(category);
         }
+
+        public void EditCategory(int categoryId, Category newCategory)
+        {
+            var currentCategory = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
+            currentCategory.Name = newCategory.Name;
+        }
+
+        public void DeleteCategory(int categoryId)
+        {
+#warning Cascade delete
+            var categoryToDelete = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
+            _context.Category.Remove(categoryToDelete);
+        }
         #endregion
 
         public IEnumerable<Category> GetAllCategories()
@@ -46,11 +59,16 @@ namespace ComeTogether.Models
             return _context.Category.Include(c => c.ToDoItems).OrderBy(c => c.Name).ToList();
         }
 
+        //public IEnumerable<TodoItem> GetDeletedToDoItems()
+        //{
+        //    return _context.ToDoItems.Where(c => c.isDeleted == true).OrderBy(c => c.DateFinish).ToList();
+        //}
+
         public IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId)
         {
             var tasksInCategory = (from s in _context.Category
-                     where s.Id == categoryId
-                     select s).Single().ToDoItems.ToList();
+                                   where s.Id == categoryId
+                                   select s).Single().ToDoItems.ToList();
             return tasksInCategory;
         }
 
@@ -77,16 +95,49 @@ namespace ComeTogether.Models
             return _context.SaveChanges() > 0;
         }
 
-        public void EditCategory(int categoryId, Category newCategory)
+        public void EditToDoItem(int todoitemId, TodoItem toDoitem)
         {
-            var currentCategory = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
-            currentCategory.Name = newCategory.Name;
+            var currentToDoItem = _context.ToDoItems.Where(c => c.Id == todoitemId).FirstOrDefault();
+            //#warning HARDCODING
+            currentToDoItem.Comments = toDoitem.Comments;
+            currentToDoItem.Creator = toDoitem.Creator;
+            currentToDoItem.DateAdded = toDoitem.DateAdded;
+            currentToDoItem.DateFinish = toDoitem.DateFinish;
+            currentToDoItem.Done = toDoitem.Done;
+            currentToDoItem.Name = toDoitem.Name;
+            currentToDoItem.WhoDoIt = toDoitem.WhoDoIt;
+            //currentToDoItem = toDoitem;
         }
 
-        public void DeleteCategory(int categoryId)
+        public void DeleteAllDoneItems(int categoryId)
         {
-            var categoryToDelete = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
-            _context.Category.Remove(categoryToDelete);
+#warning Insert Cascade delete
+            var category = _context.Category.Include(c => c.ToDoItems).Where(c => c.Id == categoryId).FirstOrDefault();
+            var doneTasks = category.ToDoItems.Where(c => c.Done == true).ToList();
+            _context.RemoveRange(doneTasks);
+        }
+
+        public void DeleteToDoItem (int taskId)
+        {
+#warning Insert Cascade delete
+            var taskToDelete = _context.ToDoItems.Where(c => c.Id == taskId).FirstOrDefault();
+            _context.Remove(taskToDelete);
+        }
+
+        public Comment GetCommentById (int commentId)
+        {
+            return _context.Comments.Where(c => c.Id == commentId).FirstOrDefault();
+        }
+
+        public void DeleteComment(int commentId)
+        {
+            var comment = _context.Comments.Where(c => c.Id == commentId).FirstOrDefault();
+            _context.Remove(comment);
+        }
+
+        public IEnumerable<Person> GetAllUsersForCategory(int categoryId)
+        {
+            return _context.CategoryPeople.Where(c => c.CategoryId == categoryId).Select(c => c.Person).ToList();            
         }
     }
 }
