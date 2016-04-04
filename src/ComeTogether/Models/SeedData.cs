@@ -20,19 +20,15 @@ namespace ComeTogether.Models
 
         public async Task AddDataAsync()
         {
+            Person first = new Person() { Created = DateTime.Now.Date, UserName = "Vitalii", Email = "alter.vetal@mail.ru" };
+            Person second = new Person() { Created = DateTime.Now.Date, UserName = "Carl", Email = "vvv@mail.ru" };
 
-            if (!_context.Users.Any(u => u.UserName == "Vitalii"))
+            if (await _userManager.FindByEmailAsync("alter.vetal@mail.ru") == null)
             {
-                var store = new UserStore<Person>(_context);
-
-#warning Костыль
-                // Костыль: var user = new Person
-                var user = new IdentityUser { UserName = "Vitalii", Email = "alter.vetal@mail.ru" };
-                //  последствия костыля await _userManager.CreateAsync((Person) user
-                await _userManager.CreateAsync((Person) user, "P@ssw0rd!");
+                await _userManager.CreateAsync(first, "P@ssw0rd!");
+                await _userManager.CreateAsync(second, "P@ssw0rd!");
             }
-
-
+            
             if (!_context.Category.Any())
             {
                 #region Add Category I
@@ -89,14 +85,15 @@ namespace ComeTogether.Models
                 {
                     Name = "First Category",
 
-                    ToDoItems = new List<TodoItem>() { todo1, todo2 }
+                    ToDoItems = new List<TodoItem>() { todo1, todo2 },
                 };
 
                 _context.Add(newCategory);
                 _context.AddRange(newCategory.ToDoItems);
                 _context.AddRange(todo1.Comments);
                 _context.AddRange(todo2.Comments);
-#endregion
+                _context.SaveChanges();
+                #endregion
 
                 #region Add Category II
                 var todo3 = new TodoItem()
@@ -159,7 +156,16 @@ namespace ComeTogether.Models
                 _context.AddRange(secondCategory.ToDoItems);
                 _context.AddRange(todo3.Comments);
                 _context.AddRange(todo4.Comments);
+                _context.SaveChanges();
                 #endregion
+
+                var useraltId = _context.People.Where(c => c.Email == "alter.vetal@mail.ru").FirstOrDefault().Id;
+                var user2Id = _context.People.Where(c => c.Email == "vvv@mail.ru").FirstOrDefault().Id;
+
+                CategoryPeople cp = new CategoryPeople() { CategoryId = 1, UserId = useraltId };
+                CategoryPeople cp1 = new CategoryPeople() { CategoryId = 2, UserId = useraltId };
+                CategoryPeople cp2 = new CategoryPeople() { CategoryId = 2, UserId = user2Id };
+                _context.AddRange(cp, cp1, cp2);
 
                 _context.SaveChanges();
             }
