@@ -9,7 +9,7 @@ namespace ComeTogether.Models
 
     public interface ICategory
     {
-        IEnumerable<Category> GetAllCategories();
+        IEnumerable<Category> GetAllCategoriesForUser(string userId);
         IEnumerable<Category> GetAllCategoriesWithToDoItems();
         Category GetCategoryById(int categoryId);
         void AddCategory(Category category);
@@ -20,6 +20,8 @@ namespace ComeTogether.Models
     public interface IUser
     {
         IEnumerable<Person> GetAllUsersForCategory(int categoryId);
+        IEnumerable<Person> GetAllUsers();
+        Person GetUserByName(string userName);
     }
 
     public interface IToDoItem

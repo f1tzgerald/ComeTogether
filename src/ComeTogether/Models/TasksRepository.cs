@@ -43,15 +43,16 @@ namespace ComeTogether.Models
 
         public void DeleteCategory(int categoryId)
         {
-#warning Cascade delete
             var categoryToDelete = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
             _context.Category.Remove(categoryToDelete);
         }
         #endregion
 
-        public IEnumerable<Category> GetAllCategories()
+        public IEnumerable<Category> GetAllCategoriesForUser(string userId)
         {
-            return _context.Category.OrderBy(c=>c.Name).ToList();
+            var s = _context.Category.Where(c => c.CategoryPeople.Any(ac => ac.UserId == userId)).OrderBy(c=>c.Name).ToList();
+
+            return s;
         }
 
         public IEnumerable<Category> GetAllCategoriesWithToDoItems()
@@ -111,7 +112,6 @@ namespace ComeTogether.Models
 
         public void DeleteAllDoneItems(int categoryId)
         {
-#warning Insert Cascade delete
             var category = _context.Category.Include(c => c.ToDoItems).Where(c => c.Id == categoryId).FirstOrDefault();
             var doneTasks = category.ToDoItems.Where(c => c.Done == true).ToList();
             _context.RemoveRange(doneTasks);
@@ -119,7 +119,6 @@ namespace ComeTogether.Models
 
         public void DeleteToDoItem (int taskId)
         {
-#warning Insert Cascade delete
             var taskToDelete = _context.ToDoItems.Where(c => c.Id == taskId).FirstOrDefault();
             _context.Remove(taskToDelete);
         }
@@ -138,6 +137,16 @@ namespace ComeTogether.Models
         public IEnumerable<Person> GetAllUsersForCategory(int categoryId)
         {
             return _context.CategoryPeople.Where(c => c.CategoryId == categoryId).Select(c => c.Person).ToList();            
+        }
+
+        public IEnumerable<Person> GetAllUsers()
+        {
+            return _context.People.OrderBy(c=>c.UserName).ToList();
+        }
+
+        public Person GetUserByName(string userName)
+        {
+            return _context.People.Where(c => c.UserName == userName).FirstOrDefault();
         }
     }
 }
