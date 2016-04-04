@@ -134,5 +134,11 @@ namespace ComeTogether.Models
             var comment = _context.Comments.Where(c => c.Id == commentId).FirstOrDefault();
             _context.Remove(comment);
         }
+
+        public IEnumerable<Person> GetAllUsersForCategory(int categoryId)
+        {
+            var category = _context.Category.Where(c => c.Id == categoryId).Include(c => c.People).FirstOrDefault();
+            return category.People.ToList();
+        }
     }
 }

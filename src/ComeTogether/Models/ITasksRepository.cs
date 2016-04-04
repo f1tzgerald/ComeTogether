@@ -2,7 +2,7 @@
 
 namespace ComeTogether.Models
 {
-    public interface ITasksRepository : ICategory, IToDoItem, IComment
+    public interface ITasksRepository : ICategory, IToDoItem, IComment, IUser
     {
         bool SaveChanges();
     }
@@ -15,6 +15,11 @@ namespace ComeTogether.Models
         void AddCategory(Category category);
         void EditCategory(int categoryId, Category editCategory);
         void DeleteCategory(int categoryId);
+    }
+
+    public interface IUser
+    {
+        IEnumerable<Person> GetAllUsersForCategory(int categoryId);
     }
 
     public interface IToDoItem

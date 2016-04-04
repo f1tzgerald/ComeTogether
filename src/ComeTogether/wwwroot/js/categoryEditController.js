@@ -23,8 +23,7 @@
             })
             .finally(function () {
             });       
-
-
+        
         vm.url = "/api/category/edit/" + vm.categoryId;
 
         vm.editCategoryClick = function () {
@@ -54,5 +53,12 @@
                     vm.isBusy = false;
                 });
         };
+
+        $http.get()
+            .then(function (response) {
+                //success
+            }, function (error) {
+                //failed
+            }).finally();
     }
 })();
