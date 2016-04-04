@@ -65,5 +65,17 @@ namespace ComeTogether.Controllers
         {
             return View();
         }
+
+        [Authorize]
+        public IActionResult Users()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Recycler()
+        {
+            return View();
+        }
     }
 }
