@@ -137,8 +137,7 @@ namespace ComeTogether.Models
 
         public IEnumerable<Person> GetAllUsersForCategory(int categoryId)
         {
-            var category = _context.Category.Where(c => c.Id == categoryId).Include(c => c.People).FirstOrDefault();
-            return category.People.ToList();
+            return _context.CategoryPeople.Where(c => c.CategoryId == categoryId).Select(c => c.Person).ToList();            
         }
     }
 }

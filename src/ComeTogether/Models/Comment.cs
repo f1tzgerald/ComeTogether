@@ -13,5 +13,8 @@ namespace ComeTogether.Models
         public string Creator { get; set; }
         public DateTime DateAdded { get; set; }
         public string Text { get; set; }
+
+        public int? ToDoItemId { get; set; }
+        public TodoItem ToDoItem { get; set; }
     }
 }

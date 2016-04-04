@@ -29,10 +29,6 @@
         console.log("username = " + vm.userName);
 
 
-
-
-
-
         vm.today = new Date().toJSON().slice(0, 10);
         var urlTasks = "/api/category/" + vm.categoryId + "/tasks";
 

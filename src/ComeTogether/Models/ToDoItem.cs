@@ -32,5 +32,8 @@ namespace ComeTogether.Models
         //public bool isDeleted { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
+
+        public int? CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }
