@@ -16,6 +16,6 @@ namespace ComeTogether.Models
 
         public ICollection<TodoItem> ToDoItems { get; set; }
 
-        public ICollection<Person> People { get; set; }
+        public List<CategoryPeople> CategoryPeople { get; set; }
     }
 }
