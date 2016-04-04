@@ -1,0 +1,19 @@
+﻿<div>
+    <p>People</p>
+    <div>
+        <table ng-repeat="user in vm.users">
+            <tr>
+                <td> User Name </td>
+                <td> Email </td>
+                <td> Phone Number </td>
+                <td> Created account </td>
+            </tr>
+            <tr>
+                <td> {{ user.userName }} </td>
+                <td> {{ user.created | date:shortDate }} </td>
+                <td> {{ user.email }} </td>
+                <td> {{ user.phoneNumber }} </td>
+            </tr>
+        </table>
+    </div>
+</div>

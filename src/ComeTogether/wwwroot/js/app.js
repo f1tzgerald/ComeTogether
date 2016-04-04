@@ -21,7 +21,19 @@
                     controller: "categoryEditController",
                     controllerAs: "vm",
                     templateUrl: "/views/editCategory.html"
-                })
+                });
+
+                $routeProvider.when("/users", {
+                    controller: "userController",
+                    controllerAs: "vm",
+                    templateUrl: "/views/usersView.html"
+                });
+
+                $routeProvider.when("/recycle", {
+                    controller: "recycleController",
+                    controllerAs: "vm",
+                    templateUrl: "/views/recycleView.html"
+                });
 
                 $routeProvider.otherwise({ redirectTo: "/"});
 

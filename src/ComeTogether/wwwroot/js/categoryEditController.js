@@ -22,10 +22,20 @@
                 vm.errorMessage = "Failed to load data: " + error;
             })
             .finally(function () {
-            });       
-        
-        vm.url = "/api/category/edit/" + vm.categoryId;
+            });
 
+        // Get Users related with current category
+        vm.urlUsers = "/api/category/" + vm.categoryId + "/users";
+        vm.usersListForCategory = [];
+        $http.get(vm.urlUsers)
+            .then(function (response) {
+                //success
+                vm.usersListForCategory = response.data;
+            }, function (error) {
+                //failed
+            }).finally();        
+
+        vm.url = "/api/category/edit/" + vm.categoryId;
         vm.editCategoryClick = function () {
 
             vm.isBusy = true;
@@ -54,11 +64,7 @@
                 });
         };
 
-        $http.get()
-            .then(function (response) {
-                //success
-            }, function (error) {
-                //failed
-            }).finally();
+
+        // Add new users for this category
     }
 })();

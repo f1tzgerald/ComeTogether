@@ -19,7 +19,11 @@
 
     <div>
         <p>People related with the category:</p>
-
+        <div>
+            <ul ng-repeat="user in vm.usersListForCategory">
+                <li>{{user.userName}}</li>
+            </ul>
+        </div>
     </div>
 
     <div>
