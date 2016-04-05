@@ -2,7 +2,7 @@
 
     "use strict";
 
-    angular.module("tasks_app").controller("userController", userController);
+    angular.module("tasks_app_user").controller("userController", userController);
 
     function userController ($http) {
 
