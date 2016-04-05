@@ -19,12 +19,35 @@ namespace ComeTogether.Controllers.Api
             _repository = repository;
         }
 
-        // GET: api/values
         [HttpGet]
         [Route("api/currentuser")]
         public JsonResult GetCurrentUser()
         {
             return Json(new { currentUser = User.Identity.Name });
+        }
+
+        [HttpGet]
+        [Route("api/users")]
+        public JsonResult GetAllUsers()
+        {
+            try
+            {
+                var users = _repository.GetAllUsers().Take(25);
+
+                if (users != null)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.OK;
+                    return Json(users);
+                }
+
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(false);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json($"Error: {ex.ToString()}");
+            }            
         }
 
         [HttpGet]
