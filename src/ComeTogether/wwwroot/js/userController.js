@@ -31,8 +31,6 @@
                 vm.isBusy = false;
             });
 
-        console.log(vm.users);
-
         // Get more users (+25)
         vm.ShowMoreUsers = function () {
             vm.isBusy = true;
@@ -56,5 +54,23 @@
                     vm.isBusy = false;
                 });
         }
+
+
+        // Sort Data
+        vm.reverseSort = false;
+        vm.sortColumn = 'userName';
+
+        vm.sortData = function (column) {
+            vm.reverseSort = (vm.sortColumn == column) ? !vm.reverseSort : false;
+            vm.sortColumn = column;
+        };
+
+        // Add arrow narrow sorting column
+        vm.getSortClass = function (column) {
+            if (vm.sortColumn == column) {
+                return vm.reverseSort ? 'fa fa-arrow-down' : 'fa fa-arrow-up';
+            }
+            return '';
+        };
     }
 })();
