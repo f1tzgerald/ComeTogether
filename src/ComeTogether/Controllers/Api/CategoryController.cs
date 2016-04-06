@@ -25,7 +25,8 @@ namespace ComeTogether.Controllers.Api
         [Route("api/category")]
         public JsonResult Get()
         {
-            var res = Mapper.Map<IEnumerable<CategoryViewModel>>(_repository.GetAllCategories());
+            var user = _repository.GetUserByName(User.Identity.Name);
+            var res = Mapper.Map<IEnumerable<CategoryViewModel>>(_repository.GetAllCategoriesForUser(user.Id));
 
             return Json(res);
         }

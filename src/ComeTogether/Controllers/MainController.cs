@@ -73,7 +73,7 @@ namespace ComeTogether.Controllers
         }
 
         [Authorize]
-        public IActionResult Recycler()
+        public IActionResult Recycle()
         {
             return View();
         }

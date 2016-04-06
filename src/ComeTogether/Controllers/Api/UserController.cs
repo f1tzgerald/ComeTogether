@@ -27,12 +27,12 @@ namespace ComeTogether.Controllers.Api
         }
 
         [HttpGet]
-        [Route("api/users")]
-        public JsonResult GetAllUsers()
+        [Route("api/users/{countTake}/{countSkip}")]
+        public JsonResult GetAllUsers(int countTake, int countSkip)
         {
             try
             {
-                var users = _repository.GetAllUsers().Take(25);
+                var users = _repository.GetCountOfUsersFrom(countTake, countSkip);
 
                 if (users != null)
                 {

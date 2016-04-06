@@ -21,6 +21,7 @@ namespace ComeTogether.Models
     {
         IEnumerable<Person> GetAllUsersForCategory(int categoryId);
         IEnumerable<Person> GetAllUsers();
+        IEnumerable<Person> GetCountOfUsersFrom(int count, int skip);
         Person GetUserByName(string userName);
     }
 
@@ -28,10 +29,10 @@ namespace ComeTogether.Models
     {
         void AddToDoItem(int categoryId, TodoItem toDoitem);
         TodoItem GetToDoItemById(int id);
-        //IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId);
+        IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId);
         void EditToDoItem(int todoitemId, TodoItem toDoitem);
 
-
+        IEnumerable<TodoItem> GetDeletedToDoItems();
 
         void DeleteToDoItem(int taskId);
         void DeleteAllDoneItems(int categoryId);
