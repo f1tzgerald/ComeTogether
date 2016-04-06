@@ -1,10 +1,32 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+﻿<div class="row">
+    <div class="col-md-offset-1 col-md-7 col-lg-offset-1 col-lg-7">
+        <h2>Recycle View</h2>
+        <div ng-show="vm.isBusy" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading...</div>
+        <div class="alert alert-danger" ng-show="vm.errorMessage">{{ vm.errorMessage }}</div>
+        <!-- DISPLAY TODOITEMS FOR CATEGORY -->
+        <table class="table table-responsive table-striped">
+            <tr>
+                <th>Status</th>
+                <th>Name</th>
+                <th>Added Date</th>
+                <th>Finish Date</th>
+                <th>Executor</th>
+                <th>Creator</th>
+                <th>Recover</th>
+                <th>Delete</th>
+            </tr>
+            <tr ng-repeat="todoItem in vm.todoItems">
+                <td><input type="checkbox" name="status" ng-checked="todoItem.done" ng-click="vm.updateStatus(todoItem.id, $index)" /></td>
+                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.name }}</td>
+                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateAdded | date:shortDate }}</td>
+                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateFinish | date:shortDate }}</td>
+                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.whoDoIt }}</td>
+                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.creator }}</td>
+                <td><a class="btn btn-warning" ng-click="vm.recoverTask(todoItem.id, $index)"><i class="fa fa-reply"></i></a></td>
+                <td><a class="btn btn-warning" ng-click="vm.deleteTask(todoItem.id, $index)"><i class="fa fa-remove"></i></a></td>
+            </tr>
+        </table>
+        <input type="button" value="Delete All Done ToDo Items" name="deleteDone" ng-click="vm.deleteAll()" />
+        <!-- **END** DISPLAY TODOITEMS FOR CATEGORY **END** -->
+    </div>
+</div>
