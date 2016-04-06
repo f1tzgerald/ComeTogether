@@ -22,13 +22,17 @@ namespace ComeTogether.Models
         {
             Person first = new Person() { Created = DateTime.Now.Date, UserName = "Vitalii", Email = "alter.vetal@mail.ru" };
             Person second = new Person() { Created = DateTime.Now.Date, UserName = "Carl", Email = "vvv@mail.ru" };
+            Person first1 = new Person() { Created = DateTime.Now.Date, UserName = "Misja", Email = "c@mail.ru" };
+            Person second2 = new Person() { Created = DateTime.Now.Date, UserName = "Oleg", Email = "v@mail.ru" };
 
             if (await _userManager.FindByEmailAsync("alter.vetal@mail.ru") == null)
             {
                 await _userManager.CreateAsync(first, "P@ssw0rd!");
                 await _userManager.CreateAsync(second, "P@ssw0rd!");
+                await _userManager.CreateAsync(first1, "P@ssw0rd!");
+                await _userManager.CreateAsync(second2, "P@ssw0rd!");
             }
-            
+
             if (!_context.Category.Any())
             {
                 #region Add Category I
@@ -39,6 +43,7 @@ namespace ComeTogether.Models
                     DateAdded = DateTime.UtcNow.Date,
                     DateFinish = DateTime.UtcNow.AddDays(1).Date,
                     Done = false,
+                    IsDeleted = false,
                     WhoDoIt = "Marry",
                     Comments = new List<Comment>()
                             {
@@ -63,6 +68,7 @@ namespace ComeTogether.Models
                     DateAdded = DateTime.UtcNow.Date,
                     DateFinish = DateTime.UtcNow.AddDays(1).Date,
                     Done = false,
+                    IsDeleted = false,
                     WhoDoIt = "Marry",
                     Comments = new List<Comment>()
                             {
@@ -103,6 +109,7 @@ namespace ComeTogether.Models
                     DateAdded = DateTime.UtcNow.Date,
                     DateFinish = DateTime.UtcNow.AddDays(1).Date,
                     Done = false,
+                    IsDeleted = false,
                     WhoDoIt = "Marry",
                     Comments = new List<Comment>()
                             {
@@ -128,6 +135,7 @@ namespace ComeTogether.Models
                     DateAdded = DateTime.UtcNow.Date,
                     DateFinish = DateTime.UtcNow.AddDays(1).Date,
                     Done = false,
+                    IsDeleted = false,
                     WhoDoIt = "Marry",
                     Comments = new List<Comment>()
                             {
