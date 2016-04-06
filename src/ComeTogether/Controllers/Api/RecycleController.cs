@@ -40,12 +40,34 @@ namespace ComeTogether.Controllers.Api
                 return Json($"Error: {ex.ToString()}");
             }
         }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        
+        [HttpPut]
+        [Route("api/recycle/{taskId}")]
+        public JsonResult Put(int taskId, [FromBody]ToDoItemViewModel updatedToDoVM)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var editToDoItem = Mapper.Map<TodoItem>(updatedToDoVM);
 
+                    _repository.EditToDoItem(taskId, editToDoItem);
+
+                    if (_repository.SaveChanges())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.Created;
+                        return Json(Mapper.Map<ToDoItemViewModel>(editToDoItem));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { Message = ex.ToString() });
+            }
+
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(false);
         }
 
         [Route("api/recycle/{taskId}")]
@@ -72,13 +94,13 @@ namespace ComeTogether.Controllers.Api
             return Json(false);
         }
                 
-        [Route("api/recycle/deleteAllDone")]
+        [Route("api/recycle/deleteAllDeleted")]
         [HttpDelete]
-        public JsonResult DeleteAllDone(int categoryId)
+        public JsonResult DeleteAllDeleted()
         {
             try
             {
-                _repository.DeleteAllDoneItems(categoryId);
+                _repository.DeleteAllDeletedItems();
 
                 if (_repository.SaveChanges())
                 {

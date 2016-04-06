@@ -112,11 +112,10 @@ namespace ComeTogether.Models
             //currentToDoItem = toDoitem;
         }
 
-        public void DeleteAllDoneItems(int categoryId)
+        public void DeleteAllDeletedItems()
         {
-            var category = _context.Category.Include(c => c.ToDoItems).Where(c => c.Id == categoryId).FirstOrDefault();
-            var doneTasks = category.ToDoItems.Where(c => c.Done == true).ToList();
-            _context.RemoveRange(doneTasks);
+            var deletedTasks = _context.ToDoItems.Where(c => c.IsDeleted == true).ToList();
+            _context.RemoveRange(deletedTasks);
         }
 
         public void DeleteToDoItem (int taskId)
@@ -154,6 +153,13 @@ namespace ComeTogether.Models
         public IEnumerable<Person> GetCountOfUsersFrom(int count, int skip)
         {
             return _context.People.OrderBy(c => c.UserName).Skip(skip).Take(count).ToList();
+        }
+
+        public void MoveAllDoneItemsToRecycle(int categoryId)
+        {
+            var category = _context.Category.Where(c => c.Id == categoryId).Include(c=>c.ToDoItems).FirstOrDefault();
+            var tasksToRecycle = category.ToDoItems.Where(c => c.IsDeleted == false && c.Done == true).ToList();
+            _context.RemoveRange(tasksToRecycle);
         }
     }
 }

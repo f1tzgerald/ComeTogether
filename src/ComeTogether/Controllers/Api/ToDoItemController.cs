@@ -108,13 +108,13 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                _repository.DeleteAllDoneItems(categoryId);
+                _repository.MoveAllDoneItemsToRecycle(categoryId);
 
                 if (_repository.SaveChanges())
                 {
                     Response.StatusCode = (int)HttpStatusCode.Created;
                 }
-                return Json(new { Message = "Tasks was been deleted." });
+                return Json(new { Message = "Tasks was been deleted to recycle." });
             }
             catch (Exception ex)
             {

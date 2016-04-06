@@ -38,8 +38,8 @@
         };
 
         // Deleted all tasks
-        vm.deleteAllDone = function () {
-            var urlDelete = "/api/recycle/deleteAllDone";
+        vm.deleteAllDeleted = function () {
+            var urlDelete = "/api/recycle/deleteAllDeleted";
             $http.delete(urlDelete)
                 .then(function () {
                     //success

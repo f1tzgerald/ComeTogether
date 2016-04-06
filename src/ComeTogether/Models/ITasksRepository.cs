@@ -32,10 +32,12 @@ namespace ComeTogether.Models
         IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId);
         void EditToDoItem(int todoitemId, TodoItem toDoitem);
 
+        void MoveAllDoneItemsToRecycle(int categoryId);
+
         IEnumerable<TodoItem> GetDeletedToDoItems();
 
         void DeleteToDoItem(int taskId);
-        void DeleteAllDoneItems(int categoryId);
+        void DeleteAllDeletedItems();
     }
 
     public interface IComment
