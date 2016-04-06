@@ -27,6 +27,7 @@ namespace ComeTogether.ViewModels
         public string Creator { get; set; }
 
         public bool Done { get; set; } = false;
+        public bool IsDeleted { get; set; } = false;
 
         public IEnumerable<CommentViewModel> Comments { get; set; }
     }

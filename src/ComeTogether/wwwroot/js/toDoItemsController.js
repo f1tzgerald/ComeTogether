@@ -23,10 +23,10 @@
         $http.get("/api/currentuser")
             .then(function (response) {
                 //Success
-                vm.userName = response.data;
+                vm.userName = response.currentUser;
             }, function (error) {
             }).finally(function () { });
-        console.log("username = " + vm.userName);
+        console.log(vm.userName);
 
 
         vm.today = new Date().toJSON().slice(0, 10);
@@ -117,6 +117,9 @@
         vm.deleteTask = function (id, $index) {
             console.log("Id task to delete - " + id);
 
+            vm.updatedItem = vm.todoItems[$index];
+            vm.updatedItem.isDeleted = true;
+
             var urlTaskToDel = "/api/category/" + vm.categoryId + "/tasks/";
 
             $http.delete(urlTaskToDel + id)
@@ -157,6 +160,7 @@
                 .then(function (response) {
                     //success
                     vm.comments = response.data;
+                    console.log(vm.comments);
                 }, function () {
                     //failed
                 })

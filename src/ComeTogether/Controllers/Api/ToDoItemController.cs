@@ -27,12 +27,12 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                var category = _repository.GetCategoryById(categoryId);
+                var tasks = _repository.GetToDoItemsForCategory(categoryId);
 
-                if (category == null)
+                if (tasks == null)
                     return Json(null);
 
-                return Json(Mapper.Map<IEnumerable<ToDoItemViewModel>>(category.ToDoItems));
+                return Json(Mapper.Map<IEnumerable<ToDoItemViewModel>>(tasks));
             }
             catch (Exception ex)
             {
@@ -123,27 +123,33 @@ namespace ComeTogether.Controllers.Api
             }
         }
 
-        // Delete api/values/5
-        [HttpDelete]
+        [HttpPut]
         [Route("api/category/{categoryId}/tasks/{taskId}")]
-        public JsonResult Delete(int taskId)
+        public JsonResult DeleteToRecycle(int taskId, ToDoItemViewModel deletedToDoVM)
         {
             try
             {
-                _repository.DeleteToDoItem(taskId);
-
-                if (_repository.SaveChanges())
+                if (ModelState.IsValid)
                 {
-                    Response.StatusCode = (int)HttpStatusCode.Created;
-                }
+                    var editToDoItem = Mapper.Map<TodoItem>(deletedToDoVM);
 
-                return Json(new { Message = "ToDo Item -" + taskId + "has been Deleted" });
+                    _repository.EditToDoItem(taskId, editToDoItem);
+
+                    if (_repository.SaveChanges())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.Created;
+                        return Json(Mapper.Map<ToDoItemViewModel>(editToDoItem));
+                    }
+                }
             }
+
             catch (Exception ex)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(new { Message = ex.ToString() });
             }
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(false);
         }
     }
 }
