@@ -60,17 +60,18 @@ namespace ComeTogether.Models
             return _context.Category.Include(c => c.ToDoItems).OrderBy(c => c.Name).ToList();
         }
 
-        //public IEnumerable<TodoItem> GetDeletedToDoItems()
-        //{
-        //    return _context.ToDoItems.Where(c => c.isDeleted == true).OrderBy(c => c.DateFinish).ToList();
-        //}
+        public IEnumerable<TodoItem> GetDeletedToDoItems()
+        {
+
+            return _context.ToDoItems.Where(c => c.IsDeleted == true).OrderBy(c => c.DateFinish).ToList();
+        }
 
         public IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId)
         {
-            var tasksInCategory = (from s in _context.Category
-                                   where s.Id == categoryId
-                                   select s).Single().ToDoItems.ToList();
-            return tasksInCategory;
+            var query = (from cat in _context.Category
+                         where cat.Id == categoryId
+                         select cat).Include(c => c.ToDoItems).FirstOrDefault();
+            return query.ToDoItems;
         }
 
         public IEnumerable<Comment> GetCommentsForToDoItem(int id)
@@ -83,7 +84,8 @@ namespace ComeTogether.Models
 
         public Category GetCategoryById(int categoryId)
         {
-            return _context.Category.Include(c => c.ToDoItems).Where(c => c.Id == categoryId).FirstOrDefault();
+            var ss = _context.Category.Include(c => c.ToDoItems).Where(c => c.Id == categoryId).FirstOrDefault();
+            return ss;
         }
 
         public TodoItem GetToDoItemById(int id)
@@ -147,6 +149,11 @@ namespace ComeTogether.Models
         public Person GetUserByName(string userName)
         {
             return _context.People.Where(c => c.UserName == userName).FirstOrDefault();
+        }
+
+        public IEnumerable<Person> GetCountOfUsersFrom(int count, int skip)
+        {
+            return _context.People.OrderBy(c => c.UserName).Skip(skip).Take(count).ToList();
         }
     }
 }
