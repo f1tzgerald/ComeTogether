@@ -12,7 +12,7 @@ namespace ComeTogether.ViewModels
 
         //[Required]
         //[StringLength(20, MinimumLength = 4)]
-        //public string Creator { get; set; }
+        public string Creator { get; set; }
 
         public DateTime DateAdded { get; set; } = DateTime.UtcNow.Date;
 

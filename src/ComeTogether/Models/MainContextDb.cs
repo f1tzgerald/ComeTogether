@@ -13,7 +13,14 @@ namespace ComeTogether.Models
     {
         public MainContextDb()
         {
-            Database.EnsureCreated();
+            try
+            {
+                Database.EnsureCreated();
+            }
+            catch (Exception ex)
+            {
+                Console.Write (ex.ToString());
+            }
         }
 
         public DbSet<Category> Category { get; set; }

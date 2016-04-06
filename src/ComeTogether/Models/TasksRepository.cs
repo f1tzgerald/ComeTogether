@@ -43,15 +43,16 @@ namespace ComeTogether.Models
 
         public void DeleteCategory(int categoryId)
         {
-#warning Cascade delete
             var categoryToDelete = _context.Category.Where(c => c.Id == categoryId).FirstOrDefault();
             _context.Category.Remove(categoryToDelete);
         }
         #endregion
 
-        public IEnumerable<Category> GetAllCategories()
+        public IEnumerable<Category> GetAllCategoriesForUser(string userId)
         {
-            return _context.Category.OrderBy(c=>c.Name).ToList();
+            var s = _context.Category.Where(c => c.CategoryPeople.Any(ac => ac.UserId == userId)).OrderBy(c=>c.Name).ToList();
+
+            return s;
         }
 
         public IEnumerable<Category> GetAllCategoriesWithToDoItems()
@@ -59,17 +60,19 @@ namespace ComeTogether.Models
             return _context.Category.Include(c => c.ToDoItems).OrderBy(c => c.Name).ToList();
         }
 
-        //public IEnumerable<TodoItem> GetDeletedToDoItems()
-        //{
-        //    return _context.ToDoItems.Where(c => c.isDeleted == true).OrderBy(c => c.DateFinish).ToList();
-        //}
+        public IEnumerable<TodoItem> GetDeletedToDoItems()
+        {
+
+            return _context.ToDoItems.Where(c => c.IsDeleted == true).OrderBy(c => c.DateFinish).ToList();
+        }
 
         public IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId)
         {
-            var tasksInCategory = (from s in _context.Category
-                                   where s.Id == categoryId
-                                   select s).Single().ToDoItems.ToList();
-            return tasksInCategory;
+            var query = (from cat in _context.Category
+                         where cat.Id == categoryId
+                         select cat).Include(c => c.ToDoItems).FirstOrDefault();
+            var tasks = query.ToDoItems.Where(c => c.IsDeleted == false);
+            return tasks;
         }
 
         public IEnumerable<Comment> GetCommentsForToDoItem(int id)
@@ -82,7 +85,8 @@ namespace ComeTogether.Models
 
         public Category GetCategoryById(int categoryId)
         {
-            return _context.Category.Include(c => c.ToDoItems).Where(c => c.Id == categoryId).FirstOrDefault();
+            var ss = _context.Category.Include(c => c.ToDoItems).Where(c => c.Id == categoryId).FirstOrDefault();
+            return ss;
         }
 
         public TodoItem GetToDoItemById(int id)
@@ -106,20 +110,18 @@ namespace ComeTogether.Models
             currentToDoItem.Done = toDoitem.Done;
             currentToDoItem.Name = toDoitem.Name;
             currentToDoItem.WhoDoIt = toDoitem.WhoDoIt;
+            currentToDoItem.IsDeleted = toDoitem.IsDeleted;
             //currentToDoItem = toDoitem;
         }
 
-        public void DeleteAllDoneItems(int categoryId)
+        public void DeleteAllDeletedItems()
         {
-#warning Insert Cascade delete
-            var category = _context.Category.Include(c => c.ToDoItems).Where(c => c.Id == categoryId).FirstOrDefault();
-            var doneTasks = category.ToDoItems.Where(c => c.Done == true).ToList();
-            _context.RemoveRange(doneTasks);
+            var deletedTasks = _context.ToDoItems.Where(c => c.IsDeleted == true).ToList();
+            _context.RemoveRange(deletedTasks);
         }
 
         public void DeleteToDoItem (int taskId)
         {
-#warning Insert Cascade delete
             var taskToDelete = _context.ToDoItems.Where(c => c.Id == taskId).FirstOrDefault();
             _context.Remove(taskToDelete);
         }
@@ -138,6 +140,32 @@ namespace ComeTogether.Models
         public IEnumerable<Person> GetAllUsersForCategory(int categoryId)
         {
             return _context.CategoryPeople.Where(c => c.CategoryId == categoryId).Select(c => c.Person).ToList();            
+        }
+
+        public IEnumerable<Person> GetAllUsers()
+        {
+            return _context.People.OrderBy(c=>c.UserName).ToList();
+        }
+
+        public Person GetUserByName(string userName)
+        {
+            return _context.People.Where(c => c.UserName == userName).FirstOrDefault();
+        }
+
+        public IEnumerable<Person> GetCountOfUsersFrom(int count, int skip)
+        {
+            return _context.People.OrderBy(c => c.UserName).Skip(skip).Take(count).ToList();
+        }
+
+        public void MoveAllDoneItemsToRecycle(int categoryId)
+        {
+            var category = _context.Category.Where(c => c.Id == categoryId).Include(c=>c.ToDoItems).FirstOrDefault();
+            var tasksToRecycle = category.ToDoItems.Where(c => c.IsDeleted == false && c.Done == true).ToList();
+            if (tasksToRecycle.Count == 0)
+                return;
+
+            foreach (var task in tasksToRecycle)
+                task.IsDeleted = true;
         }
     }
 }

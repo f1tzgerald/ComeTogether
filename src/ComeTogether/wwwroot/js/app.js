@@ -5,6 +5,18 @@
     angular.module("tasks_app", ["ngRoute"])
             .config(function ($routeProvider) {
 
+                //$routeProvider.when("/users", {
+                //    controller: "userController",
+                //    controllerAs: "vm",
+                //    templateUrl: "/views/usersView.html"
+                //});
+
+                //$routeProvider.when("/recycle", {
+                //    controller: "recycleController",
+                //    controllerAs: "vm",
+                //    templateUrl: "/views/recycleView.html"
+                //});
+
                 $routeProvider.when("/", {
                     controller: "categoryController",
                     controllerAs: "vm",
@@ -21,7 +33,9 @@
                     controller: "categoryEditController",
                     controllerAs: "vm",
                     templateUrl: "/views/editCategory.html"
-                })
+                });
+
+
 
                 $routeProvider.otherwise({ redirectTo: "/"});
 

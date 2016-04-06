@@ -1,0 +1,22 @@
+﻿<div class="row">
+    <div class="col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10">
+        <h2>People list</h2>
+        <div>
+            <table class="table table-hover" >
+                <tr>
+                    <th ng-click="vm.sortData('userName')"> User Name <i ng-class="vm.getSortClass('userName')"></i></th>
+                    <th ng-click="vm.sortData('email')"> Email <i ng-class="vm.getSortClass('email')"></i> </th>
+                    <th ng-click="vm.sortData('phoneNumber')"> Phone Number <i ng-class="vm.getSortClass('phoneNumber')"></i> </th>
+                    <th ng-click="vm.sortData('created')"> Created account <i ng-class="vm.getSortClass('created')"></i> </th>
+                </tr>
+                <tr ng-repeat="user in vm.users | orderBy: vm.sortColumn : vm.reverseSort">
+                    <td> {{ user.userName }} </td>
+                    <td> {{ user.email }} </td>
+                    <td> {{ user.phoneNumber }} </td>
+                    <td> {{ user.created | date:shortDate }} </td>
+                </tr>
+            </table>
+        </div>
+        <input type="button" name="MoreUsers" value="Show more users" class="btn btn-default" ng-click="vm.ShowMoreUsers()"/>
+    </div>
+</div>
