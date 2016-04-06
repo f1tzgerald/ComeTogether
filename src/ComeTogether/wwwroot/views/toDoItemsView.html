@@ -51,7 +51,13 @@
                         <tr>
                             <td><input class="form-control" type="text" name="name" value="" ng-model="vm.newTodoitem.name" /></td>
                             <td><input class="form-control" type="date" value="{{ vm.today }}" ng-model="vm.newTodoitem.dateFinish" /></td>
-                            <td><input class="form-control" type="text" name="executor" value="" ng-model="vm.newTodoitem.whoDoIt" /></td>
+                            <td>
+                                <div class="dropdown">
+                                    <select name="executor" ng-model="vm.newTodoitem.whoDoIt">
+                                        <option ng-repeat="user in vm.usersListForCategory" value="{{ user.userName }}"> {{ user.userName }}</option>
+                                    </select>
+                                </div>
+                            </td>
                         </tr>
                     </table>
 

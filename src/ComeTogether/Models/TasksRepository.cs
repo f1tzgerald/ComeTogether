@@ -71,7 +71,8 @@ namespace ComeTogether.Models
             var query = (from cat in _context.Category
                          where cat.Id == categoryId
                          select cat).Include(c => c.ToDoItems).FirstOrDefault();
-            return query.ToDoItems;
+            var tasks = query.ToDoItems.Where(c => c.IsDeleted == false);
+            return tasks;
         }
 
         public IEnumerable<Comment> GetCommentsForToDoItem(int id)
@@ -109,6 +110,7 @@ namespace ComeTogether.Models
             currentToDoItem.Done = toDoitem.Done;
             currentToDoItem.Name = toDoitem.Name;
             currentToDoItem.WhoDoIt = toDoitem.WhoDoIt;
+            currentToDoItem.IsDeleted = toDoitem.IsDeleted;
             //currentToDoItem = toDoitem;
         }
 
@@ -159,7 +161,11 @@ namespace ComeTogether.Models
         {
             var category = _context.Category.Where(c => c.Id == categoryId).Include(c=>c.ToDoItems).FirstOrDefault();
             var tasksToRecycle = category.ToDoItems.Where(c => c.IsDeleted == false && c.Done == true).ToList();
-            _context.RemoveRange(tasksToRecycle);
+            if (tasksToRecycle.Count == 0)
+                return;
+
+            foreach (var task in tasksToRecycle)
+                task.IsDeleted = true;
         }
     }
 }

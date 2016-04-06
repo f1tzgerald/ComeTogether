@@ -43,7 +43,7 @@
             $http.delete(urlDelete)
                 .then(function () {
                     //success
-                    vm.refreshToDoItems();
+                    vm.todoItems = {};
                 }, function () {
                     //error
                 }).finally(function () {

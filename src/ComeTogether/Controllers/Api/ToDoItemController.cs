@@ -71,7 +71,7 @@ namespace ComeTogether.Controllers.Api
             return Json(false);
         }
 
-        // PUT api/values/5
+        //PUT api/values/5
         [HttpPut]
         [Route("api/category/{categoryId}/tasks/{todoitemId}")]
         public JsonResult Put(int todoitemId, [FromBody]ToDoItemViewModel updatedToDoVM)
@@ -82,7 +82,7 @@ namespace ComeTogether.Controllers.Api
                 {
                     var editToDoItem = Mapper.Map<TodoItem>(updatedToDoVM);
 
-                    _repository.EditToDoItem (todoitemId, editToDoItem);
+                    _repository.EditToDoItem(todoitemId, editToDoItem);
 
                     if (_repository.SaveChanges())
                     {
@@ -102,7 +102,7 @@ namespace ComeTogether.Controllers.Api
         }
 
         // DELETE all done tasks
-        [HttpDelete]
+        [HttpPut]
         [Route("api/category/{categoryId}/tasks/deleteAllDone")]
         public JsonResult DeleteAllDone(int categoryId)
         {
@@ -121,35 +121,6 @@ namespace ComeTogether.Controllers.Api
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(new { Message = ex.ToString() });
             }
-        }
-
-        [HttpPut]
-        [Route("api/category/{categoryId}/tasks/{taskId}")]
-        public JsonResult DeleteToRecycle(int taskId, ToDoItemViewModel deletedToDoVM)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    var editToDoItem = Mapper.Map<TodoItem>(deletedToDoVM);
-
-                    _repository.EditToDoItem(taskId, editToDoItem);
-
-                    if (_repository.SaveChanges())
-                    {
-                        Response.StatusCode = (int)HttpStatusCode.Created;
-                        return Json(Mapper.Map<ToDoItemViewModel>(editToDoItem));
-                    }
-                }
-            }
-
-            catch (Exception ex)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return Json(new { Message = ex.ToString() });
-            }
-            Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            return Json(false);
         }
     }
 }

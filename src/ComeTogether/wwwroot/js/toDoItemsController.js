@@ -47,18 +47,39 @@
         };
         vm.refreshToDoItems();
 
+
+
         // TOGGLE BUTTON - SHOW/HIDE NEW TASK        
         vm.newItemMenuToggle = false; // Show/hide add new category
         vm.textToggleBtn = "Show add todo form"
+        vm.usersListForCategory = [];
 
         vm.showNewItem = function () {
             vm.newItemMenuToggle = !vm.newItemMenuToggle;
             
             if (vm.newItemMenuToggle)
+            {
                 vm.textToggleBtn = "Hide add todo form";
+
+                if (vm.usersListForCategory.length == 0)
+                    vm.getUsersRelatedWithCategory();
+            }                
             else
                 vm.textToggleBtn = "Show add todo form";
+        };    
+        vm.getUsersRelatedWithCategory = function () {
+            // Get Users related with current category for dropdown button
+            vm.urlUsers = "/api/category/" + vm.categoryId + "/users";
+            $http.get(vm.urlUsers)
+                .then(function (response) {
+                    //success
+                    vm.usersListForCategory = response.data;
+                    console.log('vm.usersListForCategory'); console.log(vm.usersListForCategory);
+                }, function (error) {
+                    //failed
+                }).finally();
         };
+        
 
         // POST - ADD NEW TASK
         vm.newTodoitem = {};
@@ -93,6 +114,7 @@
         };
 
 
+
         // PUT - CHANGE CHECKBOX STATUS         
         vm.updateStatus = function (id, $index) {
             vm.updatedItem = vm.todoItems[$index];
@@ -112,8 +134,7 @@
                     vm.isBusy = false;
                 });
         };
-
-        // DELETE - TASK
+        // PUT - TASK To RECYCLE
         vm.deleteTask = function (id, $index) {
             console.log("Id task to delete - " + id);
 
@@ -122,7 +143,7 @@
 
             var urlTaskToDel = "/api/category/" + vm.categoryId + "/tasks/";
 
-            $http.delete(urlTaskToDel + id)
+            $http.put(urlTaskToDel + id, vm.updatedItem)
                 .then(function () {
                     //success
                     vm.todoItems.splice($index, 1 );
@@ -133,10 +154,12 @@
                 });
         };
 
-        // DELETE - ALL DONE TASKS
+
+
+        // PUT - ALL DONE TASKS To RECYCLE
         vm.deleteAllDone = function () {
             var urlDelete = "/api/category/" + vm.categoryId + "/tasks/deleteAllDone";
-            $http.delete(urlDelete)
+            $http.put(urlDelete)
                 .then(function () {
                     //success
                     vm.refreshToDoItems();
@@ -146,6 +169,8 @@
 
                 });
         };
+
+        //---------------------------------COMMENTS------------------------//
 
         // SHOW COMMENTS BTN
         vm.showCommentsFlag = false;
