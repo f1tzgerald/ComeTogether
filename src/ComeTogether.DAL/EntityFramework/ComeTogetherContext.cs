@@ -6,12 +6,12 @@ using Microsoft.Data.Entity;
 using ComeTogether.DAL.Entities;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Data.Entity.Infrastructure;
 
 namespace ComeTogether.DAL.EntityFramework
 {
     public class ComeTogetherContext : IdentityDbContext<Person>
     {
-
         public ComeTogetherContext() : base ()
         {
             Database.EnsureCreated();
@@ -22,6 +22,14 @@ namespace ComeTogether.DAL.EntityFramework
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<CategoryPeople> CategoryPeople { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            string connectionString = "Server=.\\SQLEXPRESS;Database=ComeTogetherDb;Trusted_Connection=True;MultipleActiveResultSets=true";
+            optionsBuilder.UseSqlServer(connectionString);
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

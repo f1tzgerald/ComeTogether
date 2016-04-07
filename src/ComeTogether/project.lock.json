@@ -23,6 +23,7 @@
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
           "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
           "System.ComponentModel.Annotations": "4.0.11-beta-23516",
           "System.Runtime": "4.0.0"
@@ -2146,6 +2147,7 @@
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
           "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "System.Collections": "4.0.11-beta-23516",
@@ -4911,6 +4913,7 @@
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
           "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
           "System.ComponentModel.Annotations": "4.0.11-beta-23516",
           "System.Runtime": "4.0.0"
@@ -7018,6 +7021,7 @@
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
           "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
           "System.ComponentModel.Annotations": "4.0.11-beta-23516",
           "System.Runtime": "4.0.0"
@@ -9144,6 +9148,7 @@
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
           "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "System.Collections": "4.0.11-beta-23516",
@@ -12475,6 +12480,7 @@
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
           "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "System.Collections": "4.0.11-beta-23516",

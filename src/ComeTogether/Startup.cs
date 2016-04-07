@@ -49,10 +49,9 @@ namespace ComeTogether
 
             services.AddEntityFramework()
                 .AddSqlServer()
-                .AddDbContext<DAL.EntityFramework.ComeTogetherContext>(option =>
-                {
-                    option.UseSqlServer(Configuration["DataConnection:ConnectionString"]);
-                });
+                .AddDbContext<DAL.EntityFramework.ComeTogetherContext>(
+                /* Exception --> add to DbContext override method OnConfiguring
+                options => { options.UseSqlServer(Configuration["DataConnection:ConnectionString"]); } */);
 
             services.AddIdentity<DAL.Entities.Person, IdentityRole>(config =>
             {
@@ -61,7 +60,7 @@ namespace ComeTogether
             }).AddEntityFrameworkStores<DAL.EntityFramework.ComeTogetherContext>();
 
             services.AddScoped<IMailService, DebugMailService>();
-            //services.AddScoped<ITasksRepository, TasksRepository>();
+            services.AddScoped<DAL.Interfaces.IUnitOfWork, DAL.Repositories.EFUnitOfWork>();
 
             services.AddTransient<SeedData>();
         }
