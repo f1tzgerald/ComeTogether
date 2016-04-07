@@ -85,22 +85,22 @@ namespace ComeTogether
                 config.LoginPath = "/Auth/Login";
             });
 
-            app.UseFacebookAuthentication(options =>
-            {
-                options.AppId = Configuration["Authentication:Facebook:AppId"];
-                options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-                options.Scope.Add("name");
-                options.Scope.Add("email");
-                //options.Events = new OAuthEvents
-                //{
-                //    OnRemoteFailure = context =>
-                //    {
-                //        context.Response.Redirect($"/Account/ExternalLoginCallback?remoteError={ UrlEncoder.Default.Encode(context.Failure.Message) }");
-                //        context.HandleResponse();
-                //        return Task.FromResult(0);
-                //    }
-                //};
-            });
+            //app.UseFacebookAuthentication(options =>
+            //{
+            //    options.AppId = Configuration["Authentication:Facebook:AppId"];
+            //    options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            //    options.Scope.Add("name");
+            //    options.Scope.Add("email");
+            //    //options.Events = new OAuthEvents
+            //    //{
+            //    //    OnRemoteFailure = context =>
+            //    //    {
+            //    //        context.Response.Redirect($"/Account/ExternalLoginCallback?remoteError={ UrlEncoder.Default.Encode(context.Failure.Message) }");
+            //    //        context.HandleResponse();
+            //    //        return Task.FromResult(0);
+            //    //    }
+            //    //};
+            //});
 
             // Add data to database if not exists
             await dataToAdd.AddDataAsync();

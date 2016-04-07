@@ -20,7 +20,8 @@
     "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
     "Microsoft.Framework.CodeGenerators.Mvc": "1.0.0-beta5",
     "Microsoft.AspNet.Owin": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Authentication.Facebook": "1.0.0-rc1-final" 
+    "Microsoft.AspNet.Authentication.Facebook": "1.0.0-rc1-final",
+    "Microsoft.Framework.SecretManager": "1.0.0-beta8"
   },
 
   "commands": {

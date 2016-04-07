@@ -1231,6 +1231,21 @@
           "lib/net451/Microsoft.Dnx.Compilation.CSharp.Common.dll": {}
         }
       },
+      "Microsoft.Dnx.Runtime.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        }
+      },
       "Microsoft.Extensions.Caching.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -1754,6 +1769,95 @@
           "lib/dnx451/Microsoft.Framework.CommandLineUtils.Sources.dll": {}
         }
       },
+      "Microsoft.Framework.Configuration/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.FileExtensions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.FileExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.FileExtensions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.Json/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration": "1.0.0-beta8",
+          "Microsoft.Framework.Configuration.FileExtensions": "1.0.0-beta8",
+          "Newtonsoft.Json": "6.0.6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Json.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Json.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.UserSecrets/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Json": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        }
+      },
       "Microsoft.Framework.DependencyInjection/1.0.0-beta5": {
         "type": "package",
         "dependencies": {
@@ -1772,7 +1876,7 @@
           "lib/dnx451/Microsoft.Framework.DependencyInjection.dll": {}
         }
       },
-      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta5": {
+      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta8": {
         "type": "package",
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -1785,6 +1889,26 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Logging/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta8",
+          "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Collections.Concurrent",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Logging.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Logging.dll": {}
         }
       },
       "Microsoft.Framework.Logging.Abstractions/1.0.0-beta8": {
@@ -1894,6 +2018,27 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.Framework.Runtime.Roslyn.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.SecretManager/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta8",
+          "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta8",
+          "Microsoft.Framework.Logging": "1.0.0-beta8",
+          "Newtonsoft.Json": "6.0.6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.SecretManager.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.SecretManager.dll": {}
         }
       },
       "Microsoft.Net.Http.Headers/1.0.0-rc1-final": {
@@ -3235,6 +3380,25 @@
           "lib/dotnet5.4/Microsoft.Dnx.Compilation.CSharp.Common.dll": {}
         }
       },
+      "Microsoft.Dnx.Runtime.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.0.11-beta-23409",
+          "System.ComponentModel": "4.0.1-beta-23409",
+          "System.IO": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Reflection": "4.1.0-beta-23225",
+          "System.Runtime": "4.0.21-beta-23409",
+          "System.Runtime.Extensions": "4.0.11-beta-23409",
+          "System.Threading.Tasks": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        }
+      },
       "Microsoft.Extensions.Caching.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -3709,6 +3873,78 @@
           "lib/dnxcore50/Microsoft.Framework.CommandLineUtils.Sources.dll": {}
         }
       },
+      "Microsoft.Framework.Configuration/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta8",
+          "System.Collections": "4.0.11-beta-23409",
+          "System.Diagnostics.Debug": "4.0.11-beta-23409",
+          "System.IO": "4.0.11-beta-23409",
+          "System.IO.FileSystem": "4.0.1-beta-23409",
+          "System.Resources.ResourceManager": "4.0.1-beta-23409",
+          "System.Runtime.Extensions": "4.0.11-beta-23409",
+          "System.Runtime.InteropServices": "4.0.21-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "System.Linq": "4.0.1-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.FileExtensions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration": "1.0.0-beta8"
+        },
+        "compile": {
+          "lib/dotnet/Microsoft.Framework.Configuration.FileExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/Microsoft.Framework.Configuration.FileExtensions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.Json/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration": "1.0.0-beta8",
+          "Microsoft.Framework.Configuration.FileExtensions": "1.0.0-beta8",
+          "Newtonsoft.Json": "6.0.6",
+          "System.Dynamic.Runtime": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.Json.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.Json.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.UserSecrets/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Json": "1.0.0-beta8",
+          "System.Runtime": "4.0.21-beta-23409",
+          "System.Runtime.Serialization.Primitives": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        }
+      },
       "Microsoft.Framework.DependencyInjection/1.0.0-beta5": {
         "type": "package",
         "dependencies": {
@@ -3725,22 +3961,41 @@
           "lib/dotnet/Microsoft.Framework.DependencyInjection.dll": {}
         }
       },
-      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta5": {
+      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta8": {
         "type": "package",
         "dependencies": {
-          "System.ComponentModel": "4.0.0-beta-23019",
-          "System.Diagnostics.Debug": "4.0.10-beta-23019",
-          "System.Globalization": "4.0.10-beta-23019",
-          "System.Linq": "4.0.0-beta-23019",
-          "System.Linq.Expressions": "4.0.10-beta-23019",
-          "System.Reflection": "4.0.10-beta-23019",
-          "System.Resources.ResourceManager": "4.0.0-beta-23019"
+          "System.ComponentModel": "4.0.1-beta-23409",
+          "System.Diagnostics.Debug": "4.0.11-beta-23409",
+          "System.Globalization": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Linq.Expressions": "4.0.11-beta-23409",
+          "System.Reflection": "4.1.0-beta-23225",
+          "System.Resources.ResourceManager": "4.0.1-beta-23409"
         },
         "compile": {
-          "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+          "lib/dnxcore50/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
         },
         "runtime": {
-          "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+          "lib/dnxcore50/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Logging/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta8",
+          "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta8",
+          "System.Collections": "4.0.11-beta-23409",
+          "System.Collections.Concurrent": "4.0.11-beta-23409",
+          "System.ComponentModel": "4.0.1-beta-23409",
+          "System.Globalization": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Threading": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Logging.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Logging.dll": {}
         }
       },
       "Microsoft.Framework.Logging.Abstractions/1.0.0-beta8": {
@@ -3839,6 +4094,22 @@
         },
         "runtime": {
           "lib/dnxcore50/Microsoft.Framework.Runtime.Roslyn.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.SecretManager/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta8",
+          "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta8",
+          "Microsoft.Framework.Logging": "1.0.0-beta8",
+          "Newtonsoft.Json": "6.0.6",
+          "System.Console": "4.0.0-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.SecretManager.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.SecretManager.dll": {}
         }
       },
       "Microsoft.Net.Http.Headers/1.0.0-rc1-final": {
@@ -4646,6 +4917,19 @@
         },
         "runtime": {
           "lib/DNXCore50/System.Runtime.Loader.dll": {}
+        }
+      },
+      "System.Runtime.Serialization.Primitives/4.0.11-beta-23409": {
+        "type": "package",
+        "dependencies": {
+          "System.Resources.ResourceManager": "4.0.0",
+          "System.Runtime": "4.0.20"
+        },
+        "compile": {
+          "ref/dotnet/System.Runtime.Serialization.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/System.Runtime.Serialization.Primitives.dll": {}
         }
       },
       "System.Security.Claims/4.0.1-beta-23516": {
@@ -6196,6 +6480,21 @@
           "lib/net451/Microsoft.Dnx.Compilation.CSharp.Common.dll": {}
         }
       },
+      "Microsoft.Dnx.Runtime.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        }
+      },
       "Microsoft.Extensions.Caching.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -6719,6 +7018,95 @@
           "lib/dnx451/Microsoft.Framework.CommandLineUtils.Sources.dll": {}
         }
       },
+      "Microsoft.Framework.Configuration/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.FileExtensions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.FileExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.FileExtensions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.Json/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration": "1.0.0-beta8",
+          "Microsoft.Framework.Configuration.FileExtensions": "1.0.0-beta8",
+          "Newtonsoft.Json": "6.0.6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Json.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Json.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.UserSecrets/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Json": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        }
+      },
       "Microsoft.Framework.DependencyInjection/1.0.0-beta5": {
         "type": "package",
         "dependencies": {
@@ -6737,7 +7125,7 @@
           "lib/dnx451/Microsoft.Framework.DependencyInjection.dll": {}
         }
       },
-      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta5": {
+      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta8": {
         "type": "package",
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -6750,6 +7138,26 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Logging/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta8",
+          "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Collections.Concurrent",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Logging.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Logging.dll": {}
         }
       },
       "Microsoft.Framework.Logging.Abstractions/1.0.0-beta8": {
@@ -6859,6 +7267,27 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.Framework.Runtime.Roslyn.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.SecretManager/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta8",
+          "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta8",
+          "Microsoft.Framework.Logging": "1.0.0-beta8",
+          "Newtonsoft.Json": "6.0.6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.SecretManager.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.SecretManager.dll": {}
         }
       },
       "Microsoft.Net.Http.Headers/1.0.0-rc1-final": {
@@ -8338,6 +8767,21 @@
           "lib/net451/Microsoft.Dnx.Compilation.CSharp.Common.dll": {}
         }
       },
+      "Microsoft.Dnx.Runtime.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        }
+      },
       "Microsoft.Extensions.Caching.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -8861,6 +9305,95 @@
           "lib/dnx451/Microsoft.Framework.CommandLineUtils.Sources.dll": {}
         }
       },
+      "Microsoft.Framework.Configuration/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.FileExtensions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.FileExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.FileExtensions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.Json/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration": "1.0.0-beta8",
+          "Microsoft.Framework.Configuration.FileExtensions": "1.0.0-beta8",
+          "Newtonsoft.Json": "6.0.6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Json.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Json.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.UserSecrets/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Json": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        }
+      },
       "Microsoft.Framework.DependencyInjection/1.0.0-beta5": {
         "type": "package",
         "dependencies": {
@@ -8879,7 +9412,7 @@
           "lib/dnx451/Microsoft.Framework.DependencyInjection.dll": {}
         }
       },
-      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta5": {
+      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta8": {
         "type": "package",
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -8892,6 +9425,26 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Logging/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta8",
+          "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Collections.Concurrent",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Logging.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Logging.dll": {}
         }
       },
       "Microsoft.Framework.Logging.Abstractions/1.0.0-beta8": {
@@ -9001,6 +9554,27 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.Framework.Runtime.Roslyn.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.SecretManager/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta8",
+          "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta8",
+          "Microsoft.Framework.Logging": "1.0.0-beta8",
+          "Newtonsoft.Json": "6.0.6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.SecretManager.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.SecretManager.dll": {}
         }
       },
       "Microsoft.Net.Http.Headers/1.0.0-rc1-final": {
@@ -10345,6 +10919,25 @@
           "lib/dotnet5.4/Microsoft.Dnx.Compilation.CSharp.Common.dll": {}
         }
       },
+      "Microsoft.Dnx.Runtime.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.0.11-beta-23409",
+          "System.ComponentModel": "4.0.1-beta-23409",
+          "System.IO": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Reflection": "4.1.0-beta-23225",
+          "System.Runtime": "4.0.21-beta-23409",
+          "System.Runtime.Extensions": "4.0.11-beta-23409",
+          "System.Threading.Tasks": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        }
+      },
       "Microsoft.Extensions.Caching.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -10819,6 +11412,78 @@
           "lib/dnxcore50/Microsoft.Framework.CommandLineUtils.Sources.dll": {}
         }
       },
+      "Microsoft.Framework.Configuration/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta8",
+          "System.Collections": "4.0.11-beta-23409",
+          "System.Diagnostics.Debug": "4.0.11-beta-23409",
+          "System.IO": "4.0.11-beta-23409",
+          "System.IO.FileSystem": "4.0.1-beta-23409",
+          "System.Resources.ResourceManager": "4.0.1-beta-23409",
+          "System.Runtime.Extensions": "4.0.11-beta-23409",
+          "System.Runtime.InteropServices": "4.0.21-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "System.Linq": "4.0.1-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.FileExtensions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration": "1.0.0-beta8"
+        },
+        "compile": {
+          "lib/dotnet/Microsoft.Framework.Configuration.FileExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/Microsoft.Framework.Configuration.FileExtensions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.Json/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration": "1.0.0-beta8",
+          "Microsoft.Framework.Configuration.FileExtensions": "1.0.0-beta8",
+          "Newtonsoft.Json": "6.0.6",
+          "System.Dynamic.Runtime": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.Json.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.Json.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.UserSecrets/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Json": "1.0.0-beta8",
+          "System.Runtime": "4.0.21-beta-23409",
+          "System.Runtime.Serialization.Primitives": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        }
+      },
       "Microsoft.Framework.DependencyInjection/1.0.0-beta5": {
         "type": "package",
         "dependencies": {
@@ -10835,22 +11500,41 @@
           "lib/dotnet/Microsoft.Framework.DependencyInjection.dll": {}
         }
       },
-      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta5": {
+      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta8": {
         "type": "package",
         "dependencies": {
-          "System.ComponentModel": "4.0.0-beta-23019",
-          "System.Diagnostics.Debug": "4.0.10-beta-23019",
-          "System.Globalization": "4.0.10-beta-23019",
-          "System.Linq": "4.0.0-beta-23019",
-          "System.Linq.Expressions": "4.0.10-beta-23019",
-          "System.Reflection": "4.0.10-beta-23019",
-          "System.Resources.ResourceManager": "4.0.0-beta-23019"
+          "System.ComponentModel": "4.0.1-beta-23409",
+          "System.Diagnostics.Debug": "4.0.11-beta-23409",
+          "System.Globalization": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Linq.Expressions": "4.0.11-beta-23409",
+          "System.Reflection": "4.1.0-beta-23225",
+          "System.Resources.ResourceManager": "4.0.1-beta-23409"
         },
         "compile": {
-          "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+          "lib/dnxcore50/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
         },
         "runtime": {
-          "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+          "lib/dnxcore50/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Logging/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta8",
+          "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta8",
+          "System.Collections": "4.0.11-beta-23409",
+          "System.Collections.Concurrent": "4.0.11-beta-23409",
+          "System.ComponentModel": "4.0.1-beta-23409",
+          "System.Globalization": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Threading": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Logging.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Logging.dll": {}
         }
       },
       "Microsoft.Framework.Logging.Abstractions/1.0.0-beta8": {
@@ -10949,6 +11633,22 @@
         },
         "runtime": {
           "lib/dnxcore50/Microsoft.Framework.Runtime.Roslyn.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.SecretManager/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta8",
+          "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta8",
+          "Microsoft.Framework.Logging": "1.0.0-beta8",
+          "Newtonsoft.Json": "6.0.6",
+          "System.Console": "4.0.0-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.SecretManager.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.SecretManager.dll": {}
         }
       },
       "Microsoft.Net.Http.Headers/1.0.0-rc1-final": {
@@ -12244,6 +12944,19 @@
         },
         "runtime": {
           "lib/dotnet/System.Runtime.Numerics.dll": {}
+        }
+      },
+      "System.Runtime.Serialization.Primitives/4.0.11-beta-23409": {
+        "type": "package",
+        "dependencies": {
+          "System.Resources.ResourceManager": "4.0.0",
+          "System.Runtime": "4.0.20"
+        },
+        "compile": {
+          "ref/dotnet/System.Runtime.Serialization.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/System.Runtime.Serialization.Primitives.dll": {}
         }
       },
       "System.Security.Claims/4.0.1-beta-23516": {
@@ -13715,6 +14428,25 @@
           "lib/dotnet5.4/Microsoft.Dnx.Compilation.CSharp.Common.dll": {}
         }
       },
+      "Microsoft.Dnx.Runtime.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.0.11-beta-23409",
+          "System.ComponentModel": "4.0.1-beta-23409",
+          "System.IO": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Reflection": "4.1.0-beta-23225",
+          "System.Runtime": "4.0.21-beta-23409",
+          "System.Runtime.Extensions": "4.0.11-beta-23409",
+          "System.Threading.Tasks": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        }
+      },
       "Microsoft.Extensions.Caching.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -14189,6 +14921,78 @@
           "lib/dnxcore50/Microsoft.Framework.CommandLineUtils.Sources.dll": {}
         }
       },
+      "Microsoft.Framework.Configuration/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta8",
+          "System.Collections": "4.0.11-beta-23409",
+          "System.Diagnostics.Debug": "4.0.11-beta-23409",
+          "System.IO": "4.0.11-beta-23409",
+          "System.IO.FileSystem": "4.0.1-beta-23409",
+          "System.Resources.ResourceManager": "4.0.1-beta-23409",
+          "System.Runtime.Extensions": "4.0.11-beta-23409",
+          "System.Runtime.InteropServices": "4.0.21-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.Abstractions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "System.Linq": "4.0.1-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.FileExtensions/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration": "1.0.0-beta8"
+        },
+        "compile": {
+          "lib/dotnet/Microsoft.Framework.Configuration.FileExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/Microsoft.Framework.Configuration.FileExtensions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.Json/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration": "1.0.0-beta8",
+          "Microsoft.Framework.Configuration.FileExtensions": "1.0.0-beta8",
+          "Newtonsoft.Json": "6.0.6",
+          "System.Dynamic.Runtime": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.Json.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.Json.dll": {}
+        }
+      },
+      "Microsoft.Framework.Configuration.UserSecrets/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Json": "1.0.0-beta8",
+          "System.Runtime": "4.0.21-beta-23409",
+          "System.Runtime.Serialization.Primitives": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        }
+      },
       "Microsoft.Framework.DependencyInjection/1.0.0-beta5": {
         "type": "package",
         "dependencies": {
@@ -14205,22 +15009,41 @@
           "lib/dotnet/Microsoft.Framework.DependencyInjection.dll": {}
         }
       },
-      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta5": {
+      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta8": {
         "type": "package",
         "dependencies": {
-          "System.ComponentModel": "4.0.0-beta-23019",
-          "System.Diagnostics.Debug": "4.0.10-beta-23019",
-          "System.Globalization": "4.0.10-beta-23019",
-          "System.Linq": "4.0.0-beta-23019",
-          "System.Linq.Expressions": "4.0.10-beta-23019",
-          "System.Reflection": "4.0.10-beta-23019",
-          "System.Resources.ResourceManager": "4.0.0-beta-23019"
+          "System.ComponentModel": "4.0.1-beta-23409",
+          "System.Diagnostics.Debug": "4.0.11-beta-23409",
+          "System.Globalization": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Linq.Expressions": "4.0.11-beta-23409",
+          "System.Reflection": "4.1.0-beta-23225",
+          "System.Resources.ResourceManager": "4.0.1-beta-23409"
         },
         "compile": {
-          "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+          "lib/dnxcore50/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
         },
         "runtime": {
-          "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+          "lib/dnxcore50/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.Logging/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta8",
+          "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta8",
+          "System.Collections": "4.0.11-beta-23409",
+          "System.Collections.Concurrent": "4.0.11-beta-23409",
+          "System.ComponentModel": "4.0.1-beta-23409",
+          "System.Globalization": "4.0.11-beta-23409",
+          "System.Linq": "4.0.1-beta-23409",
+          "System.Threading": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Logging.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Logging.dll": {}
         }
       },
       "Microsoft.Framework.Logging.Abstractions/1.0.0-beta8": {
@@ -14319,6 +15142,22 @@
         },
         "runtime": {
           "lib/dnxcore50/Microsoft.Framework.Runtime.Roslyn.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.SecretManager/1.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta8",
+          "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta8",
+          "Microsoft.Framework.Logging": "1.0.0-beta8",
+          "Newtonsoft.Json": "6.0.6",
+          "System.Console": "4.0.0-beta-23409"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.SecretManager.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.SecretManager.dll": {}
         }
       },
       "Microsoft.Net.Http.Headers/1.0.0-rc1-final": {
@@ -15614,6 +16453,19 @@
         },
         "runtime": {
           "lib/dotnet/System.Runtime.Numerics.dll": {}
+        }
+      },
+      "System.Runtime.Serialization.Primitives/4.0.11-beta-23409": {
+        "type": "package",
+        "dependencies": {
+          "System.Resources.ResourceManager": "4.0.0",
+          "System.Runtime": "4.0.20"
+        },
+        "compile": {
+          "ref/dotnet/System.Runtime.Serialization.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/System.Runtime.Serialization.Primitives.dll": {}
         }
       },
       "System.Security.Claims/4.0.1-beta-23516": {
@@ -16952,6 +17804,20 @@
         "Microsoft.Dnx.Compilation.CSharp.Common.nuspec"
       ]
     },
+    "Microsoft.Dnx.Runtime.Abstractions/1.0.0-beta8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "t1vLklb3nzZHDbrnXw49rOwq+/ATQby/em1L3seL4wODoHS0W4L7WHG8rxbMZCnrFo/G+UhB/atxULIMuwZL5w==",
+      "files": [
+        "lib/dnx451/Microsoft.Dnx.Runtime.Abstractions.dll",
+        "lib/dnx451/Microsoft.Dnx.Runtime.Abstractions.xml",
+        "lib/dnxcore50/Microsoft.Dnx.Runtime.Abstractions.dll",
+        "lib/dnxcore50/Microsoft.Dnx.Runtime.Abstractions.xml",
+        "Microsoft.Dnx.Runtime.Abstractions.1.0.0-beta8.nupkg",
+        "Microsoft.Dnx.Runtime.Abstractions.1.0.0-beta8.nupkg.sha512",
+        "Microsoft.Dnx.Runtime.Abstractions.nuspec"
+      ]
+    },
     "Microsoft.Extensions.Caching.Abstractions/1.0.0-rc1-final": {
       "type": "package",
       "serviceable": true,
@@ -17423,6 +18289,90 @@
         "shared/CommandOptionType.cs"
       ]
     },
+    "Microsoft.Framework.Configuration/1.0.0-beta8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "M2Fg4gBigELMjFow/w44eGZe7VICY6naOe8R6jKbtsXpDTKFsfCuXxpZcUfIgI791hs7Ney88IjxZ3XudsgJeg==",
+      "files": [
+        "lib/dnx451/Microsoft.Framework.Configuration.dll",
+        "lib/dnx451/Microsoft.Framework.Configuration.xml",
+        "lib/dnxcore50/Microsoft.Framework.Configuration.dll",
+        "lib/dnxcore50/Microsoft.Framework.Configuration.xml",
+        "lib/dotnet/Microsoft.Framework.Configuration.dll",
+        "lib/dotnet/Microsoft.Framework.Configuration.xml",
+        "lib/net45/Microsoft.Framework.Configuration.dll",
+        "lib/net45/Microsoft.Framework.Configuration.xml",
+        "Microsoft.Framework.Configuration.1.0.0-beta8.nupkg",
+        "Microsoft.Framework.Configuration.1.0.0-beta8.nupkg.sha512",
+        "Microsoft.Framework.Configuration.nuspec"
+      ]
+    },
+    "Microsoft.Framework.Configuration.Abstractions/1.0.0-beta8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "WH5zC6AkShx6VZzZT37tl0QPROkR6zdffACEIPiDyPyqyf+DtWN5Z6v1q9OD5q6CfAij18EwqWaF1eWtYBigNw==",
+      "files": [
+        "lib/dnx451/Microsoft.Framework.Configuration.Abstractions.dll",
+        "lib/dnx451/Microsoft.Framework.Configuration.Abstractions.xml",
+        "lib/dnxcore50/Microsoft.Framework.Configuration.Abstractions.dll",
+        "lib/dnxcore50/Microsoft.Framework.Configuration.Abstractions.xml",
+        "lib/dotnet/Microsoft.Framework.Configuration.Abstractions.dll",
+        "lib/dotnet/Microsoft.Framework.Configuration.Abstractions.xml",
+        "lib/net45/Microsoft.Framework.Configuration.Abstractions.dll",
+        "lib/net45/Microsoft.Framework.Configuration.Abstractions.xml",
+        "Microsoft.Framework.Configuration.Abstractions.1.0.0-beta8.nupkg",
+        "Microsoft.Framework.Configuration.Abstractions.1.0.0-beta8.nupkg.sha512",
+        "Microsoft.Framework.Configuration.Abstractions.nuspec"
+      ]
+    },
+    "Microsoft.Framework.Configuration.FileExtensions/1.0.0-beta8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "+hsytl/Puj6Gc6U934Y7n3hfdkJG7lfvasIwY0RnAmsTSxJ6pF54A/mR3d/EwSHyUyMlgSnSHeoTXZ4u8RfJsA==",
+      "files": [
+        "lib/dnx451/Microsoft.Framework.Configuration.FileExtensions.dll",
+        "lib/dnx451/Microsoft.Framework.Configuration.FileExtensions.xml",
+        "lib/dotnet/Microsoft.Framework.Configuration.FileExtensions.dll",
+        "lib/dotnet/Microsoft.Framework.Configuration.FileExtensions.xml",
+        "lib/net45/Microsoft.Framework.Configuration.FileExtensions.dll",
+        "lib/net45/Microsoft.Framework.Configuration.FileExtensions.xml",
+        "Microsoft.Framework.Configuration.FileExtensions.1.0.0-beta8.nupkg",
+        "Microsoft.Framework.Configuration.FileExtensions.1.0.0-beta8.nupkg.sha512",
+        "Microsoft.Framework.Configuration.FileExtensions.nuspec"
+      ]
+    },
+    "Microsoft.Framework.Configuration.Json/1.0.0-beta8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "dfA9iuKWri9gVaAY7XEQMXP5C+PMalC+0vDhv9AUuawwuTeQm11JhOwXzdPu/FM4Bbwm33kHlVkLrHRW403XIA==",
+      "files": [
+        "lib/dnx451/Microsoft.Framework.Configuration.Json.dll",
+        "lib/dnx451/Microsoft.Framework.Configuration.Json.xml",
+        "lib/dnxcore50/Microsoft.Framework.Configuration.Json.dll",
+        "lib/dnxcore50/Microsoft.Framework.Configuration.Json.xml",
+        "lib/dotnet/Microsoft.Framework.Configuration.Json.dll",
+        "lib/dotnet/Microsoft.Framework.Configuration.Json.xml",
+        "lib/net45/Microsoft.Framework.Configuration.Json.dll",
+        "lib/net45/Microsoft.Framework.Configuration.Json.xml",
+        "Microsoft.Framework.Configuration.Json.1.0.0-beta8.nupkg",
+        "Microsoft.Framework.Configuration.Json.1.0.0-beta8.nupkg.sha512",
+        "Microsoft.Framework.Configuration.Json.nuspec"
+      ]
+    },
+    "Microsoft.Framework.Configuration.UserSecrets/1.0.0-beta8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "P0ZPcnvy2t/3yYxd0eFbZdqGbwqNR2UBIoOLkFexr2XYpbPS8jXt/TQWVn+eA8ml5/L4B17G6davwZU25PYn1A==",
+      "files": [
+        "lib/dnx451/Microsoft.Framework.Configuration.UserSecrets.dll",
+        "lib/dnx451/Microsoft.Framework.Configuration.UserSecrets.xml",
+        "lib/dnxcore50/Microsoft.Framework.Configuration.UserSecrets.dll",
+        "lib/dnxcore50/Microsoft.Framework.Configuration.UserSecrets.xml",
+        "Microsoft.Framework.Configuration.UserSecrets.1.0.0-beta8.nupkg",
+        "Microsoft.Framework.Configuration.UserSecrets.1.0.0-beta8.nupkg.sha512",
+        "Microsoft.Framework.Configuration.UserSecrets.nuspec"
+      ]
+    },
     "Microsoft.Framework.DependencyInjection/1.0.0-beta5": {
       "type": "package",
       "serviceable": true,
@@ -17439,20 +18389,40 @@
         "Microsoft.Framework.DependencyInjection.nuspec"
       ]
     },
-    "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta5": {
+    "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "/WgY/P0YftvScIfLyLee36H7fb6EUG2L6p5qZMp7quJ3aUEHUolZpXBbYQ9XP21KuX4ab0/zH8DD0mpMKjGDsw==",
+      "sha512": "7WL9hy+7bYDyBtIrrW5tw57dChBcizjSyuD0p5pVkay+gSseLqvAk72a4KldMmRgH//7t74d/YVrTvLhw83b7w==",
       "files": [
         "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.dll",
         "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.xml",
+        "lib/dnxcore50/Microsoft.Framework.DependencyInjection.Abstractions.dll",
+        "lib/dnxcore50/Microsoft.Framework.DependencyInjection.Abstractions.xml",
         "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.dll",
         "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.xml",
         "lib/net45/Microsoft.Framework.DependencyInjection.Abstractions.dll",
         "lib/net45/Microsoft.Framework.DependencyInjection.Abstractions.xml",
-        "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta5.nupkg",
-        "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta5.nupkg.sha512",
+        "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta8.nupkg",
+        "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta8.nupkg.sha512",
         "Microsoft.Framework.DependencyInjection.Abstractions.nuspec"
+      ]
+    },
+    "Microsoft.Framework.Logging/1.0.0-beta8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "4PpVGirfXovwJjlLfgvM3kKgXUSSnOhqwlIFxAl6v1yTEVrrYrAxVmZ2YVz7EzTDUaeRpElm4AgCoyqHcZty4A==",
+      "files": [
+        "lib/dnx451/Microsoft.Framework.Logging.dll",
+        "lib/dnx451/Microsoft.Framework.Logging.xml",
+        "lib/dnxcore50/Microsoft.Framework.Logging.dll",
+        "lib/dnxcore50/Microsoft.Framework.Logging.xml",
+        "lib/dotnet/Microsoft.Framework.Logging.dll",
+        "lib/dotnet/Microsoft.Framework.Logging.xml",
+        "lib/net45/Microsoft.Framework.Logging.dll",
+        "lib/net45/Microsoft.Framework.Logging.xml",
+        "Microsoft.Framework.Logging.1.0.0-beta8.nupkg",
+        "Microsoft.Framework.Logging.1.0.0-beta8.nupkg.sha512",
+        "Microsoft.Framework.Logging.nuspec"
       ]
     },
     "Microsoft.Framework.Logging.Abstractions/1.0.0-beta8": {
@@ -17544,6 +18514,23 @@
         "Microsoft.Framework.Runtime.Roslyn.Abstractions.1.0.0-beta5.nupkg",
         "Microsoft.Framework.Runtime.Roslyn.Abstractions.1.0.0-beta5.nupkg.sha512",
         "Microsoft.Framework.Runtime.Roslyn.Abstractions.nuspec"
+      ]
+    },
+    "Microsoft.Framework.SecretManager/1.0.0-beta8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "Uz9iUZ9DKpy3R70xwcSfHXVlk4Tx2e+F2N6M5bORusbLMaU3sJtCZDfYA/hSbOCkd4guRSbgdPvJDi4qxoxYLw==",
+      "files": [
+        "app/project.json",
+        "app/user-secret",
+        "app/user-secret.cmd",
+        "lib/dnx451/Microsoft.Framework.SecretManager.dll",
+        "lib/dnx451/Microsoft.Framework.SecretManager.xml",
+        "lib/dnxcore50/Microsoft.Framework.SecretManager.dll",
+        "lib/dnxcore50/Microsoft.Framework.SecretManager.xml",
+        "Microsoft.Framework.SecretManager.1.0.0-beta8.nupkg",
+        "Microsoft.Framework.SecretManager.1.0.0-beta8.nupkg.sha512",
+        "Microsoft.Framework.SecretManager.nuspec"
       ]
     },
     "Microsoft.Net.Http.Headers/1.0.0-rc1-final": {
@@ -20797,6 +21784,38 @@
         "System.Runtime.Numerics.nuspec"
       ]
     },
+    "System.Runtime.Serialization.Primitives/4.0.11-beta-23409": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "AQywM01eG8EgYde/RRrJDVdHmOOI3KkgK9GEjLQqvTLsrWsamNHN/j7Pxwa3XX7klSSrfDpvTNfUl40855idVg==",
+      "files": [
+        "lib/dotnet/de/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/es/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/fr/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/it/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/ja/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/ko/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/ru/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/System.Runtime.Serialization.Primitives.dll",
+        "lib/dotnet/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/zh-hans/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/zh-hant/System.Runtime.Serialization.Primitives.xml",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "ref/dotnet/System.Runtime.Serialization.Primitives.dll",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "System.Runtime.Serialization.Primitives.4.0.11-beta-23409.nupkg",
+        "System.Runtime.Serialization.Primitives.4.0.11-beta-23409.nupkg.sha512",
+        "System.Runtime.Serialization.Primitives.nuspec"
+      ]
+    },
     "System.Security.Claims/4.0.1-beta-23516": {
       "type": "package",
       "serviceable": true,
@@ -21827,7 +22846,8 @@
       "Microsoft.AspNet.Identity.EntityFramework >= 3.0.0-rc1-final",
       "Microsoft.Framework.CodeGenerators.Mvc >= 1.0.0-beta5",
       "Microsoft.AspNet.Owin >= 1.0.0-rc1-final",
-      "Microsoft.AspNet.Authentication.Facebook >= 1.0.0-rc1-final"
+      "Microsoft.AspNet.Authentication.Facebook >= 1.0.0-rc1-final",
+      "Microsoft.Framework.SecretManager >= 1.0.0-beta8"
     ],
     "DNX,Version=v4.5.1": [],
     "DNXCore,Version=v5.0": []
