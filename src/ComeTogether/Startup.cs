@@ -15,6 +15,7 @@ using AutoMapper;
 using ComeTogether.ViewModels;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Authentication.OAuth;
 
 namespace ComeTogether
 {
@@ -82,6 +83,23 @@ namespace ComeTogether
             app.UseCookieAuthentication(config =>
             {
                 config.LoginPath = "/Auth/Login";
+            });
+
+            app.UseFacebookAuthentication(options =>
+            {
+                options.AppId = Configuration["Authentication:Facebook:AppId"];
+                options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                options.Scope.Add("name");
+                options.Scope.Add("email");
+                //options.Events = new OAuthEvents
+                //{
+                //    OnRemoteFailure = context =>
+                //    {
+                //        context.Response.Redirect($"/Account/ExternalLoginCallback?remoteError={ UrlEncoder.Default.Encode(context.Failure.Message) }");
+                //        context.HandleResponse();
+                //        return Task.FromResult(0);
+                //    }
+                //};
             });
 
             // Add data to database if not exists

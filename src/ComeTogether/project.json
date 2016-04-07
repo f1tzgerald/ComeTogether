@@ -18,7 +18,9 @@
     "Microsoft.Framework.Logging.Debug": "1.0.0-beta8",
     "AutoMapper": "4.2.1",
     "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
-    "Microsoft.Framework.CodeGenerators.Mvc": "1.0.0-beta5" 
+    "Microsoft.Framework.CodeGenerators.Mvc": "1.0.0-beta5",
+    "Microsoft.AspNet.Owin": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Authentication.Facebook": "1.0.0-rc1-final" 
   },
 
   "commands": {
