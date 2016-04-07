@@ -16,9 +16,9 @@ namespace ComeTogether.DAL.Repositories
         private ToDoItemRepository todoitemRepository;
         private UserRepository userRepository;
 
-        public EFUnitOfWork(string connectionString)
+        public EFUnitOfWork(/*string connectionString*/)
         {
-            _context = new ComeTogetherContext(connectionString);
+            _context = new ComeTogetherContext(/*connectionString*/);
         }
 
         public ICategory Categories

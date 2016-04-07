@@ -8,15 +8,17 @@ using ComeTogether.Models;
 using AutoMapper;
 using ComeTogether.ViewModels;
 using System.Net;
+using ComeTogether.DAL.Interfaces;
+using ComeTogether.DAL.Entities;
 
 namespace ComeTogether.Controllers.Api
 {
     [Authorize]
     public class CommentController : Controller
     {
-        private ITasksRepository _repository;
+        private IUnitOfWork _repository;
 
-        public CommentController(ITasksRepository repository)
+        public CommentController(IUnitOfWork repository)
         {
             _repository = repository;
         }
@@ -27,7 +29,7 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                var toDoItem = _repository.GetToDoItemById(taskId);
+                var toDoItem = _repository.ToDoItems.GetToDoItemById(taskId);
 
                 if (toDoItem == null)
                     return Json(null);
@@ -52,7 +54,7 @@ namespace ComeTogether.Controllers.Api
                     var commentToAdd = Mapper.Map<Comment>(commentnewVM);
                     commentToAdd.Creator = User.Identity.Name;
 
-                    _repository.AddComment (taskId, commentToAdd);
+                    _repository.Comments.AddComment (taskId, commentToAdd);
 
                     if (_repository.SaveChanges())
                     {
@@ -78,11 +80,11 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                var commentToDelete = _repository.GetCommentById(commentId);
+                var commentToDelete = _repository.Comments.GetCommentById(commentId);
 
                 // Check if creator = current user then delete comment
                 if (commentToDelete.Creator == User.Identity.Name)
-                    _repository.DeleteComment(commentId);
+                    _repository.Comments.DeleteComment(commentId);
 
                 if (_repository.SaveChanges())
                 {

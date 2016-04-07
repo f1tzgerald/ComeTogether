@@ -15,6 +15,7 @@ using AutoMapper;
 using ComeTogether.ViewModels;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
 
 namespace ComeTogether
 {
@@ -48,16 +49,19 @@ namespace ComeTogether
 
             services.AddEntityFramework()
                 .AddSqlServer()
-                .AddDbContext<MainContextDb>();
+                .AddDbContext<DAL.EntityFramework.ComeTogetherContext>(option =>
+                {
+                    option.UseSqlServer(Configuration["DataConnection:ConnectionString"]);
+                });
 
-            services.AddIdentity<Person, IdentityRole>(config =>
+            services.AddIdentity<DAL.Entities.Person, IdentityRole>(config =>
             {
                 config.User.RequireUniqueEmail = true;
                 config.Password.RequiredLength = 5;
-            }).AddEntityFrameworkStores<MainContextDb>();
+            }).AddEntityFrameworkStores<DAL.EntityFramework.ComeTogetherContext>();
 
             services.AddScoped<IMailService, DebugMailService>();
-            services.AddScoped<ITasksRepository, TasksRepository>();
+            //services.AddScoped<ITasksRepository, TasksRepository>();
 
             services.AddTransient<SeedData>();
         }
@@ -89,9 +93,9 @@ namespace ComeTogether
 
             Mapper.Initialize(config =>
             {
-                config.CreateMap<CategoryViewModel, Category>().ReverseMap();
-                config.CreateMap<ToDoItemViewModel, TodoItem>().ReverseMap();
-                config.CreateMap<CommentViewModel, Comment>().ReverseMap();
+                config.CreateMap<CategoryViewModel, DAL.Entities.Category>().ReverseMap();
+                config.CreateMap<ToDoItemViewModel, DAL.Entities.TodoItem>().ReverseMap();
+                config.CreateMap<CommentViewModel, DAL.Entities.Comment>().ReverseMap();
             });
         }
 

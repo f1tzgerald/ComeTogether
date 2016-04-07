@@ -6,15 +6,16 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Authorization;
 using ComeTogether.Models;
 using System.Net;
+using ComeTogether.DAL.Interfaces;
 
 namespace ComeTogether.Controllers.Api
 {
     [Authorize]
     public class UserController : Controller
     {
-        private ITasksRepository _repository;
+        private IUnitOfWork _repository;
 
-        public UserController(ITasksRepository repository)
+        public UserController(IUnitOfWork repository)
         {
             _repository = repository;
         }
@@ -32,7 +33,7 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                var users = _repository.GetCountOfUsersFrom(countTake, countSkip);
+                var users = _repository.People.GetCountOfUsersFrom(countTake, countSkip);
 
                 if (users != null)
                 {
@@ -56,7 +57,7 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                var people = _repository.GetAllUsersForCategory(categoryId);
+                var people = _repository.People.GetAllUsersForCategory(categoryId);
 
                 if (people == null)
                     return Json(null);
@@ -72,7 +73,7 @@ namespace ComeTogether.Controllers.Api
 
         [HttpPost]
         [Route("api/category/{categoryId}/users")]
-        public JsonResult Post(int categoryId, Person personToAdd)
+        public JsonResult Post(int categoryId/*, Person personToAdd*/)
         {
             //try
             //{

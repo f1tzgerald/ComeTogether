@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,20 +10,20 @@ namespace ComeTogether.DAL.Entities
     {
         public int Id { get; set; }
 
-        //[StringLength(100, MinimumLength = 3)]
+        [StringLength(100, MinimumLength = 3)]
         public string Name { get; set; }
 
-        //[Display(Name = "Added Date")]
-        //[DataType(DataType.DateTime)]
-        //[DisplayFormat(DataFormatString = "{0: dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Added Date")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0: dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateAdded { get; set; }
 
-        //[Display(Name = "Finish Date")]
-        //[DataType(DataType.DateTime)]
-        //[DisplayFormat(DataFormatString = "{0: dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Finish Date")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0: dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateFinish { get; set; }
 
-        //[Display(Name = "Executor")]
+        [Display(Name = "Executor")]
         public string WhoDoIt { get; set; }
         public string Creator { get; set; }
         public bool Done { get; set; }

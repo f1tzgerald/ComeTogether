@@ -20,7 +20,7 @@ namespace ComeTogether.DAL.Repositories
 
         public void AddToDoItem(int categoryId, TodoItem toDoitem)
         {
-            var category = GetCategoryById(categoryId);
+            var category = _context.Category.Include(c => c.ToDoItems).Where(c => c.Id == categoryId).FirstOrDefault();
             category.ToDoItems.Add(toDoitem);
             _context.ToDoItems.Add(toDoitem);
         }

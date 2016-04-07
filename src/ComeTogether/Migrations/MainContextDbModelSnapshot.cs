@@ -7,7 +7,7 @@ using ComeTogether.Models;
 
 namespace ComeTogether.Migrations
 {
-    [DbContext(typeof(MainContextDb))]
+    [DbContext(typeof(DAL.EntityFramework.ComeTogetherContext))]
     partial class MainContextDbModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

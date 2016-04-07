@@ -6,6 +6,7 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Identity;
 using ComeTogether.Models;
 using ComeTogether.ViewModels;
+using ComeTogether.DAL.Entities;
 
 namespace ComeTogether.Controllers
 {

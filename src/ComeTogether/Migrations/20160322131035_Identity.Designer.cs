@@ -7,7 +7,7 @@ using ComeTogether.Models;
 
 namespace ComeTogether.Migrations
 {
-    [DbContext(typeof(MainContextDb))]
+    [DbContext(typeof(DAL.EntityFramework.ComeTogetherContext))]
     [Migration("20160322131035_Identity")]
     partial class Identity
     {

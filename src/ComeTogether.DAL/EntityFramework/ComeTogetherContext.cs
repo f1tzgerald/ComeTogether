@@ -5,21 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.Data.Entity;
 using ComeTogether.DAL.Entities;
 using Microsoft.Data.Entity.Metadata;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ComeTogether.DAL.EntityFramework
 {
-    public class ComeTogetherContext : DbContext
+    public class ComeTogetherContext : IdentityDbContext<Person>
     {
-        public ComeTogetherContext()
+
+        public ComeTogetherContext() : base ()
         {
-            try
-            {
-                Database.EnsureCreated();
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.ToString());
-            }
+            Database.EnsureCreated();
         }
 
         public DbSet<Category> Category { get; set; }
@@ -27,14 +22,6 @@ namespace ComeTogether.DAL.EntityFramework
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<CategoryPeople> CategoryPeople { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var connectionString = Startup.Configuration["DataConnection:ConnectionString"];
-            optionsBuilder.UseSqlServer(connectionString);
-
-            base.OnConfiguring(optionsBuilder);
-        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

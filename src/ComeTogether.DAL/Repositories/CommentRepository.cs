@@ -1,6 +1,7 @@
 ﻿using ComeTogether.DAL.Entities;
 using ComeTogether.DAL.EntityFramework;
 using ComeTogether.DAL.Interfaces;
+using Microsoft.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace ComeTogether.DAL.Repositories
         
         public void AddComment(int toDoItemId, Comment comment)
         {
-            var toDoItem = GetToDoItemById(toDoItemId);
+            var toDoItem = _context.ToDoItems.Include(c => c.Comments).Where(c => c.Id == toDoItemId).FirstOrDefault();
             toDoItem.Comments.Add(comment);
             _context.Comments.Add(comment);
         }
