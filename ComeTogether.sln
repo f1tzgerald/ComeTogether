@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{407665FB-7798-4F2A-A21B-24F4666FE5C8}"
 EndProject
@@ -13,6 +13,8 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ComeTogether", "src\ComeTogether\ComeTogether.xproj", "{80E4C85C-0D06-479A-A5F5-635C8915E39E}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ComeTogether.DAL", "src\ComeTogether.DAL\ComeTogether.DAL.xproj", "{6BD3EFB7-DBEC-40DA-9AC5-3E70939BD9F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComeTogether.Droid", "ComeTogether.Droid\ComeTogether.Droid.csproj", "{87DF1E08-E45D-4B20-9E3F-290E48B69810}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +30,12 @@ Global
 		{6BD3EFB7-DBEC-40DA-9AC5-3E70939BD9F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BD3EFB7-DBEC-40DA-9AC5-3E70939BD9F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BD3EFB7-DBEC-40DA-9AC5-3E70939BD9F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87DF1E08-E45D-4B20-9E3F-290E48B69810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87DF1E08-E45D-4B20-9E3F-290E48B69810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87DF1E08-E45D-4B20-9E3F-290E48B69810}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{87DF1E08-E45D-4B20-9E3F-290E48B69810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87DF1E08-E45D-4B20-9E3F-290E48B69810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87DF1E08-E45D-4B20-9E3F-290E48B69810}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,5 +43,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{80E4C85C-0D06-479A-A5F5-635C8915E39E} = {407665FB-7798-4F2A-A21B-24F4666FE5C8}
 		{6BD3EFB7-DBEC-40DA-9AC5-3E70939BD9F4} = {407665FB-7798-4F2A-A21B-24F4666FE5C8}
+		{87DF1E08-E45D-4B20-9E3F-290E48B69810} = {407665FB-7798-4F2A-A21B-24F4666FE5C8}
 	EndGlobalSection
 EndGlobal

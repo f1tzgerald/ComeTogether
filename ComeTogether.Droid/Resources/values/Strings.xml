@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="tasks_text">Text:</string>
+  <string name="date_added">Date added:</string>
+  <string name="date_to_done">Date to finish task:</string>
+  <string name="btn_date_to_done">Set another date to finish task:</string>
+  <string name="add_category">Add new category</string>
+
+  <string-array name="context_menu">
+    <item>Edit</item>
+    <item>Delete</item>
+  </string-array>
+</resources>

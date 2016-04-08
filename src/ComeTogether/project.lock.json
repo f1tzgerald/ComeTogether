@@ -4615,22 +4615,6 @@
           "ref/dotnet5.1/System.Security.Cryptography.Encoding.dll": {}
         }
       },
-      "System.Security.Cryptography.Encryption/4.0.0-beta-23019": {
-        "type": "package",
-        "dependencies": {
-          "System.Globalization": "4.0.0-beta-23019",
-          "System.IO": "4.0.0-beta-23019",
-          "System.Resources.ResourceManager": "4.0.0-beta-23019",
-          "System.Runtime": "4.0.0-beta-23019",
-          "System.Threading.Tasks": "4.0.0-beta-23019"
-        },
-        "compile": {
-          "ref/dotnet/System.Security.Cryptography.Encryption.dll": {}
-        },
-        "runtime": {
-          "lib/DNXCore50/System.Security.Cryptography.Encryption.dll": {}
-        }
-      },
       "System.Security.Cryptography.Primitives/4.0.0-beta-23516": {
         "type": "package",
         "dependencies": {
@@ -4696,15 +4680,15 @@
           "lib/DNXCore50/System.Security.Principal.Windows.dll": {}
         }
       },
-      "System.Security.SecureString/4.0.0-beta-23019": {
+      "System.Security.SecureString/4.0.0-beta-23409": {
         "type": "package",
         "dependencies": {
-          "System.Resources.ResourceManager": "4.0.0-beta-23019",
-          "System.Runtime": "4.0.20-beta-23019",
-          "System.Runtime.Handles": "4.0.0-beta-23019",
-          "System.Runtime.InteropServices": "4.0.20-beta-23019",
-          "System.Security.Cryptography.Encryption": "4.0.0-beta-23019",
-          "System.Threading": "4.0.10-beta-23019"
+          "System.Resources.ResourceManager": "4.0.0",
+          "System.Runtime": "4.0.20",
+          "System.Runtime.Handles": "4.0.0",
+          "System.Runtime.InteropServices": "4.0.20",
+          "System.Security.Cryptography.Primitives": "4.0.0-beta-23409",
+          "System.Threading": "4.0.10"
         },
         "compile": {
           "ref/dotnet/System.Security.SecureString.dll": {}
@@ -12150,22 +12134,6 @@
           "ref/dotnet5.1/System.Security.Cryptography.Encoding.dll": {}
         }
       },
-      "System.Security.Cryptography.Encryption/4.0.0-beta-23019": {
-        "type": "package",
-        "dependencies": {
-          "System.Globalization": "4.0.0-beta-23019",
-          "System.IO": "4.0.0-beta-23019",
-          "System.Resources.ResourceManager": "4.0.0-beta-23019",
-          "System.Runtime": "4.0.0-beta-23019",
-          "System.Threading.Tasks": "4.0.0-beta-23019"
-        },
-        "compile": {
-          "ref/dotnet/System.Security.Cryptography.Encryption.dll": {}
-        },
-        "runtime": {
-          "lib/DNXCore50/System.Security.Cryptography.Encryption.dll": {}
-        }
-      },
       "System.Security.Cryptography.Primitives/4.0.0-beta-23516": {
         "type": "package",
         "dependencies": {
@@ -12231,15 +12199,15 @@
           "lib/DNXCore50/System.Security.Principal.Windows.dll": {}
         }
       },
-      "System.Security.SecureString/4.0.0-beta-23019": {
+      "System.Security.SecureString/4.0.0-beta-23409": {
         "type": "package",
         "dependencies": {
-          "System.Resources.ResourceManager": "4.0.0-beta-23019",
-          "System.Runtime": "4.0.20-beta-23019",
-          "System.Runtime.Handles": "4.0.0-beta-23019",
-          "System.Runtime.InteropServices": "4.0.20-beta-23019",
-          "System.Security.Cryptography.Encryption": "4.0.0-beta-23019",
-          "System.Threading": "4.0.10-beta-23019"
+          "System.Resources.ResourceManager": "4.0.0",
+          "System.Runtime": "4.0.20",
+          "System.Runtime.Handles": "4.0.0",
+          "System.Runtime.InteropServices": "4.0.20",
+          "System.Security.Cryptography.Primitives": "4.0.0-beta-23409",
+          "System.Threading": "4.0.10"
         },
         "compile": {
           "ref/dotnet/System.Security.SecureString.dll": {}
@@ -15482,22 +15450,6 @@
           "ref/dotnet5.1/System.Security.Cryptography.Encoding.dll": {}
         }
       },
-      "System.Security.Cryptography.Encryption/4.0.0-beta-23019": {
-        "type": "package",
-        "dependencies": {
-          "System.Globalization": "4.0.0-beta-23019",
-          "System.IO": "4.0.0-beta-23019",
-          "System.Resources.ResourceManager": "4.0.0-beta-23019",
-          "System.Runtime": "4.0.0-beta-23019",
-          "System.Threading.Tasks": "4.0.0-beta-23019"
-        },
-        "compile": {
-          "ref/dotnet/System.Security.Cryptography.Encryption.dll": {}
-        },
-        "runtime": {
-          "lib/DNXCore50/System.Security.Cryptography.Encryption.dll": {}
-        }
-      },
       "System.Security.Cryptography.Primitives/4.0.0-beta-23516": {
         "type": "package",
         "dependencies": {
@@ -15563,15 +15515,15 @@
           "lib/DNXCore50/System.Security.Principal.Windows.dll": {}
         }
       },
-      "System.Security.SecureString/4.0.0-beta-23019": {
+      "System.Security.SecureString/4.0.0-beta-23409": {
         "type": "package",
         "dependencies": {
-          "System.Resources.ResourceManager": "4.0.0-beta-23019",
-          "System.Runtime": "4.0.20-beta-23019",
-          "System.Runtime.Handles": "4.0.0-beta-23019",
-          "System.Runtime.InteropServices": "4.0.20-beta-23019",
-          "System.Security.Cryptography.Encryption": "4.0.0-beta-23019",
-          "System.Threading": "4.0.10-beta-23019"
+          "System.Resources.ResourceManager": "4.0.0",
+          "System.Runtime": "4.0.20",
+          "System.Runtime.Handles": "4.0.0",
+          "System.Runtime.InteropServices": "4.0.20",
+          "System.Security.Cryptography.Primitives": "4.0.0-beta-23409",
+          "System.Threading": "4.0.10"
         },
         "compile": {
           "ref/dotnet/System.Security.SecureString.dll": {}
@@ -20665,19 +20617,6 @@
         "System.Security.Cryptography.Encoding.nuspec"
       ]
     },
-    "System.Security.Cryptography.Encryption/4.0.0-beta-23019": {
-      "type": "package",
-      "sha512": "W95rPBfpgVShPysa/TcLKYQvKjFO0Uq6Obo2DYpKM2+N6SoEVHaBWTxxoImq7vJT/jSlDf0K+SREFBGSj6Gj5A==",
-      "files": [
-        "lib/DNXCore50/System.Security.Cryptography.Encryption.dll",
-        "lib/net46/System.Security.Cryptography.Encryption.dll",
-        "ref/dotnet/System.Security.Cryptography.Encryption.dll",
-        "ref/net46/System.Security.Cryptography.Encryption.dll",
-        "System.Security.Cryptography.Encryption.4.0.0-beta-23019.nupkg",
-        "System.Security.Cryptography.Encryption.4.0.0-beta-23019.nupkg.sha512",
-        "System.Security.Cryptography.Encryption.nuspec"
-      ]
-    },
     "System.Security.Cryptography.Primitives/4.0.0-beta-23516": {
       "type": "package",
       "serviceable": true,
@@ -20798,16 +20737,55 @@
         "System.Security.Principal.Windows.nuspec"
       ]
     },
-    "System.Security.SecureString/4.0.0-beta-23019": {
+    "System.Security.SecureString/4.0.0-beta-23409": {
       "type": "package",
-      "sha512": "VqnglApw6FC+TLD7wz45HGjTDuJjkUmAJGmhjk1FxcnHziJCYkVgxg8OMtEXS2wHvNwEDfVdTdo/8j2hmxrzsA==",
+      "serviceable": true,
+      "sha512": "KsuDpUcHXQjLeZ64XwvEHzSQJUKu3W0Z/3MtHQZKR+3DF4Qq/FPHXfbCcB/oBuSITfD90f4T7Slz5O9F7U+ORw==",
       "files": [
+        "lib/DNXCore50/de/System.Security.SecureString.xml",
+        "lib/DNXCore50/es/System.Security.SecureString.xml",
+        "lib/DNXCore50/fr/System.Security.SecureString.xml",
+        "lib/DNXCore50/it/System.Security.SecureString.xml",
+        "lib/DNXCore50/ja/System.Security.SecureString.xml",
+        "lib/DNXCore50/ko/System.Security.SecureString.xml",
+        "lib/DNXCore50/ru/System.Security.SecureString.xml",
         "lib/DNXCore50/System.Security.SecureString.dll",
+        "lib/DNXCore50/System.Security.SecureString.xml",
+        "lib/DNXCore50/zh-hans/System.Security.SecureString.xml",
+        "lib/DNXCore50/zh-hant/System.Security.SecureString.xml",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/de/System.Security.SecureString.xml",
+        "lib/net46/es/System.Security.SecureString.xml",
+        "lib/net46/fr/System.Security.SecureString.xml",
+        "lib/net46/it/System.Security.SecureString.xml",
+        "lib/net46/ja/System.Security.SecureString.xml",
+        "lib/net46/ko/System.Security.SecureString.xml",
+        "lib/net46/ru/System.Security.SecureString.xml",
         "lib/net46/System.Security.SecureString.dll",
+        "lib/net46/System.Security.SecureString.xml",
+        "lib/net46/zh-hans/System.Security.SecureString.xml",
+        "lib/net46/zh-hant/System.Security.SecureString.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
         "ref/dotnet/System.Security.SecureString.dll",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/de/System.Security.SecureString.xml",
+        "ref/net46/es/System.Security.SecureString.xml",
+        "ref/net46/fr/System.Security.SecureString.xml",
+        "ref/net46/it/System.Security.SecureString.xml",
+        "ref/net46/ja/System.Security.SecureString.xml",
+        "ref/net46/ko/System.Security.SecureString.xml",
+        "ref/net46/ru/System.Security.SecureString.xml",
         "ref/net46/System.Security.SecureString.dll",
-        "System.Security.SecureString.4.0.0-beta-23019.nupkg",
-        "System.Security.SecureString.4.0.0-beta-23019.nupkg.sha512",
+        "ref/net46/System.Security.SecureString.xml",
+        "ref/net46/zh-hans/System.Security.SecureString.xml",
+        "ref/net46/zh-hant/System.Security.SecureString.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "System.Security.SecureString.4.0.0-beta-23409.nupkg",
+        "System.Security.SecureString.4.0.0-beta-23409.nupkg.sha512",
         "System.Security.SecureString.nuspec"
       ]
     },
