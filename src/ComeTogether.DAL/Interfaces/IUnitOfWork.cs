@@ -11,6 +11,7 @@ namespace ComeTogether.DAL.Interfaces
         IComment Comments { get; }
         IToDoItem ToDoItems { get; }
         IUser People { get; }
+        ICategoryPeople CategoryPeople { get; }
 
         bool SaveChanges();
     }

@@ -52,8 +52,12 @@ namespace ComeTogether.Controllers.Api
                 {
                     //Add new category 
                     var category = Mapper.Map<DAL.Entities.Category>(viewmodelCategory);
-
                     _repository.Categories.AddCategory(category);
+
+                    // Add new category <--> people
+                    var user = _repository.People.GetUserByName(User.Identity.Name);
+                    CategoryPeople newItem = new CategoryPeople() { Category = category, UserId = user.Id };
+                    _repository.CategoryPeople.AddCategoryPeople(newItem);
 
                     if (_repository.SaveChanges())
                     {

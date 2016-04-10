@@ -15,6 +15,7 @@ namespace ComeTogether.DAL.Repositories
         private CommentRepository commentRepository;
         private ToDoItemRepository todoitemRepository;
         private UserRepository userRepository;
+        private CategoryPeopleRepository categoryPeopleRepository;
 
         public EFUnitOfWork(/*string connectionString*/)
         {
@@ -58,6 +59,16 @@ namespace ComeTogether.DAL.Repositories
                 if (todoitemRepository == null)
                     todoitemRepository = new ToDoItemRepository(_context);
                 return todoitemRepository;
+            }
+        }
+
+        public ICategoryPeople CategoryPeople
+        {
+            get
+            {
+                if (categoryPeopleRepository == null)
+                    categoryPeopleRepository = new CategoryPeopleRepository(_context);
+                return categoryPeopleRepository;
             }
         }
 

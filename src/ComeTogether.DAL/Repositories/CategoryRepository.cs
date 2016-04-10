@@ -57,5 +57,6 @@ namespace ComeTogether.DAL.Repositories
         {
             return _context.CategoryPeople.Where(c => c.CategoryId == categoryId).Select(c => c.Person).ToList();
         }
+
     }
 }
