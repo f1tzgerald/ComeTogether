@@ -23,7 +23,7 @@
         $http.get("/api/currentuser")
             .then(function (response) {
                 //Success
-                vm.userName = response.currentUser;
+                vm.userName = response.data.userName;
             }, function (error) {
             }).finally(function () { });
         console.log(vm.userName);
@@ -178,6 +178,12 @@
         vm.selectedCommentButton = {};
 
         vm.showComments = function (taskId) {
+
+            console.log("userName:");
+            console.log(vm.userName);
+
+            console.log();
+
             vm.selectedCommentButton = taskId;
             vm.showCommentsFlag = true;
             var urlComments = "/api/category/" + vm.categoryId + "/" + taskId + "/comments";
@@ -219,7 +225,7 @@
         // DELETE - DELETE COMMENT
         vm.deleteComment = function (commentId, $index) {
             var urlCommentDelete = "/api/category/" + vm.categoryId + "/" + vm.selectedCommentButton + "/comments/" + commentId;
-            console.log($rootScope.currentUser);
+            
             $http.delete(urlCommentDelete)
                 .then(function () {
                     //success

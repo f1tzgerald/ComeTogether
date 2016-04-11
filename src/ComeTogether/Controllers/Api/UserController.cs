@@ -25,7 +25,8 @@ namespace ComeTogether.Controllers.Api
         [Route("api/currentuser")]
         public JsonResult GetCurrentUser()
         {
-            return Json(new { currentUser = User.Identity.Name });
+            var currentUser = User.Identity.Name;
+            return Json(new { userName = currentUser });
         }
 
         [HttpGet]
