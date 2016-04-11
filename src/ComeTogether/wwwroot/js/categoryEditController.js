@@ -106,6 +106,25 @@
         };
 
         // Delete user from category
+        vm.deletePersonFromCategory = function (userId, $index) {
+            vm.urlDeletePerson = "/api/category/" + vm.categoryId + "/users/";
 
+            vm.userToDelete = vm.usersListForCategory[$index];
+            vm.idTodel = vm.userToDelete.id;
+            console.log(vm.userToDelete);
+            console.log(vm.userToDelete.id);
+
+            $http.delete(vm.urlDeletePerson + vm.idTodel)
+                .then(function () {
+                    //success
+                    vm.usersListForCategory.splice($index, 1);
+                }, function () {
+                    //failed
+                    vm.errorMessageAddNew = "Can't delete person from category.";
+                })
+                .finally(function () {
+                    //vm.isBusyAddNew = false;
+                });
+        };
     }
 })();

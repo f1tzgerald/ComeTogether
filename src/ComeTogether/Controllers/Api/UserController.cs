@@ -105,5 +105,35 @@ namespace ComeTogether.Controllers.Api
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
             return Json(false);
         }
+
+        [HttpDelete]
+        [Route("api/category/{categoryId}/users/{userId}")]
+        public JsonResult DeletePerson(int categoryId, string userId)
+        {
+            try
+            {
+                CategoryPeople categoryPeopleToDelete = new CategoryPeople()
+                {
+                    CategoryId = categoryId,
+                    UserId = userId
+                };
+                _repository.CategoryPeople.DeleteCategoryPeople(categoryPeopleToDelete);
+
+                if (_repository.SaveChanges())
+                {
+                    Response.StatusCode = (int)HttpStatusCode.Created;
+                    return Json(new { Message = "Person has been deleted." });
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                Console.WriteLine(ex.ToString());
+                return Json(new { Message = ex.ToString() });
+            }
+
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(false);
+        }
     }
 }
