@@ -7,27 +7,29 @@
 <!-- DISPLAY TODOITEMS FOR CATEGORY -->
         <input type="button" class="btn btn-warning" value="Delete All Done ToDo Items" name="deleteDone" ng-click="vm.deleteAllDone()" />
 
-        <table class="table table-responsive table-striped">
-            <tr>
-                <th>Status</th>
-                <th>Name</th>
-                <th>Added Date</th>
-                <th>Finish Date</th>
-                <th>Executor</th>
-                <th>Creator</th>                
-                <th>Comments</th>
-                <th></th>
-            </tr>
-            <tr ng-repeat="todoItem in vm.todoItems">
-                <td><input type="checkbox" name="status" ng-checked="todoItem.done" ng-click="vm.updateStatus(todoItem.id, $index)" /></td>
-                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.name }}</td>
-                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateAdded | date:shortDate }}</td>
-                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateFinish | date:shortDate }}</td>
-                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.whoDoIt }}</td>
-                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.creator }}</td>                
-                <td><input type="button" name="comments" value="Show" ng-click="vm.showComments(todoItem.id)"/></td>
-                <td><a class="btn btn-warning btn-sm" ng-click="vm.deleteTask(todoItem.id, $index)"><i class="fa fa-close"></i></a></td>
-            </tr>
+        <table class="table table-responsive" id="todoItems">
+            <tbody>
+                <tr>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Added Date</th>
+                    <th>Finish Date</th>
+                    <th>Executor</th>
+                    <th>Creator</th>
+                    <th>Comments</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="todoItem in vm.todoItems" ng-click="vm.setSelected(todoItem.id)" ng-class="{selected: todoItem.id === vm.idSelectedVote}">
+                    <td><input type="checkbox" name="status" ng-checked="todoItem.done" ng-click="vm.updateStatus(todoItem.id, $index)" /></td>
+                    <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.name }}</td>
+                    <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateAdded | date:shortDate }}</td>
+                    <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateFinish | date:shortDate }}</td>
+                    <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.whoDoIt }}</td>
+                    <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.creator }}</td>
+                    <td><input type="button" name="comments" value="Show" ng-click="vm.showComments(todoItem.id)" /></td>
+                    <td><a class="btn btn-warning btn-sm" ng-click="vm.deleteTask(todoItem.id, $index)"><i class="fa fa-close"></i></a></td>
+                </tr>
+            </tbody>
         </table>
 <!-- **END** DISPLAY TODOITEMS FOR CATEGORY **END** -->
 

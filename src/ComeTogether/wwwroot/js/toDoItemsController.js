@@ -15,9 +15,6 @@
         vm.isBusy = true;
         vm.todoItems = [];
 
-        //vm.userName = userConfig.userName;
-        //console.log("username = " + vm.userName);
-
         // GET CURRENT USER NAME
         vm.userName = {};
         $http.get("/api/currentuser")
@@ -178,12 +175,6 @@
         vm.selectedCommentButton = {};
 
         vm.showComments = function (taskId) {
-
-            console.log("userName:");
-            console.log(vm.userName);
-
-            console.log();
-
             vm.selectedCommentButton = taskId;
             vm.showCommentsFlag = true;
             var urlComments = "/api/category/" + vm.categoryId + "/" + taskId + "/comments";
@@ -234,5 +225,12 @@
                     //failed
                 }).finally(function () { });
         };
+
+        // Select row in the table
+        vm.idSelectedVote = null;
+        vm.setSelected = function (id) {
+            vm.idSelectedVote = id;
+            vm.showComments(id);
+        }
     }
 })();
