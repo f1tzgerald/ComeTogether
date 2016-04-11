@@ -8,15 +8,17 @@ using System.Net;
 using ComeTogether.Models;
 using ComeTogether.ViewModels;
 using AutoMapper;
+using ComeTogether.DAL.Interfaces;
+using ComeTogether.DAL.Entities;
 
 namespace ComeTogether.Controllers.Api
 {
     [Authorize]
     public class RecycleController : Controller
     {
-        private ITasksRepository _repository;
+        private IUnitOfWork _repository;
 
-        public RecycleController(ITasksRepository repository)
+        public RecycleController(IUnitOfWork repository)
         {
             _repository = repository;
         }
@@ -27,7 +29,7 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                var tasks = _repository.GetDeletedToDoItems();
+                var tasks = _repository.ToDoItems.GetDeletedToDoItems();
 
                 if (tasks == null)
                     return Json(null);
@@ -51,7 +53,7 @@ namespace ComeTogether.Controllers.Api
                 {
                     var editToDoItem = Mapper.Map<TodoItem>(updatedToDoVM);
 
-                    _repository.EditToDoItem(taskId, editToDoItem);
+                    _repository.ToDoItems.EditToDoItem(taskId, editToDoItem);
 
                     if (_repository.SaveChanges())
                     {
@@ -76,7 +78,7 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                _repository.DeleteToDoItem(taskId);
+                _repository.ToDoItems.DeleteToDoItem(taskId);
 
                 if (_repository.SaveChanges())
                 {
@@ -100,7 +102,7 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                _repository.DeleteAllDeletedItems();
+                _repository.ToDoItems.DeleteAllDeletedItems();
 
                 if (_repository.SaveChanges())
                 {

@@ -78,3 +78,23 @@
 .striketext {
     text-decoration: line-through;
 }
+
+.inline-block {
+    display: inline-block;
+}
+
+hr {
+    border-color:rebeccapurple;
+}
+
+tr:hover {
+    background-color: aquamarine;
+}
+
+#todoItems tr {
+    cursor: pointer;
+}
+
+#todoItems tr.selected {
+    background-color: #E5C37E;
+}

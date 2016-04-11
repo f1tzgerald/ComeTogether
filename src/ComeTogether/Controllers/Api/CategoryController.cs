@@ -8,15 +8,17 @@ using System.Net;
 using ComeTogether.ViewModels;
 using AutoMapper;
 using Microsoft.AspNet.Authorization;
+using ComeTogether.DAL.Interfaces;
+using ComeTogether.DAL.Entities;
 
 namespace ComeTogether.Controllers.Api
 {
     [Authorize]
     public class CategoryController : Controller
     {
-        private ITasksRepository _repository;
+        private IUnitOfWork _repository;
 
-        public CategoryController(ITasksRepository repository)
+        public CategoryController(IUnitOfWork repository)
         {
             _repository = repository;
         }
@@ -25,8 +27,8 @@ namespace ComeTogether.Controllers.Api
         [Route("api/category")]
         public JsonResult Get()
         {
-            var user = _repository.GetUserByName(User.Identity.Name);
-            var res = Mapper.Map<IEnumerable<CategoryViewModel>>(_repository.GetAllCategoriesForUser(user.Id));
+            var user = _repository.People.GetUserByName(User.Identity.Name);
+            var res = Mapper.Map<IEnumerable<CategoryViewModel>>(_repository.Categories.GetAllCategoriesForUser(user.Id));
 
             return Json(res);
         }
@@ -35,7 +37,7 @@ namespace ComeTogether.Controllers.Api
         [Route("api/category/{categoryId}")]
         public JsonResult Get(int categoryId)
         {
-            var category = _repository.GetCategoryById(categoryId);
+            var category = _repository.Categories.GetCategoryById(categoryId);
 
             return Json(Mapper.Map<CategoryViewModel>(category));
         }
@@ -49,9 +51,13 @@ namespace ComeTogether.Controllers.Api
                 if (ModelState.IsValid)
                 {
                     //Add new category 
-                    var category = Mapper.Map<Category>(viewmodelCategory);
+                    var category = Mapper.Map<DAL.Entities.Category>(viewmodelCategory);
+                    _repository.Categories.AddCategory(category);
 
-                    _repository.AddCategory(category);
+                    // Add new category <--> people
+                    var user = _repository.People.GetUserByName(User.Identity.Name);
+                    CategoryPeople newItem = new CategoryPeople() { Category = category, UserId = user.Id };
+                    _repository.CategoryPeople.AddCategoryPeople(newItem);
 
                     if (_repository.SaveChanges())
                     {
@@ -81,7 +87,7 @@ namespace ComeTogether.Controllers.Api
                 {
                     var editCategory = Mapper.Map<Category>(editCategoryVM);
 
-                    _repository.EditCategory(categoryId, editCategory);
+                    _repository.Categories.EditCategory(categoryId, editCategory);
 
                     if (_repository.SaveChanges())
                     {
@@ -106,11 +112,11 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                if (_repository.GetCategoryById(categoryId) != null)
+                if (_repository.Categories.GetCategoryById(categoryId) != null)
                 {
-                    var categoryToDelete = _repository.GetCategoryById(categoryId);
+                    var categoryToDelete = _repository.Categories.GetCategoryById(categoryId);
 
-                    _repository.DeleteCategory(categoryId);
+                    _repository.Categories.DeleteCategory(categoryId);
 
                     if (_repository.SaveChanges())
                     {

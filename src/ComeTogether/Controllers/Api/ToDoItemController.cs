@@ -8,15 +8,17 @@ using System.Net;
 using AutoMapper;
 using ComeTogether.ViewModels;
 using Microsoft.AspNet.Authorization;
+using ComeTogether.DAL.Entities;
+using ComeTogether.DAL.Interfaces;
 
 namespace ComeTogether.Controllers.Api
 {
     [Authorize]
     public class ToDoItemController : Controller
     {
-        private ITasksRepository _repository;
+        private IUnitOfWork _repository;
 
-        public ToDoItemController(ITasksRepository repository)
+        public ToDoItemController(IUnitOfWork repository)
         {
             _repository = repository;
         }
@@ -27,8 +29,8 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                var tasks = _repository.GetToDoItemsForCategory(categoryId);
-
+                var tasks = _repository.ToDoItems.GetToDoItemsForCategory(categoryId);
+                
                 if (tasks == null)
                     return Json(null);
 
@@ -52,7 +54,7 @@ namespace ComeTogether.Controllers.Api
                     var todoItem = Mapper.Map<TodoItem>(toDoitemVM);
                     todoItem.Creator = User.Identity.Name;
 
-                    _repository.AddToDoItem(categoryId, todoItem);
+                    _repository.ToDoItems.AddToDoItem(categoryId, todoItem);
 
                     if (_repository.SaveChanges())
                     {
@@ -82,7 +84,7 @@ namespace ComeTogether.Controllers.Api
                 {
                     var editToDoItem = Mapper.Map<TodoItem>(updatedToDoVM);
 
-                    _repository.EditToDoItem(todoitemId, editToDoItem);
+                    _repository.ToDoItems.EditToDoItem(todoitemId, editToDoItem);
 
                     if (_repository.SaveChanges())
                     {
@@ -108,7 +110,7 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                _repository.MoveAllDoneItemsToRecycle(categoryId);
+                _repository.ToDoItems.MoveAllDoneItemsToRecycle(categoryId);
 
                 if (_repository.SaveChanges())
                 {

@@ -9,6 +9,9 @@
         vm.categories = [];
         vm.errorMessage = "";
 
+        vm.isBusy = true;
+        vm.errorMessage = "";
+
         $http.get("/api/category")
             .then(function (response) {
                 //Success
@@ -26,8 +29,7 @@
 
         vm.addCategory = function () {
             vm.isBusy = true;
-            vm.errorMessage = "";
-            $http.post("/api/category", vm.newCategory)
+            $http.post("/api/category", { "Name" : vm.newCategory })
                 .then(function (response) {
                     //Success
                         console.log("category to add: ");

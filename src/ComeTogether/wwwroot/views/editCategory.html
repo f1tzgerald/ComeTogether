@@ -22,10 +22,26 @@
         <p>People related with the category:</p>
         <div>
             <ul ng-repeat="user in vm.usersListForCategory">
-                <li>{{user.userName}}</li>
+                <li>
+                    <div class="text-info">
+                        {{user.userName}}
+                        <a class="btn btn-xs" ng-click="vm.deletePersonFromCategory(user.id, $index)"><i class="fa fa-remove"></i></a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
+
+    <!-- ADD NEW PEOPLE TO CATEGORY -->
+    <div>
+        <div class="dropdown">
+            <select name="userName" ng-model="vm.newPerson">
+                <option ng-repeat="userToAdd in vm.users" value="{{ userToAdd.id }}"> {{ userToAdd.userName }}</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-click="vm.addPersonToCategory()">Add Person</button>
+    </div>
+    <!-- **END** ADD NEW PEOPLE TO CATEGORY **END** -->
 
     <div>
         <a href="#/" class="btn btn-sm btn-default"><i class="fa fa-chevron-left"></i>Back to list</a>

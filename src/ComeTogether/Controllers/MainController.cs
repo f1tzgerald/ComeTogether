@@ -13,12 +13,10 @@ namespace ComeTogether.Controllers
     public class MainController : Controller
     {
         private IMailService _mailService;
-        private ITasksRepository _repos;
 
-        public MainController(IMailService mailService, ITasksRepository repos)
+        public MainController(IMailService mailService)
         {
             _mailService = mailService;
-            _repos = repos;
         }
 
         public IActionResult Index()

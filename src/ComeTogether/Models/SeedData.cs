@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using ComeTogether.DAL.Entities;
+using ComeTogether.DAL.EntityFramework;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -9,10 +11,10 @@ namespace ComeTogether.Models
 {
     public class SeedData
     {
-        private MainContextDb _context;
+        private ComeTogetherContext _context;
         private UserManager<Person> _userManager;
 
-        public SeedData(MainContextDb context, UserManager<Person> manager)
+        public SeedData(ComeTogetherContext context, UserManager<Person> manager)
         {
             _context = context;
             _userManager = manager;

@@ -25,15 +25,19 @@
             });
 
         // Get Users related with current category
-        vm.urlUsers = "/api/category/" + vm.categoryId + "/users";
-        vm.usersListForCategory = [];
-        $http.get(vm.urlUsers)
-            .then(function (response) {
-                //success
-                vm.usersListForCategory = response.data;
-            }, function (error) {
-                //failed
-            }).finally();        
+        vm.refreshUsers = function () {
+            vm.urlUsers = "/api/category/" + vm.categoryId + "/users";
+            vm.usersListForCategory = [];
+            $http.get(vm.urlUsers)
+                .then(function (response) {
+                    //success
+                    vm.usersListForCategory = response.data;
+                }, function (error) {
+                    //failed
+                }).finally();
+        };
+        vm.refreshUsers();
+
 
         vm.url = "/api/category/edit/" + vm.categoryId;
         vm.editCategoryClick = function () {
@@ -64,7 +68,63 @@
                 });
         };
 
+        // Get Users For Dropdown button
+        vm.countTake = 25;
+        vm.countSkip = 0;
+        vm.users = [];
 
+        vm.urlUsers = "/api/users/" + vm.countTake + "/" + vm.countSkip;
+        $http.get(vm.urlUsers)
+            .then(function (response) {
+                //success
+                vm.users = response.data;
+            }, function (error) {
+                //failed
+            }).finally();
+        
         // Add new users for this category
+        vm.newPerson = {};
+        vm.isBusyAddNew = false;
+
+        vm.addPersonToCategory = function () {
+            vm.errorMessageAddNew = "";
+            vm.isBusyAddNew = true;
+
+            vm.urlNewPerson = "/api/category/" + vm.categoryId + "/users";
+
+            $http.post(vm.urlNewPerson, { "Id" : vm.newPerson })
+                .then(function () {
+                    //success
+                    vm.refreshUsers();
+                }, function () {
+                    //failed
+                    vm.errorMessageAddNew = "Can't add new person to category.";
+                })
+                .finally(function () {
+                    vm.isBusyAddNew = false;
+                });
+        };
+
+        // Delete user from category
+        vm.deletePersonFromCategory = function (userId, $index) {
+            vm.urlDeletePerson = "/api/category/" + vm.categoryId + "/users/";
+
+            vm.userToDelete = vm.usersListForCategory[$index];
+            vm.idTodel = vm.userToDelete.id;
+            console.log(vm.userToDelete);
+            console.log(vm.userToDelete.id);
+
+            $http.delete(vm.urlDeletePerson + vm.idTodel)
+                .then(function () {
+                    //success
+                    vm.usersListForCategory.splice($index, 1);
+                }, function () {
+                    //failed
+                    vm.errorMessageAddNew = "Can't delete person from category.";
+                })
+                .finally(function () {
+                    //vm.isBusyAddNew = false;
+                });
+        };
     }
 })();

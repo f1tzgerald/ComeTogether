@@ -7,27 +7,29 @@
 <!-- DISPLAY TODOITEMS FOR CATEGORY -->
         <input type="button" class="btn btn-warning" value="Delete All Done ToDo Items" name="deleteDone" ng-click="vm.deleteAllDone()" />
 
-        <table class="table table-responsive table-striped">
-            <tr>
-                <th>Status</th>
-                <th>Name</th>
-                <th>Added Date</th>
-                <th>Finish Date</th>
-                <th>Executor</th>
-                <th>Creator</th>                
-                <th>Comments</th>
-                <th></th>
-            </tr>
-            <tr ng-repeat="todoItem in vm.todoItems">
-                <td><input type="checkbox" name="status" ng-checked="todoItem.done" ng-click="vm.updateStatus(todoItem.id, $index)" /></td>
-                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.name }}</td>
-                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateAdded | date:shortDate }}</td>
-                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateFinish | date:shortDate }}</td>
-                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.whoDoIt }}</td>
-                <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.creator }}</td>                
-                <td><input type="button" name="comments" value="Show" ng-click="vm.showComments(todoItem.id)"/></td>
-                <td><a class="btn btn-warning btn-sm" ng-click="vm.deleteTask(todoItem.id, $index)"><i class="fa fa-close"></i></a></td>
-            </tr>
+        <table class="table table-responsive" id="todoItems">
+            <tbody>
+                <tr>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Added Date</th>
+                    <th>Finish Date</th>
+                    <th>Executor</th>
+                    <th>Creator</th>
+                    <th>Comments</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="todoItem in vm.todoItems" ng-click="vm.setSelected(todoItem.id)" ng-class="{selected: todoItem.id === vm.idSelectedVote}">
+                    <td><input type="checkbox" name="status" ng-checked="todoItem.done" ng-click="vm.updateStatus(todoItem.id, $index)" /></td>
+                    <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.name }}</td>
+                    <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateAdded | date:shortDate }}</td>
+                    <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateFinish | date:shortDate }}</td>
+                    <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.whoDoIt }}</td>
+                    <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.creator }}</td>
+                    <td ng-class="{true: 'striketext', false: ''}[todoItem.done]"><p class="text-center">{{ todoItem.comments.length }}</p></td>
+                    <td><a class="btn btn-warning btn-sm" ng-click="vm.deleteTask(todoItem.id, $index)"><i class="fa fa-close"></i></a></td>
+                </tr>
+            </tbody>
         </table>
 <!-- **END** DISPLAY TODOITEMS FOR CATEGORY **END** -->
 
@@ -88,21 +90,21 @@
         <!-- SHOW COMMENTS FOR TODOITEM -->
         <div ng-if="vm.showCommentsFlag">
             <div ng-repeat="comment in vm.comments">
-                <div style="display:inline-block">
-                    <div class="text-left" style="display:inline-block">Creator: {{ comment.creator }}</div>
-                    <div class="text-right" style="display:inline-block">
+                <div class="inline-block">
+                    <div class="text-left inline-block">Creator: {{ comment.creator }}</div>
+                    <div class="text-right inline-block">
                         <a class="btn btn-xs" ng-show="{{ comment.creator == vm.userName }}" ng-click="vm.deleteComment(comment.id, $index)">
                             <i class="fa fa-close" style="color:red"></i>
                         </a>
                     </div>
                 </div>
                 <div>
-                    <div class="text-info" style="display:inline-block">Text: {{ comment.text }}</div>
+                    <div class="text-info inline-block">Text: {{ comment.text }}</div>
                 </div>
                 <div>
-                    <div class="text-left" style="display:inline-block; font-size:small">Posted: {{ comment.dateAdded | date:shortDate }}</div>
+                    <div class="text-left inline-block" style="font-size:small">Posted: {{ comment.dateAdded | date:shortDate }}</div>
                 </div>
-                <hr style="border-color:rebeccapurple" />
+                <hr />
             </div>
         </div>
         <!-- **END** SHOW COMMENTS FOR TODOITEM **END** -->

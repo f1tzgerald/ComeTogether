@@ -6,15 +6,17 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Authorization;
 using ComeTogether.Models;
 using System.Net;
+using ComeTogether.DAL.Interfaces;
+using ComeTogether.DAL.Entities;
 
 namespace ComeTogether.Controllers.Api
 {
     [Authorize]
     public class UserController : Controller
     {
-        private ITasksRepository _repository;
+        private IUnitOfWork _repository;
 
-        public UserController(ITasksRepository repository)
+        public UserController(IUnitOfWork repository)
         {
             _repository = repository;
         }
@@ -23,7 +25,8 @@ namespace ComeTogether.Controllers.Api
         [Route("api/currentuser")]
         public JsonResult GetCurrentUser()
         {
-            return Json(new { currentUser = User.Identity.Name });
+            var currentUser = User.Identity.Name;
+            return Json(new { userName = currentUser });
         }
 
         [HttpGet]
@@ -32,7 +35,7 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                var users = _repository.GetCountOfUsersFrom(countTake, countSkip);
+                var users = _repository.People.GetCountOfUsersFrom(countTake, countSkip);
 
                 if (users != null)
                 {
@@ -56,7 +59,7 @@ namespace ComeTogether.Controllers.Api
         {
             try
             {
-                var people = _repository.GetAllUsersForCategory(categoryId);
+                var people = _repository.People.GetAllUsersForCategory(categoryId);
 
                 if (people == null)
                     return Json(null);
@@ -72,29 +75,63 @@ namespace ComeTogether.Controllers.Api
 
         [HttpPost]
         [Route("api/category/{categoryId}/users")]
-        public JsonResult Post(int categoryId, Person personToAdd)
+        public JsonResult Post(int categoryId, [FromBody] Person personToAdd)
         {
-            //try
-            //{
-            //    if (ModelState.IsValid)
-            //    {
-            //        var todoItem = Mapper.Map<TodoItem>(toDoitemVM);
-            //        todoItem.Creator = User.Identity.Name;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    CategoryPeople newCategoryPeople = new CategoryPeople()
+                    {
+                         CategoryId = categoryId,
+                         UserId = personToAdd.Id
+                    };
 
-            //        _repository.AddToDoItem(categoryId, todoItem);
+                    _repository.CategoryPeople.AddCategoryPeople(newCategoryPeople);
 
-            //        if (_repository.SaveChanges())
-            //        {
-            //            Response.StatusCode = (int)HttpStatusCode.Created;
-            //            return Json(Mapper.Map<ToDoItemViewModel>(todoItem));
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            //    return Json(new { Message = ex.ToString() });
-            //}
+                    if (_repository.SaveChanges())
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.Created;
+                        return Json(new { Message = "New person has been added." });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                Console.WriteLine(ex.ToString());
+                return Json(new { Message = ex.ToString() });
+            }
+
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(false);
+        }
+
+        [HttpDelete]
+        [Route("api/category/{categoryId}/users/{userId}")]
+        public JsonResult DeletePerson(int categoryId, string userId)
+        {
+            try
+            {
+                CategoryPeople categoryPeopleToDelete = new CategoryPeople()
+                {
+                    CategoryId = categoryId,
+                    UserId = userId
+                };
+                _repository.CategoryPeople.DeleteCategoryPeople(categoryPeopleToDelete);
+
+                if (_repository.SaveChanges())
+                {
+                    Response.StatusCode = (int)HttpStatusCode.Created;
+                    return Json(new { Message = "Person has been deleted." });
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                Console.WriteLine(ex.ToString());
+                return Json(new { Message = ex.ToString() });
+            }
 
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
             return Json(false);

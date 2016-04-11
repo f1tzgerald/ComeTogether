@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ComeTogether.Models
+namespace ComeTogether.DAL.Entities
 {
     public class TodoItem
     {
@@ -26,7 +25,7 @@ namespace ComeTogether.Models
 
         [Display(Name = "Executor")]
         public string WhoDoIt { get; set; }
-        public string  Creator { get; set; }
+        public string Creator { get; set; }
         public bool Done { get; set; }
 
         public bool IsDeleted { get; set; }

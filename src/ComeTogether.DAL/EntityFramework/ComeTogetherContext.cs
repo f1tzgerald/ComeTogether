@@ -1,26 +1,20 @@
-﻿using Microsoft.Data.Entity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ComeTogether.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Data.Entity;
+using ComeTogether.DAL.Entities;
 using Microsoft.Data.Entity.Metadata;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Data.Entity.Infrastructure;
 
-namespace ComeTogether.Models
+namespace ComeTogether.DAL.EntityFramework
 {
-    public class MainContextDb : IdentityDbContext<Person>
+    public class ComeTogetherContext : IdentityDbContext<Person>
     {
-        public MainContextDb()
+        public ComeTogetherContext() : base ()
         {
-            try
-            {
-                Database.EnsureCreated();
-            }
-            catch (Exception ex)
-            {
-                Console.Write (ex.ToString());
-            }
+            Database.EnsureCreated();
         }
 
         public DbSet<Category> Category { get; set; }
@@ -31,10 +25,10 @@ namespace ComeTogether.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = Startup.Configuration["DataConnection:ConnectionString"];
-            optionsBuilder.UseSqlServer(connectionString);
+            base.OnConfiguring(optionsBuilder);
 
-            base.OnConfiguring(optionsBuilder); 
+            string connectionString = "Server=.\\SQLEXPRESS;Database=ComeTogetherDb;Trusted_Connection=True;MultipleActiveResultSets=true";
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

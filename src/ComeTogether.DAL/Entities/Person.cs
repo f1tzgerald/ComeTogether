@@ -1,9 +1,10 @@
 ﻿using System;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace ComeTogether.Models
+namespace ComeTogether.DAL.Entities
 {
     public class Person : IdentityUser
     {

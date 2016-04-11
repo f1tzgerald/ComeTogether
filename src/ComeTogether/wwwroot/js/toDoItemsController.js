@@ -15,15 +15,12 @@
         vm.isBusy = true;
         vm.todoItems = [];
 
-        //vm.userName = userConfig.userName;
-        //console.log("username = " + vm.userName);
-
         // GET CURRENT USER NAME
         vm.userName = {};
         $http.get("/api/currentuser")
             .then(function (response) {
                 //Success
-                vm.userName = response.currentUser;
+                vm.userName = response.data.userName;
             }, function (error) {
             }).finally(function () { });
         console.log(vm.userName);
@@ -38,6 +35,7 @@
                 .then(function (response) {
                     //success
                     vm.todoItems = response.data;
+                    console.log(vm.todoItems[1]);
                 }, function () {
                     //error
                     vm.errorMessage = "Failed to load To Do Items from db";
@@ -219,7 +217,7 @@
         // DELETE - DELETE COMMENT
         vm.deleteComment = function (commentId, $index) {
             var urlCommentDelete = "/api/category/" + vm.categoryId + "/" + vm.selectedCommentButton + "/comments/" + commentId;
-            console.log($rootScope.currentUser);
+            
             $http.delete(urlCommentDelete)
                 .then(function () {
                     //success
@@ -228,5 +226,12 @@
                     //failed
                 }).finally(function () { });
         };
+
+        // Select row in the table
+        vm.idSelectedVote = null;
+        vm.setSelected = function (id) {
+            vm.idSelectedVote = id;
+            vm.showComments(id);
+        }
     }
 })();

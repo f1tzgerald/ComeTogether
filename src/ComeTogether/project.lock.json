@@ -18,6 +18,20 @@
           "lib/net45/AutoMapper.dll": {}
         }
       },
+      "ComeTogether.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+          "System.ComponentModel.Annotations": "4.0.11-beta-23516",
+          "System.Runtime": "4.0.0"
+        },
+        "frameworkAssemblies": [
+          "System.Runtime"
+        ]
+      },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -1900,6 +1914,15 @@
           "lib/dotnet/System.Collections.Immutable.dll": {}
         }
       },
+      "System.ComponentModel.Annotations/4.0.11-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
       "System.Diagnostics.Debug/4.0.0": {
         "type": "package",
         "compile": {
@@ -2117,6 +2140,21 @@
         },
         "runtime": {
           "lib/dotnet5.1/AutoMapper.dll": {}
+        }
+      },
+      "ComeTogether.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.ComponentModel.Annotations": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
         }
       },
       "EntityFramework.Commands/7.0.0-rc1-final": {
@@ -4870,6 +4908,20 @@
           "lib/net45/AutoMapper.dll": {}
         }
       },
+      "ComeTogether.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+          "System.ComponentModel.Annotations": "4.0.11-beta-23516",
+          "System.Runtime": "4.0.0"
+        },
+        "frameworkAssemblies": [
+          "System.Runtime"
+        ]
+      },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -6755,6 +6807,15 @@
           "lib/dotnet/System.Collections.Immutable.dll": {}
         }
       },
+      "System.ComponentModel.Annotations/4.0.11-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
       "System.Diagnostics.Debug/4.0.0": {
         "type": "package",
         "compile": {
@@ -6954,6 +7015,20 @@
         "runtime": {
           "lib/net45/AutoMapper.dll": {}
         }
+      },
+      "ComeTogether.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+          "System.ComponentModel.Annotations": "4.0.11-beta-23516",
+          "System.Runtime": "4.0.0"
+        },
+        "frameworkAssemblies": [
+          "System.Runtime"
+        ]
       },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "type": "package",
@@ -8840,6 +8915,15 @@
           "lib/dotnet/System.Collections.Immutable.dll": {}
         }
       },
+      "System.ComponentModel.Annotations/4.0.11-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
       "System.Diagnostics.Debug/4.0.0": {
         "type": "package",
         "compile": {
@@ -9057,6 +9141,21 @@
         },
         "runtime": {
           "lib/dotnet5.1/AutoMapper.dll": {}
+        }
+      },
+      "ComeTogether.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.ComponentModel.Annotations": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
         }
       },
       "EntityFramework.Commands/7.0.0-rc1-final": {
@@ -12376,6 +12475,21 @@
           "lib/dotnet5.1/AutoMapper.dll": {}
         }
       },
+      "ComeTogether.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "EntityFramework.Core": "7.0.0-rc1-final",
+          "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+          "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.ComponentModel.Annotations": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        }
+      },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -15660,6 +15774,10 @@
     }
   },
   "libraries": {
+    "ComeTogether.DAL/1.0.0": {
+      "type": "project",
+      "path": "../ComeTogether.DAL/project.json"
+    },
     "AutoMapper/4.2.1": {
       "type": "package",
       "sha512": "BxAMt0Sl9dQIPPualuMv6IhJ5QrWmWSgyYZ/QxcQcR2IBu57/CXG5IP+73sFIr4FMNtcrUugWnuOWkYnlrLVWQ==",
@@ -21453,7 +21571,8 @@
       "Microsoft.Framework.Logging.Debug >= 1.0.0-beta8",
       "AutoMapper >= 4.2.1",
       "Microsoft.AspNet.Identity.EntityFramework >= 3.0.0-rc1-final",
-      "Microsoft.Framework.CodeGenerators.Mvc >= 1.0.0-beta5"
+      "Microsoft.Framework.CodeGenerators.Mvc >= 1.0.0-beta5",
+      "ComeTogether.DAL >= 1.0.0-*"
     ],
     "DNX,Version=v4.5.1": [],
     "DNXCore,Version=v5.0": []
