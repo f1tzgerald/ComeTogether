@@ -26,7 +26,7 @@
                     <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.dateFinish | date:shortDate }}</td>
                     <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.whoDoIt }}</td>
                     <td ng-class="{true: 'striketext', false: ''}[todoItem.done]">{{ todoItem.creator }}</td>
-                    <td>{{ todoItem.comments.length }}</td>
+                    <td ng-class="{true: 'striketext', false: ''}[todoItem.done]"><p class="text-center">{{ todoItem.comments.length }}</p></td>
                     <td><a class="btn btn-warning btn-sm" ng-click="vm.deleteTask(todoItem.id, $index)"><i class="fa fa-close"></i></a></td>
                 </tr>
             </tbody>
