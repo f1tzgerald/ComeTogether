@@ -19,7 +19,11 @@ namespace ComeTogether.DAL.Repositories
 
         public void AddCategoryPeople(CategoryPeople categoryPeople)
         {
+            var user = _context.People.Where(c => c.Id == categoryPeople.UserId).FirstOrDefault();
             _context.CategoryPeople.Add(categoryPeople);
+
+            //var category = _context.Category.Where(c => c.Id == categoryPeople.CategoryId).FirstOrDefault();
+            //category.CategoryPeople.Add(categoryPeople);
         }
 
         public void DeleteCategoryPeople(CategoryPeople categoryPeople)
