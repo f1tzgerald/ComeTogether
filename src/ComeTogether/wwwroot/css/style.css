@@ -78,3 +78,11 @@
 .striketext {
     text-decoration: line-through;
 }
+
+.inline-block {
+    display: inline-block;
+}
+
+hr {
+    border-color:rebeccapurple;
+}

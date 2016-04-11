@@ -88,21 +88,21 @@
         <!-- SHOW COMMENTS FOR TODOITEM -->
         <div ng-if="vm.showCommentsFlag">
             <div ng-repeat="comment in vm.comments">
-                <div style="display:inline-block">
-                    <div class="text-left" style="display:inline-block">Creator: {{ comment.creator }}</div>
-                    <div class="text-right" style="display:inline-block">
+                <div class="inline-block">
+                    <div class="text-left inline-block">Creator: {{ comment.creator }}</div>
+                    <div class="text-right inline-block">
                         <a class="btn btn-xs" ng-show="{{ comment.creator == vm.userName }}" ng-click="vm.deleteComment(comment.id, $index)">
                             <i class="fa fa-close" style="color:red"></i>
                         </a>
                     </div>
                 </div>
                 <div>
-                    <div class="text-info" style="display:inline-block">Text: {{ comment.text }}</div>
+                    <div class="text-info inline-block">Text: {{ comment.text }}</div>
                 </div>
                 <div>
-                    <div class="text-left" style="display:inline-block; font-size:small">Posted: {{ comment.dateAdded | date:shortDate }}</div>
+                    <div class="text-left inline-block" style="font-size:small">Posted: {{ comment.dateAdded | date:shortDate }}</div>
                 </div>
-                <hr style="border-color:rebeccapurple" />
+                <hr />
             </div>
         </div>
         <!-- **END** SHOW COMMENTS FOR TODOITEM **END** -->
