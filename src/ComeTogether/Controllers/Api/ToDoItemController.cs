@@ -30,7 +30,7 @@ namespace ComeTogether.Controllers.Api
             try
             {
                 var tasks = _repository.ToDoItems.GetToDoItemsForCategory(categoryId);
-
+                
                 if (tasks == null)
                     return Json(null);
 

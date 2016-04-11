@@ -32,10 +32,14 @@ namespace ComeTogether.DAL.Repositories
 
         public IEnumerable<TodoItem> GetToDoItemsForCategory(int categoryId)
         {
+            //var query = (from cat in _context.Category
+            //             where cat.Id == categoryId
+            //             select cat).Include(c => c.ToDoItems).FirstOrDefault();        
             var query = (from cat in _context.Category
                          where cat.Id == categoryId
-                         select cat).Include(c => c.ToDoItems).FirstOrDefault();
+                         select cat).Include(c => c.ToDoItems).ThenInclude(co=>co.Comments).FirstOrDefault();
             var tasks = query.ToDoItems.Where(c => c.IsDeleted == false);
+
             return tasks;
         }
 

@@ -35,6 +35,7 @@
                 .then(function (response) {
                     //success
                     vm.todoItems = response.data;
+                    console.log(vm.todoItems[1]);
                 }, function () {
                     //error
                     vm.errorMessage = "Failed to load To Do Items from db";
