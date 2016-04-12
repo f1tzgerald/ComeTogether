@@ -53,7 +53,8 @@ namespace ComeTogether.Controllers
             return View();
         }
 
-        public IActionResult Constructor()
+        [Authorize]
+        public IActionResult Friends()
         {
             return View();
         }
