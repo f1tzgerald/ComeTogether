@@ -11,5 +11,7 @@ namespace ComeTogether.DAL.Entities
         public DateTime Created { get; set; }
 
         public List<CategoryPeople> CategoryPeople { get; set; }
+
+        //public List<Person> Friends { get; set; }
     }
 }
