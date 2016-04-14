@@ -26,10 +26,10 @@
         <ul class="menu nav">
             <li class="active"><a asp-controller="Main" asp-action="Index">How to start</a></li>
             <li><a asp-controller="Main" asp-action="About">About</a></li>
-            <li><a asp-controller="Main" asp-action="Contact">Contact</a></li>
-            <li><a asp-controller="Main" asp-action="Constructor">Constructor</a></li>
+            <li><a asp-controller="Main" asp-action="Contact">Contact</a></li>            
             @if (User.Identity.IsAuthenticated)
             {
+                <li><a asp-controller="Main" asp-action="Friends">Friends</a></li>
                 <li><a asp-controller="Main" asp-action="Categories">Work hard! list</a></li>
                 <li><a asp-controller="Main" asp-action="Recycle">Recycle</a></li>
                 <li><a asp-controller="Main" asp-action="Users">Users list</a></li>
